@@ -1,0 +1,714 @@
+// src/pages/BuildProjectPage.tsx
+import { useState, useEffect, useCallback, lazy, Suspense } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useSeo, getBOQServiceSchema, getSpeakableSchema } from "@/lib/seo";
+import { useAuth } from "@/contexts/AuthContext";
+import { useCredits } from "@/hooks/useCredits";
+import { useBOQGeneration } from "@/hooks/useBOQGeneration";
+import { useVendorChat } from "@/hooks/useVendorChat";
+import { MAX_AREA_SQM, MAX_FLOORS } from "@/lib/boq-engine";
+
+import { trackEvent } from "@/lib/tracking";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+const ChatManager = lazy(() => import("@/components/ChatManager"));
+import ProjectWizardStep1 from "@/components/build-project/ProjectWizardStep1";
+import ProjectWizardStep2 from "@/components/build-project/ProjectWizardStep2";
+import ProjectWizardStep3 from "@/components/build-project/ProjectWizardStep3";
+import BOQResultTable from "@/components/build-project/BOQResultTable";
+import BOQFeedbackModal from "@/components/build-project/BOQFeedbackModal";
+import CreditPaywall from "@/components/build-project/CreditPaywall";
+import CreditStatusBar from "@/components/build-project/CreditStatusBar";
+import AIGeneratingOverlay from "@/components/build-project/AIGeneratingOverlay";
+import { cn } from "@/lib/utils";
+import {
+  Ruler,
+  Settings2,
+  CheckCircle2,
+  Zap,
+  Shield,
+  TrendingUp,
+  FileText,
+  ShoppingCart,
+  BarChart3,
+  Building2,
+  Calculator,
+} from "lucide-react";
+import { toast } from "sonner";
+import { motion, AnimatePresence } from "framer-motion";
+import BennaLoader from "@/components/BennaLoader";
+
+const STEP_META = [
+  { labelEn: "Project", labelAr: "المشروع", icon: Building2 },
+  { labelEn: "Scale", labelAr: "الأبعاد", icon: Ruler },
+  { labelEn: "Specs", labelAr: "المواصفات", icon: Settings2 },
+];
+
+const BuildProjectPage = () => {
+  const { isRTL } = useLanguage();
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const { isLoading: authLoading, isAuthenticated } = useAuth();
+  const { credits, refetch: refetchCredits } = useCredits();
+  const { generate, isGenerating, result, setResult, reset } =
+    useBOQGeneration();
+  const {
+    openChats,
+    setOpenChats,
+    activeChatId,
+    setActiveChatId,
+    showChat,
+    setShowChat,
+    openChat,
+  } = useVendorChat();
+
+  useSeo({
+    title: "Build My Project - Free BOQ Builder for Construction",
+    titleAr: "ابنِ مشروعك - حاسبة كميات البناء المجانية",
+    description:
+      "Get a free, shoppable Bill of Quantities (BOQ) for your construction project in Saudi Arabia. Match materials to Benna products and add them to cart.",
+    descriptionAr:
+      "احصل على قائمة كميات مجانية قابلة للشراء لمشروعك في السعودية. فلل، شقق، مباني تجارية، مستودعات، وتجديدات.",
+    keywords:
+      "BOQ generator, bill of quantities, construction calculator, building materials estimate, حاسبة كميات, تقدير مواد بناء, Saudi Arabia",
+    schemas: [getBOQServiceSchema(), getSpeakableSchema("/build-project")],
+  });
+
+  const [step, setStep] = useState(1);
+  const [showPaywall, setShowPaywall] = useState(false);
+  const [showFeedback, setShowFeedback] = useState(false);
+
+  const [projectName, setProjectName] = useState("");
+  const [projectType, setProjectType] = useState("");
+  const [city, setCity] = useState("");
+  const [areaSqm, setAreaSqm] = useState("");
+  const [floors, setFloors] = useState("");
+  const [specifications, setSpecifications] = useState<Record<string, boolean>>(
+    {},
+  );
+  const [additionalNotes, setAdditionalNotes] = useState("");
+
+  // Handle payment success from URL params
+  useEffect(() => {
+    if (searchParams.get("payment") === "success") {
+      const creditsAdded = searchParams.get("credits");
+      toast.success(
+        creditsAdded
+          ? `${creditsAdded} credits added to your account!`
+          : "Payment successful! Credits added to your account.",
+      );
+      refetchCredits();
+      setShowPaywall(false);
+
+      // Clean URL params
+      navigate("/build-project", { replace: true });
+    }
+  }, [searchParams, refetchCredits, navigate]);
+
+  // Validate inputs before generating
+  const validateInputs = useCallback((): string | null => {
+    if (!projectName.trim() || projectName.trim().length < 2) {
+      return isRTL
+        ? "اسم المشروع مطلوب (٢ أحرف على الأقل)"
+        : "Project name required (min 2 chars)";
+    }
+    if (!projectType) {
+      return isRTL ? "نوع المشروع مطلوب" : "Project type required";
+    }
+    if (!city) {
+      return isRTL ? "المدينة مطلوبة" : "City required";
+    }
+    const area = Number(areaSqm);
+    if (!areaSqm || isNaN(area) || area < 1 || area > MAX_AREA_SQM) {
+      return isRTL
+        ? "المساحة يجب أن تكون بين ١ و١٠٠٠٠٠ م²"
+        : "Area must be between 1 and 100,000 sqm";
+    }
+    const floorCount = Number(floors);
+    if (!floors || isNaN(floorCount) || floorCount < 1 || floorCount > MAX_FLOORS) {
+      return isRTL
+        ? "عدد الأدوار يجب أن يكون بين ١ و٥٠"
+        : "Floors must be between 1 and 50";
+    }
+
+    return null;
+  }, [projectName, projectType, city, areaSqm, floors, isRTL]);
+
+  const handleGenerate = useCallback(async () => {
+    const validationError = validateInputs();
+    if (validationError) {
+      toast.error(validationError);
+      return;
+    }
+
+    if (!isAuthenticated) {
+      toast.info(
+        isRTL
+          ? "سجّل الدخول للحصول على ٥٠ قائمة كميات مجانية وحفظ مشروعك."
+          : "Sign in to get 50 free BOQs and save your project.",
+      );
+      navigate("/login?redirect=/build-project");
+      return;
+    }
+
+    // Proactively open paywall when balance is 0 and no unlimited plan.
+    // Message must match reality: never bought a pack yet (totalPurchased===0)
+    // means this was the free-50 running out; otherwise it's paid credits
+    // running out. Same distinction the credit-status UI and the backend's
+    // 402 response already use — keep all three in sync.
+    if (
+      credits &&
+      !credits.isUnlimited &&
+      (credits.balance ?? 0) <= 0
+    ) {
+      setShowPaywall(true);
+      const stillOnFreeAllotment = (credits.totalPurchased ?? 0) === 0;
+      toast.info(
+        stillOnFreeAllotment
+          ? isRTL
+            ? "استخدمت قوائمك المجانية الخمسين. اختر باقة للمتابعة."
+            : "Your 50 free BOQs are used. Pick a pack to continue."
+          : isRTL
+            ? "نفد رصيدك. اختر باقة للمتابعة."
+            : "You're out of credits. Pick a pack to continue.",
+      );
+      return;
+    }
+
+    const selectedSpecs = Object.entries(specifications)
+      .filter(([, v]) => v)
+      .map(([k]) => k.toLowerCase());
+    const has = (k: string) => selectedSpecs.some((s) => s.includes(k));
+    const tierMatch = selectedSpecs.find((s) =>
+      /economy|standard|premium|luxury/i.test(s),
+    );
+    const finishingTier = (tierMatch as any) || "standard";
+
+    const res = await generate({
+      projectName: projectName.trim(),
+      projectType,
+      city,
+      areaSqm: Number(areaSqm),
+      floors: Number(floors),
+      finishingTier,
+      hasBasement: has("basement"),
+      features: {
+        ac: has("ac") || has("air") || has("cooling"),
+        elevator: has("elevator") || has("lift"),
+        pool: has("pool") || has("swim"),
+        solar: has("solar"),
+        smartHome: has("smart"),
+        landscaping: has("landscap") || has("garden"),
+        externalCladding: has("cladding") || has("facade"),
+        woodenInterior: has("wood"),
+      },
+    });
+
+    if (res.ok) {
+      try {
+        trackEvent.submitBOQ(projectType || "unknown");
+      } catch {
+        /* non-critical */
+      }
+      if (isAuthenticated) refetchCredits();
+      // Result shows inline; open feedback after a delay
+      setTimeout(() => setShowFeedback(true), 4000);
+    } else if (res.outOfCredits) {
+      setShowPaywall(true);
+    }
+  }, [
+    isAuthenticated,
+    specifications,
+    projectName,
+    projectType,
+    city,
+    areaSqm,
+    floors,
+    generate,
+    refetchCredits,
+    validateInputs,
+    navigate,
+    isRTL,
+    credits,
+  ]);
+
+  const handleReset = useCallback(() => {
+    setStep(1);
+    setProjectName("");
+    setProjectType("");
+    setCity("");
+    setAreaSqm("");
+    setFloors("");
+    setSpecifications({});
+    setAdditionalNotes("");
+    reset(); // Use hook's reset
+    setShowPaywall(false);
+  }, [reset]);
+
+  const WHAT_WE_BUILT = [
+    {
+      icon: Calculator,
+      titleEn: "Simple Material Calculator",
+      titleAr: "محرك مواد مبسط",
+      descEn: "A clean rule-based BOQ calculator turns project area, floors, and specs into a practical materials list",
+      descAr: "حاسبة كميات واضحة تحول المساحة والأدوار والمواصفات إلى قائمة مواد عملية",
+      stat: "50",
+      statLabelEn: "free BOQs",
+      statLabelAr: "قائمة مجانية",
+    },
+    {
+      icon: BarChart3,
+      titleEn: "Live Saudi Market Pricing",
+      titleAr: "أسعار السوق السعودي الحية",
+      descEn: "Unit prices indexed to 165+ Saudi cities using live contractor & supplier benchmarks updated monthly",
+      descAr: "أسعار الوحدة مؤشرة لأكثر من ١٦٥ مدينة سعودية باستخدام معايير حية للمقاولين والموردين",
+      stat: "182k+",
+      statLabelEn: "products",
+      statLabelAr: "منتج",
+    },
+    {
+      icon: ShoppingCart,
+      titleEn: "One-Click Shoppable BOQ",
+      titleAr: "قائمة كميات قابلة للشراء",
+      descEn: "Every BOQ line item is matched to real Benna catalog products — add all materials to cart in one click",
+      descAr: "كل بند في القائمة مطابق لمنتجات كتالوج Benna الفعلي — أضف كل المواد للسلة بنقرة واحدة",
+      stat: "1-click",
+      statLabelEn: "order everything",
+      statLabelAr: "طلب كل شيء",
+    },
+    {
+      icon: FileText,
+      titleEn: "Instant Export",
+      titleAr: "تصدير CSV فوري",
+      descEn: "Export a full structured BOQ spreadsheet ready for contractors, consultants, or bank submissions",
+      descAr: "تصدير جدول بيانات BOQ منظم جاهز للمقاولين أو الاستشاريين أو تقديم البنك",
+      stat: "CSV",
+      statLabelEn: "ready",
+      statLabelAr: "جاهز",
+    },
+  ];
+
+  const shellWrapper = (content: React.ReactNode) => (
+    <div className="min-h-screen bg-white">
+      <Header />
+      {content}
+      <Footer />
+      {showChat && openChats.length > 0 && (
+        <Suspense fallback={null}>
+          <ChatManager
+            openChats={openChats}
+            activeChatId={activeChatId}
+            setActiveChatId={setActiveChatId}
+            setOpenChats={setOpenChats}
+            setShowChat={setShowChat}
+          />
+        </Suspense>
+      )}
+    </div>
+  );
+
+  if (authLoading) {
+    return shellWrapper(
+      <div className="flex items-center justify-center py-32">
+        <BennaLoader
+          size="md"
+          label={isRTL ? "جاري التحميل..." : "Loading..."}
+        />
+      </div>,
+    );
+  }
+
+  return shellWrapper(
+    <main className="w-full">
+      {/* ── Hero Band ── */}
+      <div className="relative overflow-hidden bg-white">
+        {/* Subtle Benna brand wash */}
+        <div
+          className="absolute inset-0 opacity-[0.10] z-0 pointer-events-none"
+          style={{
+            background: "radial-gradient(circle, #7f7dfc, #f44bcc 33%, #e5edf5 66%)",
+          }}
+        />
+        <div className="relative z-10 px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-3xl mx-auto text-center"
+          >
+            <div className="inline-flex items-center gap-2 mb-6">
+              <span
+                className="border border-[#ff6118] px-3 py-1.5 rounded-[4px] text-[11px] uppercase tracking-widest flex items-center gap-2"
+                style={{ color: "#ff6118", backgroundColor: "rgba(255,97,24,0.05)" }}
+              >
+                <FileText className="h-2.5 w-2.5" />
+                {isRTL ? "قائمة كميات مجانية قابلة للشراء" : "Free shoppable BOQ builder"}
+              </span>
+            </div>
+            <h1
+              className="mb-6"
+              style={{
+                fontSize: "clamp(40px, 6vw, 56px)",
+                fontWeight: 300,
+                lineHeight: 1.07,
+                letterSpacing: "-0.03em",
+              }}
+            >
+              <span className="text-[#061b31]">
+                {isRTL ? "قائمة كميات مشروعك،" : "Your project BOQ,"}
+              </span>
+              <br />
+              <span
+                style={{
+                  background: "linear-gradient(90deg, #7232f1 3.13%, #fb76fa 50%, #ffcf5e)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                {isRTL ? "من منتجات بنّة." : "matched to Benna products."}
+              </span>
+            </h1>
+            <p
+              className="text-[#50617a] max-w-lg mx-auto"
+              style={{ fontSize: "18px", fontWeight: 300, lineHeight: 1.4 }}
+            >
+              {isRTL
+                ? "املأ ٣ خطوات بسيطة واحصل على جدول مواد كامل مع أزرار إضافة للسلة. أول ٥٠ قائمة مجانية."
+                : "Fill a simple 3-step form and get a full material table with add-to-cart actions. Your first 50 BOQs are free."}
+            </p>
+            {/* Stat pills */}
+            <div className="flex items-center justify-center gap-3 mt-8 flex-wrap">
+              {[
+                { v: "50", l: isRTL ? "مجانية" : "Free BOQs" },
+                { v: "182k+", l: isRTL ? "منتج" : "Products" },
+                { v: "1085", l: isRTL ? "فئة" : "Categories" },
+                { v: "1-click", l: isRTL ? "سلة" : "Cart" },
+              ].map((s) => (
+                <div key={s.v} className="flex items-center gap-1.5 bg-white border border-[#d8d6df] rounded-[4px] px-3 py-1.5 shadow-sm">
+                  <span className="text-[#533afd] font-light text-sm">{s.v}</span>
+                  <span className="text-[#50617a] text-xs font-light">{s.l}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* ── Wizard / Result Area ── */}
+      <div className="bg-white">
+        <div className="px-3 sm:px-4 lg:px-6 xl:px-8 py-10">
+          <div className={cn(result ? "w-full max-w-none" : "max-w-3xl xl:max-w-5xl 2xl:max-w-6xl mx-auto") }>
+            {showPaywall ? (
+              <CreditPaywall
+                onPurchaseComplete={() => {
+                  refetchCredits();
+                  setShowPaywall(false);
+                }}
+              />
+            ) : isGenerating ? (
+              <AIGeneratingOverlay />
+            ) : result ? (
+              <>
+                <BOQResultTable
+                  result={result}
+                  onReset={handleReset}
+                  onOpenFeedback={() => setShowFeedback(true)}
+                  onOpenChat={openChat}
+                />
+                <BOQFeedbackModal
+                  boqId={result.boqId}
+                  open={showFeedback}
+                  onOpenChange={setShowFeedback}
+                />
+              </>
+            ) : (
+              <>
+                {/* Section label */}
+                <div className="text-center mb-8">
+                  <div className="flex items-center justify-center gap-2 mb-2">
+                    <div className="w-5 h-0.5 bg-[#533afd] rounded-full" />
+                    <span className="text-xs font-light text-[#533afd] uppercase tracking-widest">
+                      {isRTL ? "ابدأ الآن" : "Get started"}
+                    </span>
+                    <div className="w-5 h-0.5 bg-[#533afd] rounded-full" />
+                  </div>
+                  <p className="text-[14px] font-light text-[#50617a]">
+                    {isRTL ? "٣ خطوات فقط للحصول على قائمة كمياتك" : "Just 3 steps to your complete BOQ"}
+                  </p>
+                </div>
+
+                {/* Step Indicator */}
+                <div className="flex items-center justify-center gap-0 mb-8">
+                  {STEP_META.map((s, i) => {
+                    const stepNum = i + 1;
+                    const Icon = s.icon;
+                    const isActive = step === stepNum;
+                    const isDone = step > stepNum;
+                    return (
+                      <div key={stepNum} className="flex items-center">
+                        <div className="flex flex-col items-center gap-1.5">
+                          <div
+                            className={cn(
+                              "w-11 h-11 rounded-[4px] flex items-center justify-center transition-all duration-500 border",
+                              isDone
+                                ? "bg-[#533afd] border-[#533afd] text-white"
+                                : isActive
+                                  ? "bg-white border-[#533afd] text-[#061b31]"
+                                  : "bg-[#f8fafd] border-[#d8d6df] text-[#64748d]",
+                            )}
+                            style={isActive ? { boxShadow: "rgba(83,58,253,0.15) 0px 0px 0px 3px" } : {}}
+                          >
+                            {isDone ? (
+                              <CheckCircle2 className="w-5 h-5" />
+                            ) : (
+                              <Icon className="w-5 h-5" />
+                            )}
+                          </div>
+                          <span
+                            className={cn(
+                              "text-[11px] font-light transition-colors",
+                              isDone
+                                ? "text-[#533afd]"
+                                : isActive
+                                  ? "text-[#061b31]"
+                                  : "text-[#64748d]",
+                            )}
+                          >
+                            {isRTL ? s.labelAr : s.labelEn}
+                          </span>
+                        </div>
+                        {stepNum < 3 && (
+                          <div
+                            className={cn(
+                              "w-16 sm:w-24 h-[2px] rounded mx-2 mb-5 transition-all duration-500",
+                              step > stepNum
+                                ? "bg-[#533afd]"
+                                : step === stepNum
+                                  ? "bg-[#d8d6df]"
+                                  : "bg-[#e5edf5]",
+                            )}
+                          />
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Credit status — visible across all 3 wizard steps, not just after generating */}
+                <div className="mb-4">
+                  <CreditStatusBar onBuyCredits={() => setShowPaywall(true)} />
+                </div>
+
+                {/* Wizard Card */}
+                <div
+                  className="relative bg-white rounded-[6px] border border-[#d8d6df] overflow-hidden"
+                  style={{ boxShadow: "rgba(23,23,23,0.08) 0px 15px 35px 0px" }}
+                >
+                  {/* Violet top accent bar */}
+                  <div
+                    className="h-1 w-full"
+                    style={{ background: "linear-gradient(90deg, rgb(114,50,241) 3.13%, rgb(251,118,250) 50%, rgb(255,207,94))" }}
+                  />
+                  <div className="p-6 sm:p-8">
+                    <AnimatePresence mode="wait">
+                      {step === 1 && (
+                        <ProjectWizardStep1
+                          key="step1"
+                          projectName={projectName}
+                          setProjectName={setProjectName}
+                          projectType={projectType}
+                          setProjectType={setProjectType}
+                          onNext={() => setStep(2)}
+                        />
+                      )}
+                      {step === 2 && (
+                        <ProjectWizardStep2
+                          key="step2"
+                          city={city}
+                          setCity={setCity}
+                          areaSqm={areaSqm}
+                          setAreaSqm={setAreaSqm}
+                          floors={floors}
+                          setFloors={setFloors}
+                          onNext={() => setStep(3)}
+                          onBack={() => setStep(1)}
+                        />
+                      )}
+                      {step === 3 && (
+                        <ProjectWizardStep3
+                          key="step3"
+                          specifications={specifications}
+                          setSpecifications={setSpecifications}
+                          additionalNotes={additionalNotes}
+                          setAdditionalNotes={setAdditionalNotes}
+                          onGenerate={handleGenerate}
+                          onBack={() => setStep(2)}
+                          isGenerating={isGenerating}
+                        />
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </div>
+
+                {/* Trust bar */}
+                <div className="flex items-center justify-center gap-6 mt-6 p-4 bg-[#f8fafd] rounded-[4px] border border-[#d8d6df]">
+                  <div className="flex items-center gap-2 text-[11px] font-light text-[#50617a]">
+                    <Shield className="w-3.5 h-3.5 text-[#533afd]" />
+                    <span>{isRTL ? "بياناتك مشفرة" : "Data encrypted"}</span>
+                  </div>
+                  <div className="w-px h-4 bg-[#d8d6df]" />
+                  <div className="flex items-center gap-2 text-[11px] font-light text-[#50617a]">
+                    <Zap className="w-3.5 h-3.5 text-[#533afd]" />
+                    <span>{isRTL ? "٥٠ قائمة مجانية" : "50 free BOQs"}</span>
+                  </div>
+                  <div className="w-px h-4 bg-[#d8d6df]" />
+                  <div className="flex items-center gap-2 text-[11px] font-light text-[#50617a]">
+                    <TrendingUp className="w-3.5 h-3.5 text-[#533afd]" />
+                    <span>{isRTL ? "منتجات من بنّة" : "Benna products"}</span>
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* ── Social proof / How-it-works strip ── */}
+      {!result && !showPaywall && !isGenerating && (
+        <div className="bg-[#f8fafd] border-t border-[#d8d6df]">
+          <div className="px-4 sm:px-6 lg:px-8 py-12">
+            <div className="max-w-3xl mx-auto">
+              <div className="text-center mb-8">
+                <div className="flex items-center justify-center gap-2 mb-2">
+                  <div className="w-5 h-0.5 bg-[#533afd] rounded-full" />
+                  <span className="text-xs font-light text-[#533afd] uppercase tracking-widest">
+                    {isRTL ? "كيف يعمل" : "How it works"}
+                  </span>
+                  <div className="w-5 h-0.5 bg-[#533afd] rounded-full" />
+                </div>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                {[
+                  {
+                    num: "01",
+                    titleEn: "Describe your project",
+                    titleAr: "صِف مشروعك",
+                    descEn: "Name it, pick the type, city, area, floors, and any special specs",
+                    descAr: "سمّه، اختر النوع والمدينة والمساحة والأدوار وأي مواصفات خاصة",
+                    icon: Building2,
+                  },
+                  {
+                    num: "02",
+                    titleEn: "Benna builds your BOQ",
+                    titleAr: "بنّة تبني قائمتك",
+                    descEn: "The engine calculates materials, quantities, and matches real catalog products",
+                    descAr: "المحرك يحسب المواد والكميات ويربطها بمنتجات حقيقية من الكتالوج",
+                    icon: Calculator,
+                  },
+                  {
+                    num: "03",
+                    titleEn: "Shop & export",
+                    titleAr: "تسوّق وصدّر",
+                    descEn: "Add matched Benna catalog products to cart instantly or export a contractor-ready CSV",
+                    descAr: "أضف منتجات كتالوج Benna المطابقة للسلة فوراً أو صدّر ملف CSV جاهزاً للمقاول",
+                    icon: ShoppingCart,
+                  },
+                ].map((item, i) => {
+                  const Icon = item.icon;
+                  return (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, y: 15 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.1 }}
+                      className="flex gap-4"
+                    >
+                      <div className="shrink-0">
+                        <div className="w-10 h-10 rounded-[4px] bg-[#e5edf5] flex items-center justify-center">
+                          <Icon className="w-5 h-5 text-[#533afd]" />
+                        </div>
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="text-[10px] font-light text-[#533afd] tracking-widest">{item.num}</span>
+                          <h3 className="text-[14px] font-light text-[#061b31]">
+                            {isRTL ? item.titleAr : item.titleEn}
+                          </h3>
+                        </div>
+                        <p className="text-[12px] font-light text-[#50617a] leading-relaxed">
+                          {isRTL ? item.descAr : item.descEn}
+                        </p>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── "What Benna Built" Feature Showcase ── */}
+      {!result && !showPaywall && !isGenerating && (
+        <div className="bg-[#f8fafd] border-t border-[#d8d6df]">
+          <div className="px-4 sm:px-6 lg:px-8 py-12">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="text-center mb-8"
+            >
+              <div className="flex items-center justify-center gap-2 mb-3">
+                <div className="w-6 h-0.5 bg-[#533afd] rounded-full" />
+                <span className="text-xs font-light text-[#533afd] uppercase tracking-widest">
+                  {isRTL ? "ما بنيناه لك" : "What we built for you"}
+                </span>
+                <div className="w-6 h-0.5 bg-[#533afd] rounded-full" />
+              </div>
+              <h2
+                className="text-[#061b31]"
+                style={{ fontSize: "22px", fontWeight: 300, lineHeight: 1.2, letterSpacing: "-0.01px" }}
+              >
+                {isRTL ? "منظومة كميات بسيطة وقابلة للشراء" : "A simple shoppable BOQ system"}
+              </h2>
+            </motion.div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {WHAT_WE_BUILT.map((item, i) => {
+                const Icon = item.icon;
+                return (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.25 + i * 0.08 }}
+                    className="bg-white rounded-[6px] border border-[#d8d6df] p-5 hover:shadow-[rgba(23,23,23,0.08)_0px_15px_35px_0px] hover:border-[#533afd] transition-all duration-300 group"
+                  >
+                    <div className="w-10 h-10 rounded-[4px] bg-[#e5edf5] flex items-center justify-center mb-4 group-hover:bg-[#533afd] transition-colors duration-300">
+                      <Icon className="w-5 h-5 text-[#533afd] group-hover:text-white transition-colors duration-300" />
+                    </div>
+                    <h3 className="text-[#061b31] mb-1" style={{ fontSize: "14px", fontWeight: 400, lineHeight: 1.4 }}>
+                      {isRTL ? item.titleAr : item.titleEn}
+                    </h3>
+                    <p className="text-[#50617a] mb-4" style={{ fontSize: "12px", fontWeight: 300, lineHeight: 1.5 }}>
+                      {isRTL ? item.descAr : item.descEn}
+                    </p>
+                    <div className="flex items-baseline gap-1.5 pt-3 border-t border-[#e5edf5]">
+                      <span className="text-[#533afd]" style={{ fontSize: "18px", fontWeight: 300 }}>{item.stat}</span>
+                      <span className="text-[#64748d]" style={{ fontSize: "11px", fontWeight: 300 }}>
+                        {isRTL ? item.statLabelAr : item.statLabelEn}
+                      </span>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )}
+    </main>,
+  );
+};
+
+export default BuildProjectPage;
