@@ -187,20 +187,6 @@ const BOQRecommendationsPanel = ({
               <PackageCheck className="h-3.5 w-3.5" />
               {isRTL ? `تغطية ${coverageLabel}` : `Coverage ${coverageLabel}`}
             </Badge>
-            <Button
-              onClick={addAll}
-              disabled={
-                isLoading || isAddingAll || recommendations.length === 0
-              }
-              className="rounded-[4px] bg-[#533afd] hover:bg-[#422bc7] text-white font-light"
-            >
-              {isAddingAll ? (
-                <Loader2 className="animate-spin h-4 w-4" />
-              ) : (
-                <ShoppingCart className="h-4 w-4" />
-              )}
-              {isRTL ? "إضافة كل الترشيحات" : "Add all recommendations"}
-            </Button>
           </div>
         </div>
       </CardHeader>
@@ -339,19 +325,6 @@ const BOQRecommendationsPanel = ({
                             </p>
                           ) : null}
                         </div>
-                        <Button
-                          size="sm"
-                          onClick={() => void addSingle(recommendation)}
-                          disabled={isAdding || isAddingAll}
-                          className="rounded-[4px] bg-[#533afd] hover:bg-[#422bc7] text-white font-light shadow-sm"
-                        >
-                          {isAdding ? (
-                            <Loader2 className="animate-spin h-4 w-4" />
-                          ) : (
-                            <ShoppingCart className="h-4 w-4" />
-                          )}
-                          {isRTL ? "أضف" : "Add"}
-                        </Button>
                       </div>
                     </CardContent>
                   </Card>

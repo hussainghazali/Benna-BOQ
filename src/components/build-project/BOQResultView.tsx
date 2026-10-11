@@ -499,19 +499,9 @@ const BOQResultView = ({
             {isRTL ? "تصدير CSV" : "Export CSV"}
           </Button>
           <Button
-            className="gap-2 h-11 flex-1 rounded-[4px] text-white font-light text-[14px] transition-all duration-200 group"
-            style={{ background: "linear-gradient(90deg, rgb(114,50,241), rgb(83,58,253))" }}
-            onClick={() => void handleAddAllMaterials()}
-            disabled={isLoading || recommendations.featuredProducts.length === 0}
-          >
-            <ShoppingCart className="w-4 h-4" />
-            {isRTL ? "طلب جميع المواد" : "Order All Materials"}
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Button>
-          <Button
             variant="ghost"
             onClick={onReset}
-            className="gap-2 h-11 rounded-[4px] border border-[#d8d6df] hover:border-[#533afd] hover:bg-white text-[#061b31] font-light text-[14px]"
+            className="gap-2 h-11 flex-1 rounded-[4px] border border-[#d8d6df] hover:border-[#533afd] hover:bg-white text-[#061b31] font-light text-[14px]"
           >
             <RotateCcw className="w-4 h-4" />
             {isRTL ? "مشروع جديد" : "New Project"}

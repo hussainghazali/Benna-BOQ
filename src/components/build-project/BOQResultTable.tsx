@@ -225,20 +225,6 @@ const BOQResultTable = ({ result, onReset, onOpenFeedback, onOpenChat }: Props) 
             <RotateCcw className="w-4 h-4 mr-2" />
             {isRTL ? "قائمة جديدة" : "New BOQ"}
           </Button>
-          <Button
-            onClick={addAllToCart}
-            disabled={busyAll}
-            className="bg-[#533afd] hover:bg-[#422bc7] text-white rounded-[4px]"
-          >
-            <ShoppingCart className="w-4 h-4 mr-2" />
-            {busyAll
-              ? isRTL
-                ? "جاري الإضافة..."
-                : "Adding..."
-              : isRTL
-                ? "أضف الكل إلى السلة"
-                : "Add All to Cart"}
-          </Button>
         </div>
       </div>
 
@@ -326,31 +312,7 @@ const BOQResultTable = ({ result, onReset, onOpenFeedback, onOpenChat }: Props) 
                           <MessageCircle className="w-3.5 h-3.5 mr-1" />
                           {isRTL ? "دردشة" : "Chat"}
                         </Button>
-                      ) : (
-                        <Button
-                          size="sm"
-                          variant={added ? "outline" : "default"}
-                          disabled={!r.match || r.unitPrice <= 0 || added}
-                          onClick={() => addRowToCart(r)}
-                          className={
-                            added
-                              ? "rounded-[4px]"
-                              : "rounded-[4px] bg-[#533afd] hover:bg-[#422bc7] text-white"
-                          }
-                        >
-                          {added ? (
-                            <>
-                              <CheckCircle2 className="w-3.5 h-3.5 mr-1" />
-                              {isRTL ? "أُضيف" : "Added"}
-                            </>
-                          ) : (
-                            <>
-                              <ShoppingCart className="w-3.5 h-3.5 mr-1" />
-                              {isRTL ? "أضف" : "Add"}
-                            </>
-                          )}
-                        </Button>
-                      )}
+                      ) : null}
                     </TableCell>
                   </TableRow>
                 );
@@ -360,22 +322,6 @@ const BOQResultTable = ({ result, onReset, onOpenFeedback, onOpenChat }: Props) 
         </div>
       ))}
 
-      {/* Bottom Add All */}
-      <div className="border border-[#e5edf5] rounded-[6px] bg-[#f8fafd] p-5 flex flex-wrap items-center justify-between gap-4">
-        <div className="text-sm text-[#50617a] font-light">
-          {isRTL
-            ? "أضف جميع المواد إلى السلة بنقرة واحدة، ثم أكمل الطلب."
-            : "Add every material to your cart in one click, then checkout."}
-        </div>
-        <Button
-          onClick={addAllToCart}
-          disabled={busyAll}
-          className="bg-[#533afd] hover:bg-[#422bc7] text-white rounded-[4px]"
-        >
-          <ShoppingCart className="w-4 h-4 mr-2" />
-          {isRTL ? "أضف الكل إلى السلة" : "Add All to Cart"}
-        </Button>
-      </div>
     </div>
   );
 };
