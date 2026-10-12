@@ -49,12 +49,12 @@ const CreditStatusBar = ({ onBuyCredits }: Props) => {
         {isLoading ? (
           <Loader2 className="w-4 h-4 animate-spin text-[#64748d] shrink-0" />
         ) : guestTrialAvailable ? (
-          <Sparkles className="w-4 h-4 text-[#FF6600] shrink-0" />
+          <Sparkles className="w-4 h-4 text-[#FA6400] shrink-0" />
         ) : (
           <Coins
             className={cn(
               "w-4 h-4 shrink-0",
-              hasCredits ? "text-[#FF6600]" : "text-[#64748d]",
+              hasCredits ? "text-[#FA6400]" : "text-[#64748d]",
             )}
           />
         )}
@@ -94,7 +94,7 @@ const CreditStatusBar = ({ onBuyCredits }: Props) => {
         <Button
           onClick={onBuyCredits}
           size="sm"
-          className="h-7 px-3 text-xs font-light bg-[#FF6600] hover:bg-[#E65C00] text-white rounded-[4px] shrink-0 gap-1"
+          className="h-7 px-3 text-xs font-light bg-[#FA6400] hover:bg-[#E85A00] text-white rounded-[4px] shrink-0 gap-1"
         >
           <Zap className="w-3 h-3" />
           {isRTL ? "شراء رصيد" : "Buy Credits"}
@@ -107,7 +107,7 @@ const CreditStatusBar = ({ onBuyCredits }: Props) => {
         !isLoading && (
           <button
             onClick={onBuyCredits}
-            className="text-[10px] font-light text-[#FF6600] hover:text-[#E65C00] underline underline-offset-2 shrink-0 whitespace-nowrap"
+            className="text-[10px] font-light text-[#FA6400] hover:text-[#E85A00] underline underline-offset-2 shrink-0 whitespace-nowrap"
           >
             {isRTL ? "احصل على المزيد" : "Get more"}
           </button>

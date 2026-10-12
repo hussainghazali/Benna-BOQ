@@ -179,7 +179,7 @@ const CreditsPage = () => {
                 <span className="text-xl text-muted-foreground">.00</span>
               </div>
               {hasSubscription && (
-                <div className="mt-2 inline-flex items-center gap-1.5 px-3 py-1 bg-violet-100 text-violet-900 rounded-full text-xs font-bold">
+                <div className="mt-2 inline-flex items-center gap-1.5 px-3 py-1 bg-ali-orange-100 text-ali-ink-900 rounded-full text-xs font-bold">
                   <Star className="w-3 h-3" />
                   {isAr
                     ? `${credits?.subscriptionPlan} نشط`
@@ -204,7 +204,7 @@ const CreditsPage = () => {
                     : "Add Credits or Redeem Giftcards"}
                 </span>
                 <div className="flex items-center gap-1">
-                  <div className="w-8 h-5 bg-gradient-to-r from-blue-500 to-purple-500 rounded flex items-center justify-center">
+                  <div className="w-8 h-5 bg-gradient-to-r from-blue-500 to-ali-orange-500 rounded flex items-center justify-center">
                     <CreditCard className="w-3 h-3 text-white" />
                   </div>
                   <div className="w-8 h-5 bg-gradient-to-r from-green-400 to-emerald-500 rounded flex items-center justify-center">

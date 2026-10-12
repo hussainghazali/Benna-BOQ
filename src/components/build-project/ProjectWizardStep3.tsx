@@ -99,7 +99,7 @@ const ProjectWizardStep3 = ({
       {/* Conversational header */}
       <div className="flex items-start gap-3">
         <div className="w-10 h-10 rounded-[4px] bg-[#e5edf5] flex items-center justify-center shrink-0">
-          <Wand2 className="w-5 h-5 text-[#FF6600]" />
+          <Wand2 className="w-5 h-5 text-[#FA6400]" />
         </div>
         <div className="bg-[#f8fafd] rounded-[4px] rounded-tl-sm px-4 py-3 border border-[#d8d6df]">
           <p className="text-sm text-[#061b31] font-light">
@@ -126,8 +126,8 @@ const ProjectWizardStep3 = ({
                 className={cn(
                   "flex items-center justify-center gap-2 px-3 py-2.5 rounded-[4px] border text-sm font-light transition-all",
                   active
-                    ? "border-[#FF6600] bg-[#e5edf5] text-[#061b31] shadow-sm"
-                    : "border-[#d8d6df] bg-white text-[#50617a] hover:border-[#FF6600]",
+                    ? "border-[#FA6400] bg-[#e5edf5] text-[#061b31] shadow-sm"
+                    : "border-[#d8d6df] bg-white text-[#50617a] hover:border-[#FA6400]",
                 )}
               >
                 <span>{t.emoji}</span>
@@ -143,7 +143,7 @@ const ProjectWizardStep3 = ({
         <Label className="text-sm font-light mb-3 block text-[#061b31]">
           {isRTL ? "المواصفات الإضافية" : "Additional Specifications"}
           {selectedCount > 0 && (
-            <span className="ml-2 text-xs font-light bg-[#FF6600] text-white px-2 py-0.5 rounded-[4px]">
+            <span className="ml-2 text-xs font-light bg-[#FA6400] text-white px-2 py-0.5 rounded-[4px]">
               {selectedCount} {isRTL ? "محدد" : "selected"}
             </span>
           )}
@@ -160,14 +160,14 @@ const ProjectWizardStep3 = ({
               className={cn(
                 "flex items-center gap-3 p-3 rounded-[4px] border cursor-pointer transition-all duration-300",
                 specifications[spec.id]
-                  ? "border-[#FF6600] bg-[#e5edf5] shadow-sm"
-                  : "border-[#d8d6df] hover:border-[#FF6600] bg-white",
+                  ? "border-[#FA6400] bg-[#e5edf5] shadow-sm"
+                  : "border-[#d8d6df] hover:border-[#FA6400] bg-white",
               )}
             >
               <Checkbox
                 checked={specifications[spec.id] || false}
                 onCheckedChange={() => toggleSpec(spec.id)}
-                className="border-[#d8d6df] data-[state=checked]:bg-[#FF6600] data-[state=checked]:border-[#FF6600] data-[state=checked]:text-white"
+                className="border-[#d8d6df] data-[state=checked]:bg-[#FA6400] data-[state=checked]:border-[#FA6400] data-[state=checked]:text-white"
               />
               <span className="text-base">{spec.emoji}</span>
               <span
@@ -198,7 +198,7 @@ const ProjectWizardStep3 = ({
           placeholder={
             isRTL ? "أي متطلبات خاصة..." : "Any special requirements..."
           }
-          className="min-h-[80px] bg-white border border-[#d8d6df] focus:border-[#FF6600] focus:ring-[#FF6600]/10 rounded-[4px] transition-all resize-none font-light"
+          className="min-h-[80px] bg-white border border-[#d8d6df] focus:border-[#FA6400] focus:ring-[#FA6400]/10 rounded-[4px] transition-all resize-none font-light"
           maxLength={2000}
         />
         <p className="text-xs text-[#64748d] mt-1 text-right font-light">
@@ -226,7 +226,7 @@ const ProjectWizardStep3 = ({
             isRTL ? "📊 تصدير CSV" : "📊 CSV export ready",
           ].map((item, i) => (
             <div key={i} className="flex items-center gap-1.5 py-1">
-              <span className="text-[#FF6600]">✓</span>
+              <span className="text-[#FA6400]">✓</span>
               <span>{item}</span>
             </div>
           ))}
@@ -238,7 +238,7 @@ const ProjectWizardStep3 = ({
         <Button
           variant="outline"
           onClick={onBack}
-          className="h-12 gap-2 border border-[#d8d6df] hover:border-[#FF6600] hover:bg-[#f8fafd] text-[#061b31] font-light rounded-[4px] transition-all"
+          className="h-12 gap-2 border border-[#d8d6df] hover:border-[#FA6400] hover:bg-[#f8fafd] text-[#061b31] font-light rounded-[4px] transition-all"
           disabled={isProcessing}
         >
           {isRTL ? (
@@ -251,7 +251,7 @@ const ProjectWizardStep3 = ({
         <Button
           onClick={handleGenerate}
           disabled={isProcessing}
-          className="flex-1 h-14 text-base font-light gap-2 bg-[#FF6600] hover:bg-[#E65C00] text-white rounded-[4px] shadow-sm hover:shadow-md transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-1 h-14 text-base font-light gap-2 bg-[#FA6400] hover:bg-[#E85A00] text-white rounded-[4px] shadow-sm hover:shadow-md transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isProcessing ? (
             <>

@@ -150,7 +150,7 @@ const BOQProjectDetailPage = () => {
     return (
       <Shell>
         <div className="bg-white rounded-[6px] border border-[#d8d6df] p-12 flex flex-col items-center justify-center gap-3">
-          <Loader2 className="w-8 h-8 animate-spin text-[#FF6600]" />
+          <Loader2 className="w-8 h-8 animate-spin text-[#FA6400]" />
           <p className="text-sm text-[#50617a]">
             {isRTL ? "جارٍ تحميل المشروع…" : "Loading project…"}
           </p>
@@ -174,7 +174,7 @@ const BOQProjectDetailPage = () => {
           </p>
           <Button
             onClick={() => navigate("/account/boq-projects")}
-            className="bg-[#FF6600] hover:bg-[#E65C00] text-white font-medium rounded-[4px]"
+            className="bg-[#FA6400] hover:bg-[#E85A00] text-white font-medium rounded-[4px]"
           >
             {isRTL ? "العودة إلى المشاريع" : "Back to projects"}
           </Button>
@@ -194,7 +194,7 @@ const BOQProjectDetailPage = () => {
         {/* Back */}
         <Link
           to="/account/boq-projects"
-          className="inline-flex items-center gap-2 text-sm font-medium text-[#50617a] hover:text-[#FF6600] transition-colors"
+          className="inline-flex items-center gap-2 text-sm font-medium text-[#50617a] hover:text-[#FA6400] transition-colors"
         >
           <ArrowLeft className={`w-4 h-4 ${isRTL ? "rotate-180" : ""}`} />
           {isRTL ? "كل المشاريع" : "All projects"}
@@ -205,7 +205,7 @@ const BOQProjectDetailPage = () => {
           <div className="flex items-start justify-between gap-4 flex-wrap">
             <div className="flex items-start gap-3 min-w-0">
               <div className="w-12 h-12 rounded-[4px] bg-[#e5edf5] flex items-center justify-center shrink-0">
-                <Calculator className="w-6 h-6 text-[#FF6600]" />
+                <Calculator className="w-6 h-6 text-[#FA6400]" />
               </div>
               <div className="min-w-0">
                 <h1 className="text-xl font-medium text-[#061b31] truncate">
@@ -221,7 +221,7 @@ const BOQProjectDetailPage = () => {
             <span
               className={`inline-flex items-center gap-1 text-xs font-medium uppercase tracking-wide px-2.5 py-1 rounded-full ${
                 project.status === "completed"
-                  ? "bg-[#e5edf5] text-[#FF6600]"
+                  ? "bg-[#e5edf5] text-[#FA6400]"
                   : "bg-[#e5edf5] text-[#50617a]"
               }`}
             >
@@ -271,9 +271,9 @@ const BOQProjectDetailPage = () => {
           </div>
 
           {/* Total */}
-          <div className="mt-5 flex items-center justify-between bg-[#e5edf5] border border-[#FF6600]/30 rounded-[4px] p-4">
+          <div className="mt-5 flex items-center justify-between bg-[#e5edf5] border border-[#FA6400]/30 rounded-[4px] p-4">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-[#FF6600] mb-0.5">
+              <p className="text-xs font-semibold uppercase tracking-wide text-[#FA6400] mb-0.5">
                 {isRTL ? "التكلفة الإجمالية المقدّرة" : "Total estimated cost"}
               </p>
               {project.boqResult?.timeline && (
@@ -292,7 +292,7 @@ const BOQProjectDetailPage = () => {
         {/* BOQ items */}
         <div className="bg-white rounded-[6px] border border-[#d8d6df] p-6 shadow-sm">
           <div className="flex items-center gap-2 mb-4">
-            <FileText className="w-5 h-5 text-[#FF6600]" />
+            <FileText className="w-5 h-5 text-[#FA6400]" />
             <h2 className="text-lg font-semibold text-[#061b31]">
               {isRTL ? "عناصر BOQ" : "BOQ Items"}
             </h2>
@@ -387,7 +387,7 @@ const BOQProjectDetailPage = () => {
               <ul className="space-y-1.5">
                 {notes.map((n, i) => (
                   <li key={i} className="text-sm text-[#061b31] flex gap-2">
-                    <span className="text-[#FF6600] font-semibold">•</span>
+                    <span className="text-[#FA6400] font-semibold">•</span>
                     <span>{n}</span>
                   </li>
                 ))}

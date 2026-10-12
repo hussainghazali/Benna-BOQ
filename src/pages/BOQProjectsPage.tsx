@@ -86,7 +86,7 @@ const BOQProjectsPage = () => {
         );
       case "completed":
         return (
-          <span className="inline-flex items-center gap-1 text-xs font-medium uppercase tracking-wide bg-[#e5edf5] text-[#FF6600] px-2.5 py-1 rounded-full">
+          <span className="inline-flex items-center gap-1 text-xs font-medium uppercase tracking-wide bg-[#e5edf5] text-[#FA6400] px-2.5 py-1 rounded-full">
             <CheckCircle className="w-3.5 h-3.5" />
             {tx("Completed", "مكتمل")}
           </span>
@@ -159,7 +159,7 @@ const BOQProjectsPage = () => {
                 <div className="flex items-center gap-3">
                   <div>
                     <div className="flex items-center gap-2 mb-1">
-                      <div className="w-6 h-1 bg-[#FF6600] rounded-full" />
+                      <div className="w-6 h-1 bg-[#FA6400] rounded-full" />
                       <h2 className="text-[22px] font-medium text-[#061b31]">
                         {tx("BOQ / Projects", "جداول الكميات / المشاريع")}
                       </h2>
@@ -174,7 +174,7 @@ const BOQProjectsPage = () => {
                 </div>
                 <Button
                   onClick={handleNewProject}
-                  className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-[#FF6600] hover:bg-[#E65C00] rounded-[4px] transition-all duration-200 shadow-sm"
+                  className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-[#FA6400] hover:bg-[#E85A00] rounded-[4px] transition-all duration-200 shadow-sm"
                 >
                   <Plus className="w-4 h-4" />
                   {tx("New Project", "مشروع جديد")}
@@ -197,7 +197,7 @@ const BOQProjectsPage = () => {
                   </p>
                   <Button
                     onClick={handleNewProject}
-                    className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-[#FF6600] hover:bg-[#E65C00] rounded-[4px] transition-all duration-200"
+                    className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-[#FA6400] hover:bg-[#E85A00] rounded-[4px] transition-all duration-200"
                   >
                     <Plus className="w-4 h-4" />
                     <Sparkles className="w-4 h-4" />
@@ -252,7 +252,7 @@ const BOQProjectsPage = () => {
                                 </p>
                                 {project.boqResult &&
                                   Object.keys(project.boqResult).length > 0 && (
-                                    <p className="text-xs text-[#FF6600] font-medium mt-1 flex items-center gap-1">
+                                    <p className="text-xs text-[#FA6400] font-medium mt-1 flex items-center gap-1">
                                       <FileText className="w-3 h-3" />
                                       {tx("BOQ Generated", "تم إنشاء BOQ")}
                                     </p>
@@ -264,7 +264,7 @@ const BOQProjectsPage = () => {
                             </td>
                             <td className="hidden lg:table-cell py-3 px-4 text-sm text-[#50617a]">
                               <div className="flex items-center gap-1">
-                                <MapPin className="w-3 h-3 text-[#FF6600]" />
+                                <MapPin className="w-3 h-3 text-[#FA6400]" />
                                 {project.city || NA}
                               </div>
                             </td>
@@ -275,7 +275,7 @@ const BOQProjectsPage = () => {
                             </td>
                             <td className="hidden lg:table-cell py-3 px-4 text-sm text-[#50617a]">
                               <div className="flex items-center gap-1">
-                                <Layers className="w-3 h-3 text-[#FF6600]" />
+                                <Layers className="w-3 h-3 text-[#FA6400]" />
                                 {project.floors || NA}
                               </div>
                             </td>
@@ -299,7 +299,7 @@ const BOQProjectsPage = () => {
                       <button
                         onClick={() => loadProjects(currentPage - 1)}
                         disabled={currentPage === 1}
-                        className="px-4 py-2 text-sm font-medium text-[#061b31] bg-[#e5edf5] rounded-[4px] hover:bg-[#d8d6df] hover:text-[#FF6600] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+                        className="px-4 py-2 text-sm font-medium text-[#061b31] bg-[#e5edf5] rounded-[4px] hover:bg-[#d8d6df] hover:text-[#FA6400] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
                       >
                         {tx("Previous", "السابق")}
                       </button>
@@ -312,7 +312,7 @@ const BOQProjectsPage = () => {
                       <button
                         onClick={() => loadProjects(currentPage + 1)}
                         disabled={currentPage === totalPages}
-                        className="px-4 py-2 text-sm font-medium text-[#061b31] bg-[#e5edf5] rounded-[4px] hover:bg-[#d8d6df] hover:text-[#FF6600] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+                        className="px-4 py-2 text-sm font-medium text-[#061b31] bg-[#e5edf5] rounded-[4px] hover:bg-[#d8d6df] hover:text-[#FA6400] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
                       >
                         {tx("Next", "التالي")}
                       </button>

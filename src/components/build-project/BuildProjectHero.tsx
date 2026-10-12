@@ -106,7 +106,7 @@ const BuildProjectHero = () => {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
               <Button
                 onClick={() => navigate("/welcome")}
-                className="h-12 px-8 rounded-[4px] bg-white text-[#FF6600] font-light hover:bg-[#f8fafd] transition-all shadow-sm"
+                className="h-12 px-8 rounded-[4px] bg-white text-[#FA6400] font-light hover:bg-[#f8fafd] transition-all shadow-sm"
                 style={{ fontSize: "15px" }}
               >
                 {isRTL ? "ابدأ مجاناً" : "Start for free"}
@@ -153,16 +153,16 @@ const BuildProjectHero = () => {
                 <motion.div
                   key={i}
                   whileHover={{ y: -3, transition: { duration: 0.2 } }}
-                  className="group bg-white border border-[#d8d6df] rounded-[6px] p-5 hover:border-[#FF6600] transition-all duration-300"
+                  className="group bg-white border border-[#d8d6df] rounded-[6px] p-5 hover:border-[#FA6400] transition-all duration-300"
                   style={{ boxShadow: "rgba(23,23,23,0.04) 0px 2px 4px 0px" }}
                 >
-                  <div className="w-10 h-10 rounded-[4px] bg-[#e5edf5] flex items-center justify-center mb-3 group-hover:bg-[#FF6600] transition-colors duration-300">
-                    <Icon className="w-5 h-5 text-[#FF6600] group-hover:text-white transition-colors duration-300" />
+                  <div className="w-10 h-10 rounded-[4px] bg-[#e5edf5] flex items-center justify-center mb-3 group-hover:bg-[#FA6400] transition-colors duration-300">
+                    <Icon className="w-5 h-5 text-[#FA6400] group-hover:text-white transition-colors duration-300" />
                   </div>
                   <p className="text-[14px] font-light text-[#061b31] mb-1">{f.label}</p>
                   <p className="text-[12px] text-[#50617a] mb-3 leading-relaxed font-light">{f.desc}</p>
                   <div className="flex items-baseline gap-1.5 pt-3 border-t border-[#e5edf5]">
-                    <span className="text-[#FF6600] text-[15px] font-light">{f.stat}</span>
+                    <span className="text-[#FA6400] text-[15px] font-light">{f.stat}</span>
                   </div>
                 </motion.div>
               );
@@ -182,7 +182,7 @@ const BuildProjectHero = () => {
               { icon: null, text: isRTL ? "📊 تصدير CSV" : "CSV Export" },
             ].map((item, i) => (
               <span key={i} className="flex items-center gap-1">
-                {item.icon && <item.icon className="w-3 h-3 text-[#FF6600]" />}
+                {item.icon && <item.icon className="w-3 h-3 text-[#FA6400]" />}
                 {item.text}
               </span>
             ))}

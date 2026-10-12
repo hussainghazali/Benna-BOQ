@@ -387,7 +387,7 @@ const BuildProjectPage = () => {
                 { v: "1-click", l: isRTL ? "سلة" : "Cart" },
               ].map((s) => (
                 <div key={s.v} className="flex items-center gap-1.5 bg-white border border-[#d8d6df] rounded-[4px] px-3 py-1.5 shadow-sm">
-                  <span className="text-[#FF6600] font-light text-sm">{s.v}</span>
+                  <span className="text-[#FA6400] font-light text-sm">{s.v}</span>
                   <span className="text-[#50617a] text-xs font-light">{s.l}</span>
                 </div>
               ))}
@@ -428,11 +428,11 @@ const BuildProjectPage = () => {
                 {/* Section label */}
                 <div className="text-center mb-8">
                   <div className="flex items-center justify-center gap-2 mb-2">
-                    <div className="w-5 h-0.5 bg-[#FF6600] rounded-full" />
-                    <span className="text-xs font-light text-[#FF6600] uppercase tracking-widest">
+                    <div className="w-5 h-0.5 bg-[#FA6400] rounded-full" />
+                    <span className="text-xs font-light text-[#FA6400] uppercase tracking-widest">
                       {isRTL ? "ابدأ الآن" : "Get started"}
                     </span>
-                    <div className="w-5 h-0.5 bg-[#FF6600] rounded-full" />
+                    <div className="w-5 h-0.5 bg-[#FA6400] rounded-full" />
                   </div>
                   <p className="text-[14px] font-light text-[#50617a]">
                     {isRTL ? "٣ خطوات فقط للحصول على قائمة كمياتك" : "Just 3 steps to your complete BOQ"}
@@ -453,9 +453,9 @@ const BuildProjectPage = () => {
                             className={cn(
                               "w-11 h-11 rounded-[4px] flex items-center justify-center transition-all duration-500 border",
                               isDone
-                                ? "bg-[#FF6600] border-[#FF6600] text-white"
+                                ? "bg-[#FA6400] border-[#FA6400] text-white"
                                 : isActive
-                                  ? "bg-white border-[#FF6600] text-[#061b31]"
+                                  ? "bg-white border-[#FA6400] text-[#061b31]"
                                   : "bg-[#f8fafd] border-[#d8d6df] text-[#64748d]",
                             )}
                             style={isActive ? { boxShadow: "rgba(83,58,253,0.15) 0px 0px 0px 3px" } : {}}
@@ -470,7 +470,7 @@ const BuildProjectPage = () => {
                             className={cn(
                               "text-[11px] font-light transition-colors",
                               isDone
-                                ? "text-[#FF6600]"
+                                ? "text-[#FA6400]"
                                 : isActive
                                   ? "text-[#061b31]"
                                   : "text-[#64748d]",
@@ -484,7 +484,7 @@ const BuildProjectPage = () => {
                             className={cn(
                               "w-16 sm:w-24 h-[2px] rounded mx-2 mb-5 transition-all duration-500",
                               step > stepNum
-                                ? "bg-[#FF6600]"
+                                ? "bg-[#FA6400]"
                                 : step === stepNum
                                   ? "bg-[#d8d6df]"
                                   : "bg-[#e5edf5]",
@@ -555,17 +555,17 @@ const BuildProjectPage = () => {
                 {/* Trust bar */}
                 <div className="flex items-center justify-center gap-6 mt-6 p-4 bg-[#f8fafd] rounded-[4px] border border-[#d8d6df]">
                   <div className="flex items-center gap-2 text-[11px] font-light text-[#50617a]">
-                    <Shield className="w-3.5 h-3.5 text-[#FF6600]" />
+                    <Shield className="w-3.5 h-3.5 text-[#FA6400]" />
                     <span>{isRTL ? "بياناتك مشفرة" : "Data encrypted"}</span>
                   </div>
                   <div className="w-px h-4 bg-[#d8d6df]" />
                   <div className="flex items-center gap-2 text-[11px] font-light text-[#50617a]">
-                    <Zap className="w-3.5 h-3.5 text-[#FF6600]" />
+                    <Zap className="w-3.5 h-3.5 text-[#FA6400]" />
                     <span>{isRTL ? "٥٠ قائمة مجانية" : "50 free BOQs"}</span>
                   </div>
                   <div className="w-px h-4 bg-[#d8d6df]" />
                   <div className="flex items-center gap-2 text-[11px] font-light text-[#50617a]">
-                    <TrendingUp className="w-3.5 h-3.5 text-[#FF6600]" />
+                    <TrendingUp className="w-3.5 h-3.5 text-[#FA6400]" />
                     <span>{isRTL ? "منتجات من بنّة" : "Benna products"}</span>
                   </div>
                 </div>
@@ -582,11 +582,11 @@ const BuildProjectPage = () => {
             <div className="max-w-3xl mx-auto">
               <div className="text-center mb-8">
                 <div className="flex items-center justify-center gap-2 mb-2">
-                  <div className="w-5 h-0.5 bg-[#FF6600] rounded-full" />
-                  <span className="text-xs font-light text-[#FF6600] uppercase tracking-widest">
+                  <div className="w-5 h-0.5 bg-[#FA6400] rounded-full" />
+                  <span className="text-xs font-light text-[#FA6400] uppercase tracking-widest">
                     {isRTL ? "كيف يعمل" : "How it works"}
                   </span>
-                  <div className="w-5 h-0.5 bg-[#FF6600] rounded-full" />
+                  <div className="w-5 h-0.5 bg-[#FA6400] rounded-full" />
                 </div>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
@@ -627,12 +627,12 @@ const BuildProjectPage = () => {
                     >
                       <div className="shrink-0">
                         <div className="w-10 h-10 rounded-[4px] bg-[#e5edf5] flex items-center justify-center">
-                          <Icon className="w-5 h-5 text-[#FF6600]" />
+                          <Icon className="w-5 h-5 text-[#FA6400]" />
                         </div>
                       </div>
                       <div>
                         <div className="flex items-center gap-2 mb-1">
-                          <span className="text-[10px] font-light text-[#FF6600] tracking-widest">{item.num}</span>
+                          <span className="text-[10px] font-light text-[#FA6400] tracking-widest">{item.num}</span>
                           <h3 className="text-[14px] font-light text-[#061b31]">
                             {isRTL ? item.titleAr : item.titleEn}
                           </h3>
@@ -661,11 +661,11 @@ const BuildProjectPage = () => {
               className="text-center mb-8"
             >
               <div className="flex items-center justify-center gap-2 mb-3">
-                <div className="w-6 h-0.5 bg-[#FF6600] rounded-full" />
-                <span className="text-xs font-light text-[#FF6600] uppercase tracking-widest">
+                <div className="w-6 h-0.5 bg-[#FA6400] rounded-full" />
+                <span className="text-xs font-light text-[#FA6400] uppercase tracking-widest">
                   {isRTL ? "ما بنيناه لك" : "What we built for you"}
                 </span>
-                <div className="w-6 h-0.5 bg-[#FF6600] rounded-full" />
+                <div className="w-6 h-0.5 bg-[#FA6400] rounded-full" />
               </div>
               <h2
                 className="text-[#061b31]"
@@ -683,10 +683,10 @@ const BuildProjectPage = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.25 + i * 0.08 }}
-                    className="bg-white rounded-[6px] border border-[#d8d6df] p-5 hover:shadow-[rgba(23,23,23,0.08)_0px_15px_35px_0px] hover:border-[#FF6600] transition-all duration-300 group"
+                    className="bg-white rounded-[6px] border border-[#d8d6df] p-5 hover:shadow-[rgba(23,23,23,0.08)_0px_15px_35px_0px] hover:border-[#FA6400] transition-all duration-300 group"
                   >
-                    <div className="w-10 h-10 rounded-[4px] bg-[#e5edf5] flex items-center justify-center mb-4 group-hover:bg-[#FF6600] transition-colors duration-300">
-                      <Icon className="w-5 h-5 text-[#FF6600] group-hover:text-white transition-colors duration-300" />
+                    <div className="w-10 h-10 rounded-[4px] bg-[#e5edf5] flex items-center justify-center mb-4 group-hover:bg-[#FA6400] transition-colors duration-300">
+                      <Icon className="w-5 h-5 text-[#FA6400] group-hover:text-white transition-colors duration-300" />
                     </div>
                     <h3 className="text-[#061b31] mb-1" style={{ fontSize: "14px", fontWeight: 400, lineHeight: 1.4 }}>
                       {isRTL ? item.titleAr : item.titleEn}
@@ -695,7 +695,7 @@ const BuildProjectPage = () => {
                       {isRTL ? item.descAr : item.descEn}
                     </p>
                     <div className="flex items-baseline gap-1.5 pt-3 border-t border-[#e5edf5]">
-                      <span className="text-[#FF6600]" style={{ fontSize: "18px", fontWeight: 300 }}>{item.stat}</span>
+                      <span className="text-[#FA6400]" style={{ fontSize: "18px", fontWeight: 300 }}>{item.stat}</span>
                       <span className="text-[#64748d]" style={{ fontSize: "11px", fontWeight: 300 }}>
                         {isRTL ? item.statLabelAr : item.statLabelEn}
                       </span>

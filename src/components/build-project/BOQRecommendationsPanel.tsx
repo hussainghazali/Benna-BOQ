@@ -165,7 +165,7 @@ const BOQRecommendationsPanel = ({
       <CardHeader className="pb-4 bg-[#f8fafd] border-b border-[#d8d6df]">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 rounded-[4px] bg-[#FF6600] px-3 py-1 text-xs font-light text-white">
+            <div className="inline-flex items-center gap-2 rounded-[4px] bg-[#FA6400] px-3 py-1 text-xs font-light text-white">
               <Sparkles className="h-3.5 w-3.5" />
               {isRTL
                 ? "Benna AI ترشيحات قابلة للشراء"
@@ -183,7 +183,7 @@ const BOQRecommendationsPanel = ({
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
-            <Badge className="gap-1 rounded-[4px] px-3 py-1 bg-[#FF6600] text-white hover:bg-[#FF6600] font-light border-0">
+            <Badge className="gap-1 rounded-[4px] px-3 py-1 bg-[#FA6400] text-white hover:bg-[#FA6400] font-light border-0">
               <PackageCheck className="h-3.5 w-3.5" />
               {isRTL ? `تغطية ${coverageLabel}` : `Coverage ${coverageLabel}`}
             </Badge>
@@ -196,7 +196,7 @@ const BOQRecommendationsPanel = ({
             variant="destructive"
             className="border-[#d8d6df] bg-[#f8fafd]"
           >
-            <AlertCircle className="h-4 w-4 text-[#FF6600]" />
+            <AlertCircle className="h-4 w-4 text-[#FA6400]" />
             <AlertTitle className="text-[#061b31] font-light">
               {isRTL ? "تعذر تحميل التوصيات" : "Recommendations unavailable"}
             </AlertTitle>
@@ -229,7 +229,7 @@ const BOQRecommendationsPanel = ({
               variant="outline"
               size="icon"
               onClick={() => slideCards("prev")}
-              className="absolute left-2 top-1/2 z-10 hidden -translate-y-1/2 rounded-[4px] bg-white border border-[#d8d6df] shadow-sm hover:border-[#FF6600] hover:bg-[#f8fafd] md:inline-flex"
+              className="absolute left-2 top-1/2 z-10 hidden -translate-y-1/2 rounded-[4px] bg-white border border-[#d8d6df] shadow-sm hover:border-[#FA6400] hover:bg-[#f8fafd] md:inline-flex"
               aria-label={isRTL ? "السابق" : "Previous recommendations"}
             >
               <ChevronLeft className="h-4 w-4" />
@@ -258,7 +258,7 @@ const BOQRecommendationsPanel = ({
                 return (
                   <Card
                     key={product._id}
-                    className="w-[280px] min-w-[280px] snap-start overflow-hidden border border-[#d8d6df] rounded-[4px] hover:border-[#FF6600] hover:shadow-md transition-all duration-200"
+                    className="w-[280px] min-w-[280px] snap-start overflow-hidden border border-[#d8d6df] rounded-[4px] hover:border-[#FA6400] hover:shadow-md transition-all duration-200"
                   >
                     <div className="aspect-square bg-[#f8fafd] p-3 relative">
                       <img
@@ -272,7 +272,7 @@ const BOQRecommendationsPanel = ({
                         }}
                       />
                       {hasDiscount && discountText && (
-                        <div className="absolute top-2 left-2 bg-[#FF6600] text-white text-xs font-light px-2 py-0.5 rounded-[4px]">
+                        <div className="absolute top-2 left-2 bg-[#FA6400] text-white text-xs font-light px-2 py-0.5 rounded-[4px]">
                           {discountText}
                         </div>
                       )}
@@ -285,7 +285,7 @@ const BOQRecommendationsPanel = ({
                           </p>
                           <Link
                             to={`/product/${product.uniqueProductSlug}`}
-                            className="line-clamp-2 text-sm font-light text-[#061b31] hover:text-[#FF6600] transition-colors"
+                            className="line-clamp-2 text-sm font-light text-[#061b31] hover:text-[#FA6400] transition-colors"
                           >
                             {isRTL && product.nameArabic
                               ? product.nameArabic
@@ -293,7 +293,7 @@ const BOQRecommendationsPanel = ({
                           </Link>
                         </div>
                         {product.inventory === "InStock" ? (
-                          <Badge className="rounded-[4px] bg-[#FF6600] text-white hover:bg-[#FF6600] font-light border-0">
+                          <Badge className="rounded-[4px] bg-[#FA6400] text-white hover:bg-[#FA6400] font-light border-0">
                             <CheckCircle2 className="h-3.5 w-3.5" />
                             {isRTL ? "متوفر" : "In stock"}
                           </Badge>
@@ -336,7 +336,7 @@ const BOQRecommendationsPanel = ({
               variant="outline"
               size="icon"
               onClick={() => slideCards("next")}
-              className="absolute right-2 top-1/2 z-10 hidden -translate-y-1/2 rounded-[4px] bg-white border border-[#d8d6df] shadow-sm hover:border-[#FF6600] hover:bg-[#f8fafd] md:inline-flex"
+              className="absolute right-2 top-1/2 z-10 hidden -translate-y-1/2 rounded-[4px] bg-white border border-[#d8d6df] shadow-sm hover:border-[#FA6400] hover:bg-[#f8fafd] md:inline-flex"
               aria-label={isRTL ? "التالي" : "Next recommendations"}
             >
               <ChevronRight className="h-4 w-4" />
@@ -344,7 +344,7 @@ const BOQRecommendationsPanel = ({
           </div>
         ) : (
           <Alert className="border-[#d8d6df] bg-[#e5edf5]">
-            <AlertCircle className="h-4 w-4 text-[#FF6600]" />
+            <AlertCircle className="h-4 w-4 text-[#FA6400]" />
             <AlertTitle className="text-[#061b31] font-light">
               {isRTL ? "لا توجد مطابقة مباشرة بعد" : "No direct matches yet"}
             </AlertTitle>

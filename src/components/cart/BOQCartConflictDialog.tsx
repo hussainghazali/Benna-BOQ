@@ -39,7 +39,7 @@ const BOQCartConflictDialog = ({
       <AlertDialogContent className="rounded-[6px] border-[#e5edf5]">
         <AlertDialogHeader>
           <AlertDialogTitle className="flex items-center gap-2 font-light text-[#061b31]">
-            <AlertTriangle className="h-5 w-5 text-[#FF6600]" />
+            <AlertTriangle className="h-5 w-5 text-[#FA6400]" />
             {isRTL ? "سلتك تحتوي على بنود BOQ" : "Your cart holds BOQ items"}
           </AlertDialogTitle>
           <AlertDialogDescription className="font-light text-[#50617a]">
@@ -57,7 +57,7 @@ const BOQCartConflictDialog = ({
           </AlertDialogCancel>
           <AlertDialogAction
             onClick={onConfirm}
-            className="rounded-[4px] bg-[#FF6600] font-light hover:bg-[#E65C00]"
+            className="rounded-[4px] bg-[#FA6400] font-light hover:bg-[#E85A00]"
           >
             {isRTL ? "إفراغ السلة والإضافة" : "Clear cart & add item"}
           </AlertDialogAction>
