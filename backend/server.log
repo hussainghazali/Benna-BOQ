@@ -1,0 +1,6 @@
+[CREDITS CONFIG ERROR] PAYTABS_PROFILE_ID and PAYTABS_SERVER_KEY must be set
+[CREDITS CONFIG ERROR] Invalid or missing credits callback URL. Set CREDITS_CALLBACK_URL or API_BASE_URL/PUBLIC_API_URL in .env
+(node:16624) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[DB] MongoDB connected: 127.0.0.1
+[API] listening on :1943
