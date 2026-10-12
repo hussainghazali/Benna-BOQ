@@ -299,13 +299,13 @@ const BOQResultView = ({
               style={{ boxShadow: "rgba(23,23,23,0.06) 0px 3px 6px 0px" }}
             >
               <div className="w-9 h-9 rounded-[4px] bg-[#e5edf5] flex items-center justify-center mx-auto mb-3">
-                <Icon className="w-4.5 h-4.5 text-[#533afd]" />
+                <Icon className="w-4.5 h-4.5 text-[#FF6600]" />
               </div>
               <p className="text-[11px] font-light text-[#64748d] mb-1 uppercase tracking-wider">
                 {card.label}
               </p>
               <p
-                className={card.accent ? "text-[#533afd]" : "text-[#061b31]"}
+                className={card.accent ? "text-[#FF6600]" : "text-[#061b31]"}
                 style={{ fontSize: "20px", fontWeight: 300 }}
               >
                 {card.value}
@@ -325,7 +325,7 @@ const BOQResultView = ({
       >
         {/* Table header strip */}
         <div className="bg-[#f8fafd] border-b border-[#d8d6df] px-5 py-3 flex items-center gap-2">
-          <div className="w-1 h-4 bg-[#533afd] rounded-full" />
+          <div className="w-1 h-4 bg-[#FF6600] rounded-full" />
           <span className="text-[13px] font-light text-[#061b31]">
             {isRTL ? "قائمة الكميات التفصيلية" : "Detailed Bill of Quantities"}
           </span>
@@ -336,7 +336,7 @@ const BOQResultView = ({
         <div className="overflow-x-auto">
           <Table>
             <TableHeader>
-              <TableRow style={{ background: "linear-gradient(90deg, #533afd, #422bc7)" }}>
+              <TableRow style={{ background: "linear-gradient(90deg, #FF6600, #E65C00)" }}>
                 <TableHead className="font-light text-white text-[12px]">
                   {isRTL ? "المادة" : "Item"}
                 </TableHead>
@@ -369,7 +369,7 @@ const BOQResultView = ({
                       className="py-2.5 border-b border-[#d8d6df]"
                     >
                       <div className="flex items-center gap-2">
-                        <div className="w-0.5 h-4 bg-[#533afd] rounded-full shrink-0" />
+                        <div className="w-0.5 h-4 bg-[#FF6600] rounded-full shrink-0" />
                         <span className="text-[13px] font-light text-[#061b31]">{category}</span>
                       </div>
                     </TableCell>
@@ -396,7 +396,7 @@ const BOQResultView = ({
                       </TableCell>
                       <TableCell className="border-b border-[#d8d6df]">
                         {item.brand && (
-                          <Badge className="bg-[#533afd] text-white hover:bg-[#533afd] font-light">
+                          <Badge className="bg-[#FF6600] text-white hover:bg-[#FF6600] font-light">
                             {item.brand}
                           </Badge>
                         )}
@@ -420,7 +420,7 @@ const BOQResultView = ({
                   ))}
                 </>
               ))}
-              <TableRow style={{ background: "linear-gradient(90deg, #533afd, #422bc7)" }}>
+              <TableRow style={{ background: "linear-gradient(90deg, #FF6600, #E65C00)" }}>
                 <TableCell
                   colSpan={5}
                   className="text-right text-[13px] font-light text-white"
@@ -446,7 +446,7 @@ const BOQResultView = ({
           className="bg-[#e5edf5] border border-[#d8d6df] rounded-[4px] p-4"
         >
           <div className="flex items-center gap-2 mb-2">
-            <AlertTriangle className="w-4 h-4 text-[#533afd]" />
+            <AlertTriangle className="w-4 h-4 text-[#FF6600]" />
             <h3 className="font-light text-[#061b31]">
               {isRTL ? "ملاحظات مهمة" : "Important Notes"}
             </h3>
@@ -493,7 +493,7 @@ const BOQResultView = ({
           <Button
             onClick={handleExportCSV}
             variant="outline"
-            className="gap-2 h-11 rounded-[4px] border border-[#d8d6df] hover:border-[#533afd] hover:bg-white text-[#061b31] font-light text-[14px]"
+            className="gap-2 h-11 rounded-[4px] border border-[#d8d6df] hover:border-[#FF6600] hover:bg-white text-[#061b31] font-light text-[14px]"
           >
             <Download className="w-4 h-4" />
             {isRTL ? "تصدير CSV" : "Export CSV"}
@@ -501,7 +501,7 @@ const BOQResultView = ({
           <Button
             variant="ghost"
             onClick={onReset}
-            className="gap-2 h-11 flex-1 rounded-[4px] border border-[#d8d6df] hover:border-[#533afd] hover:bg-white text-[#061b31] font-light text-[14px]"
+            className="gap-2 h-11 flex-1 rounded-[4px] border border-[#d8d6df] hover:border-[#FF6600] hover:bg-white text-[#061b31] font-light text-[14px]"
           >
             <RotateCcw className="w-4 h-4" />
             {isRTL ? "مشروع جديد" : "New Project"}

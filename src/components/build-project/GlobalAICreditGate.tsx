@@ -32,8 +32,8 @@ const GlobalAICreditGate = () => {
       >
         <DialogHeader className="px-6 pt-6 pb-2 border-b border-[#eef0f4]">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-[6px] bg-[#533afd]/10 flex items-center justify-center">
-              <Sparkles className="w-4 h-4 text-[#533afd]" />
+            <div className="w-8 h-8 rounded-[6px] bg-[#FF6600]/10 flex items-center justify-center">
+              <Sparkles className="w-4 h-4 text-[#FF6600]" />
             </div>
             <div>
               <DialogTitle className="text-[18px] font-light text-[#061b31]">

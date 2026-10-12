@@ -45,7 +45,7 @@ const StarRow = ({ value, onChange, label }: { value: number; onChange: (v: numb
           <Star
             className={cn(
               "w-6 h-6 transition",
-              n <= value ? "fill-[#533afd] text-[#533afd]" : "text-[#d8d6df]",
+              n <= value ? "fill-[#FF6600] text-[#FF6600]" : "text-[#d8d6df]",
             )}
           />
         </button>
@@ -140,7 +140,7 @@ const BOQFeedbackModal = ({ boqId, open, onOpenChange }: Props) => {
             <Button
               onClick={submit}
               disabled={busy}
-              className="bg-[#533afd] hover:bg-[#422bc7] text-white rounded-[4px]"
+              className="bg-[#FF6600] hover:bg-[#E65C00] text-white rounded-[4px]"
             >
               {busy ? "…" : isRTL ? "إرسال" : "Submit"}
             </Button>

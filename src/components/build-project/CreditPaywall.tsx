@@ -288,7 +288,7 @@ const CreditPaywall = ({ onPurchaseComplete, embedded = false }: Props) => {
         animate={{ opacity: 1, scale: 1 }}
         className="text-center py-12"
       >
-        <div className="w-16 h-16 bg-[#533afd] rounded-[4px] flex items-center justify-center mx-auto mb-4">
+        <div className="w-16 h-16 bg-[#FF6600] rounded-[4px] flex items-center justify-center mx-auto mb-4">
           <Check className="w-8 h-8 text-white" />
         </div>
         <h2 className="text-2xl font-light text-[#061b31] mb-2">
@@ -301,7 +301,7 @@ const CreditPaywall = ({ onPurchaseComplete, embedded = false }: Props) => {
         </p>
         <Button
           onClick={() => setPaymentStatus("idle")}
-          className="bg-[#533afd] hover:bg-[#422bc7] text-white rounded-[4px] font-light"
+          className="bg-[#FF6600] hover:bg-[#E65C00] text-white rounded-[4px] font-light"
         >
           {isRTL ? "العودة للباقات" : "Back to Packages"}
         </Button>
@@ -373,8 +373,8 @@ const CreditPaywall = ({ onPurchaseComplete, embedded = false }: Props) => {
                 className={cn(
                   "relative rounded-[6px] border overflow-hidden transition-all bg-white",
                   pkg.popular
-                    ? "border-[#533afd] scale-[1.02]"
-                    : "border-[#d8d6df] hover:border-[#533afd]",
+                    ? "border-[#FF6600] scale-[1.02]"
+                    : "border-[#d8d6df] hover:border-[#FF6600]",
                 )}
                 style={pkg.popular ? { boxShadow: "rgba(50,50,93,0.12) 0px 16px 32px 0px" } : { boxShadow: "rgba(23,23,23,0.06) 0px 3px 6px 0px" }}
               >
@@ -386,7 +386,7 @@ const CreditPaywall = ({ onPurchaseComplete, embedded = false }: Props) => {
                   />
                 )}
                 {pkg.popular && (
-                  <Badge className="absolute top-4 left-1/2 -translate-x-1/2 bg-[#533afd] text-white font-light shadow-sm border-0">
+                  <Badge className="absolute top-4 left-1/2 -translate-x-1/2 bg-[#FF6600] text-white font-light shadow-sm border-0">
                     <Sparkles className="w-3 h-3 mr-1" />
                     {isRTL ? "الأكثر شيوعاً" : "Most Popular"}
                   </Badge>
@@ -403,7 +403,7 @@ const CreditPaywall = ({ onPurchaseComplete, embedded = false }: Props) => {
                     <Icon
                       className={cn(
                         "w-6 h-6",
-                        pkg.popular ? "text-[#533afd]" : "text-[#64748d]",
+                        pkg.popular ? "text-[#FF6600]" : "text-[#64748d]",
                       )}
                     />
                   </div>
@@ -434,7 +434,7 @@ const CreditPaywall = ({ onPurchaseComplete, embedded = false }: Props) => {
                       key={fi}
                       className="flex items-center gap-2 text-sm text-[#50617a] font-light"
                     >
-                      <Check className="w-4 h-4 shrink-0 text-[#533afd]" />
+                      <Check className="w-4 h-4 shrink-0 text-[#FF6600]" />
                       {f}
                     </li>
                   ))}
@@ -452,8 +452,8 @@ const CreditPaywall = ({ onPurchaseComplete, embedded = false }: Props) => {
                     alreadyClaimedFree
                       ? "bg-[#f8fafd] text-[#64748d] border border-[#d8d6df] cursor-not-allowed"
                       : pkg.popular
-                        ? "bg-[#533afd] hover:bg-[#422bc7] text-white"
-                        : "border border-[#d8d6df] hover:border-[#533afd] text-[#061b31]",
+                        ? "bg-[#FF6600] hover:bg-[#E65C00] text-white"
+                        : "border border-[#d8d6df] hover:border-[#FF6600] text-[#061b31]",
                   )}
                   variant={pkg.popular ? "default" : "outline"}
                 >
@@ -481,11 +481,11 @@ const CreditPaywall = ({ onPurchaseComplete, embedded = false }: Props) => {
       {/* Payment trust badges */}
       <div className="flex items-center justify-center gap-4 pt-2 text-[11px] text-[#64748d] font-light">
         <span className="flex items-center gap-1">
-          <Shield className="w-3 h-3 text-[#533afd]" />
+          <Shield className="w-3 h-3 text-[#FF6600]" />
           {isRTL ? "دفع آمن" : "Secure Payment"}
         </span>
         <span className="flex items-center gap-1">
-          <CreditCard className="w-3 h-3 text-[#533afd]" />
+          <CreditCard className="w-3 h-3 text-[#FF6600]" />
           Visa / Mastercard / Mada
         </span>
         <span className="flex items-center gap-1">🍎 Apple Pay</span>
@@ -493,7 +493,7 @@ const CreditPaywall = ({ onPurchaseComplete, embedded = false }: Props) => {
 
       {paymentStatus === "failed" && (
         <div className="flex items-center gap-2 justify-center text-[#50617a] text-sm font-light">
-          <AlertTriangle className="w-4 h-4 text-[#533afd]" />
+          <AlertTriangle className="w-4 h-4 text-[#FF6600]" />
           {isRTL
             ? "فشلت عملية الدفع. يرجى المحاولة مرة أخرى."
             : "Payment failed. Please try again."}

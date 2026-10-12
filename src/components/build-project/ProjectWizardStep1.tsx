@@ -83,7 +83,7 @@ const ProjectWizardStep1 = ({
       {/* Conversational header */}
       <div className="flex items-start gap-3">
         <div className="w-10 h-10 rounded-[4px] bg-[#e5edf5] flex items-center justify-center shrink-0">
-          <Sparkles className="w-5 h-5 text-[#533afd]" />
+          <Sparkles className="w-5 h-5 text-[#FF6600]" />
         </div>
         <div className="bg-[#f8fafd] rounded-[4px] rounded-tl-sm px-4 py-3 border border-[#d8d6df]">
           <p className="text-sm text-[#061b31] font-light">
@@ -108,7 +108,7 @@ const ProjectWizardStep1 = ({
               : "e.g., Residential Villa in Jeddah"
           }
           maxLength={200}
-          className="h-12 bg-white border border-[#d8d6df] focus:border-[#533afd] focus:ring-[#533afd]/10 transition-all rounded-[4px] font-light"
+          className="h-12 bg-white border border-[#d8d6df] focus:border-[#FF6600] focus:ring-[#FF6600]/10 transition-all rounded-[4px] font-light"
         />
         <p className="text-xs text-[#64748d] mt-1 text-right font-light">
           {projectName.length}/200
@@ -136,21 +136,21 @@ const ProjectWizardStep1 = ({
                 className={cn(
                   "relative flex flex-col items-center gap-2 p-4 rounded-[4px] border transition-all duration-300 overflow-hidden group",
                   isSelected
-                    ? "border-[#533afd] bg-[#e5edf5] shadow-sm"
-                    : "border-[#d8d6df] hover:border-[#533afd] bg-white",
+                    ? "border-[#FF6600] bg-[#e5edf5] shadow-sm"
+                    : "border-[#d8d6df] hover:border-[#FF6600] bg-white",
                 )}
                 type="button"
                 aria-pressed={isSelected}
               >
                 {isSelected && (
-                  <div className="absolute inset-0 bg-[#533afd]/5" />
+                  <div className="absolute inset-0 bg-[#FF6600]/5" />
                 )}
                 <div
                   className={cn(
                     "w-10 h-10 rounded-[4px] flex items-center justify-center transition-all",
                     isSelected
-                      ? "bg-[#533afd] text-white"
-                      : "bg-[#f8fafd] group-hover:bg-[#e5edf5] text-[#64748d] group-hover:text-[#533afd]",
+                      ? "bg-[#FF6600] text-white"
+                      : "bg-[#f8fafd] group-hover:bg-[#e5edf5] text-[#64748d] group-hover:text-[#FF6600]",
                   )}
                 >
                   <Icon className="w-5 h-5" />
@@ -178,7 +178,7 @@ const ProjectWizardStep1 = ({
         <Button
           onClick={onNext}
           disabled={!isValid}
-          className="w-full h-12 text-base font-light gap-2 bg-[#533afd] hover:bg-[#422bc7] text-white rounded-[4px] shadow-sm hover:shadow-md transition-all duration-300"
+          className="w-full h-12 text-base font-light gap-2 bg-[#FF6600] hover:bg-[#E65C00] text-white rounded-[4px] shadow-sm hover:shadow-md transition-all duration-300"
         >
           {isRTL ? (
             <>

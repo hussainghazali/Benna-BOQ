@@ -232,7 +232,7 @@ const BOQResultTable = ({ result, onReset, onOpenFeedback, onOpenChat }: Props) 
       {Object.entries(grouped).map(([category, rows]) => (
         <div key={category} className="border border-[#e5edf5] rounded-[6px] overflow-hidden bg-white">
           <div className="px-4 py-3 bg-[#f8fafd] border-b border-[#e5edf5] flex items-center gap-2">
-            <Package className="w-4 h-4 text-[#533afd]" />
+            <Package className="w-4 h-4 text-[#FF6600]" />
             <span className="text-sm font-light text-[#061b31]">{category}</span>
             <Badge variant="outline" className="ml-auto rounded-[4px] font-light">
               {rows.length}
@@ -307,7 +307,7 @@ const BOQResultTable = ({ result, onReset, onOpenFeedback, onOpenChat }: Props) 
                           size="sm"
                           variant="outline"
                           onClick={() => handleChat(r)}
-                          className="rounded-[4px] border-[#533afd] text-[#533afd] hover:bg-[#533afd] hover:text-white"
+                          className="rounded-[4px] border-[#FF6600] text-[#FF6600] hover:bg-[#FF6600] hover:text-white"
                         >
                           <MessageCircle className="w-3.5 h-3.5 mr-1" />
                           {isRTL ? "دردشة" : "Chat"}

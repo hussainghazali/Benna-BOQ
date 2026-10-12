@@ -167,7 +167,7 @@ const BOQFeedbackPanel = ({
       labelAr: "مفيد",
       icon: ThumbsUp,
       color:
-        "bg-[#e5edf5] text-[#533afd] hover:bg-[#d8d6df] border border-[#d8d6df]",
+        "bg-[#e5edf5] text-[#FF6600] hover:bg-[#d8d6df] border border-[#d8d6df]",
     },
     {
       type: "inaccurate" as const,
@@ -245,7 +245,7 @@ const BOQFeedbackPanel = ({
                   className={
                     feedbackType !== option.type
                       ? option.color
-                      : "bg-[#533afd] hover:bg-[#422bc7] text-white rounded-[4px] font-light"
+                      : "bg-[#FF6600] hover:bg-[#E65C00] text-white rounded-[4px] font-light"
                   }
                 >
                   <option.icon className="w-4 h-4 mr-2" />
@@ -275,7 +275,7 @@ const BOQFeedbackPanel = ({
                     key={star}
                     className={`w-4 h-4 ${
                       star <= accuracyScore
-                        ? "fill-[#533afd] text-[#533afd]"
+                        ? "fill-[#FF6600] text-[#FF6600]"
                         : "text-[#64748d]"
                     }`}
                   />
@@ -304,7 +304,7 @@ const BOQFeedbackPanel = ({
                     key={star}
                     className={`w-4 h-4 ${
                       star <= relevanceScore
-                        ? "fill-[#533afd] text-[#533afd]"
+                        ? "fill-[#FF6600] text-[#FF6600]"
                         : "text-[#64748d]"
                     }`}
                   />
@@ -326,7 +326,7 @@ const BOQFeedbackPanel = ({
               onChange={(e) => setSuggestedImprovement(e.target.value)}
               rows={2}
               maxLength={5000}
-              className="border border-[#d8d6df] focus:border-[#533afd] focus:ring-[#533afd]/10 rounded-[4px] font-light resize-none"
+              className="border border-[#d8d6df] focus:border-[#FF6600] focus:ring-[#FF6600]/10 rounded-[4px] font-light resize-none"
             />
           </div>
 
@@ -345,7 +345,7 @@ const BOQFeedbackPanel = ({
                   onChange={(e) => setReplacementItem(e.target.value)}
                   rows={1}
                   maxLength={500}
-                  className="border border-[#d8d6df] focus:border-[#533afd] focus:ring-[#533afd]/10 rounded-[4px] font-light resize-none"
+                  className="border border-[#d8d6df] focus:border-[#FF6600] focus:ring-[#FF6600]/10 rounded-[4px] font-light resize-none"
                 />
               </div>
               <div className="space-y-2">
@@ -362,7 +362,7 @@ const BOQFeedbackPanel = ({
                   onChange={(e) => setReplacementReason(e.target.value)}
                   rows={2}
                   maxLength={2000}
-                  className="border border-[#d8d6df] focus:border-[#533afd] focus:ring-[#533afd]/10 rounded-[4px] font-light resize-none"
+                  className="border border-[#d8d6df] focus:border-[#FF6600] focus:ring-[#FF6600]/10 rounded-[4px] font-light resize-none"
                 />
               </div>
             </>
@@ -376,14 +376,14 @@ const BOQFeedbackPanel = ({
               setOpen(false);
               resetForm();
             }}
-            className="border border-[#d8d6df] hover:border-[#533afd] hover:bg-[#f8fafd] text-[#061b31] font-light rounded-[4px]"
+            className="border border-[#d8d6df] hover:border-[#FF6600] hover:bg-[#f8fafd] text-[#061b31] font-light rounded-[4px]"
           >
             {isRTL ? "إلغاء" : "Cancel"}
           </Button>
           <Button
             onClick={handleSubmit}
             disabled={isSubmitting}
-            className="bg-[#533afd] hover:bg-[#422bc7] text-white rounded-[4px] font-light"
+            className="bg-[#FF6600] hover:bg-[#E65C00] text-white rounded-[4px] font-light"
           >
             {isSubmitting ? (
               <>

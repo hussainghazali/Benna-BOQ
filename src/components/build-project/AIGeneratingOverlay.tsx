@@ -63,7 +63,7 @@ const AIGeneratingOverlay = () => {
             <motion.circle
               cx="40" cy="40" r="34"
               fill="none"
-              stroke="#533afd"
+              stroke="#FF6600"
               strokeWidth="6"
               strokeLinecap="round"
               strokeDasharray="213"
@@ -72,7 +72,7 @@ const AIGeneratingOverlay = () => {
             />
           </svg>
           <div className="absolute inset-0 flex items-center justify-center">
-            <Zap className="w-7 h-7 text-[#533afd] animate-pulse" />
+            <Zap className="w-7 h-7 text-[#FF6600] animate-pulse" />
           </div>
         </div>
 
@@ -103,7 +103,7 @@ const AIGeneratingOverlay = () => {
                 transition={{ delay: i * 0.12, duration: 0.35 }}
                 className={`flex items-center gap-3 px-4 py-2.5 rounded-[4px] border transition-all duration-500 ${
                   isActive
-                    ? "bg-[#f8fafd] border-[#533afd]"
+                    ? "bg-[#f8fafd] border-[#FF6600]"
                     : isDone
                       ? "bg-white border-[#d8d6df]"
                       : "bg-white border-[#e5edf5]"
@@ -111,14 +111,14 @@ const AIGeneratingOverlay = () => {
               >
                 {/* Left violet accent */}
                 {isActive && (
-                  <div className="absolute left-0 w-0.5 h-full bg-[#533afd] rounded-r-full" />
+                  <div className="absolute left-0 w-0.5 h-full bg-[#FF6600] rounded-r-full" />
                 )}
                 <div
                   className={`w-7 h-7 rounded-[4px] flex items-center justify-center shrink-0 transition-all ${
                     isDone
-                      ? "bg-[#533afd] text-white"
+                      ? "bg-[#FF6600] text-white"
                       : isActive
-                        ? "bg-[#e5edf5] text-[#533afd]"
+                        ? "bg-[#e5edf5] text-[#FF6600]"
                         : "bg-[#f8fafd] text-[#64748d]"
                   }`}
                 >
@@ -137,7 +137,7 @@ const AIGeneratingOverlay = () => {
                 </span>
                 {isActive && (
                   <motion.div
-                    className="w-1.5 h-1.5 rounded-full bg-[#533afd] shrink-0"
+                    className="w-1.5 h-1.5 rounded-full bg-[#FF6600] shrink-0"
                     animate={{ scale: [1, 1.6, 1], opacity: [1, 0.4, 1] }}
                     transition={{ repeat: Infinity, duration: 1.4 }}
                   />
@@ -148,12 +148,12 @@ const AIGeneratingOverlay = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#e5edf5] border border-[#d8d6df] rounded-[4px] text-[11px] font-light text-[#533afd]">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#e5edf5] border border-[#d8d6df] rounded-[4px] text-[11px] font-light text-[#FF6600]">
             <Zap className="w-3 h-3" />
             {isRTL ? "مطابقة كتالوج" : "Catalog matched"}
           </span>
           <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#f8fafd] border border-[#d8d6df] rounded-[4px] text-[11px] font-light text-[#50617a]">
-            <Calculator className="w-3 h-3 text-[#533afd]" />
+            <Calculator className="w-3 h-3 text-[#FF6600]" />
             {isRTL ? "حاسبة مجانية" : "Free calculator"}
           </span>
         </div>

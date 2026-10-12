@@ -122,7 +122,7 @@ const ProjectWizardStep2 = ({
       variant="outline"
       role="combobox"
       aria-expanded={open}
-      className="w-full h-12 justify-between bg-white border border-[#d8d6df] hover:border-[#533afd] font-light text-left rounded-[4px] transition-all"
+      className="w-full h-12 justify-between bg-white border border-[#d8d6df] hover:border-[#FF6600] font-light text-left rounded-[4px] transition-all"
     >
       <span className="truncate text-[#061b31]">
         {selectedCity
@@ -160,7 +160,7 @@ const ProjectWizardStep2 = ({
               <Check
                 className={cn(
                   "h-4 w-4 shrink-0",
-                  city === c.name ? "opacity-100 text-[#533afd]" : "opacity-0",
+                  city === c.name ? "opacity-100 text-[#FF6600]" : "opacity-0",
                 )}
               />
               <span className="truncate text-[#061b31]">
@@ -172,7 +172,7 @@ const ProjectWizardStep2 = ({
                 </span>
               )}
               {c.isMetro && (
-                <span className="text-[10px] bg-[#e5edf5] text-[#533afd] px-1.5 py-0.5 rounded-[4px] font-light shrink-0">
+                <span className="text-[10px] bg-[#e5edf5] text-[#FF6600] px-1.5 py-0.5 rounded-[4px] font-light shrink-0">
                   {isRTL ? "رئيسية" : "Metro"}
                 </span>
               )}
@@ -194,7 +194,7 @@ const ProjectWizardStep2 = ({
       {/* Conversational header */}
       <div className="flex items-start gap-3">
         <div className="w-10 h-10 rounded-[4px] bg-[#e5edf5] flex items-center justify-center shrink-0">
-          <MapPin className="w-5 h-5 text-[#533afd]" />
+          <MapPin className="w-5 h-5 text-[#FF6600]" />
         </div>
         <div className="bg-[#f8fafd] rounded-[4px] rounded-tl-sm px-4 py-3 border border-[#d8d6df]">
           <p className="text-sm text-[#061b31] font-light">
@@ -250,7 +250,7 @@ const ProjectWizardStep2 = ({
             value={areaSqm}
             onChange={handleAreaChange}
             placeholder="300"
-            className="h-12 bg-white border border-[#d8d6df] focus:border-[#533afd] focus:ring-[#533afd]/10 rounded-[4px] transition-all font-light"
+            className="h-12 bg-white border border-[#d8d6df] focus:border-[#FF6600] focus:ring-[#FF6600]/10 rounded-[4px] transition-all font-light"
             min={1}
             max={1000000}
             inputMode="numeric"
@@ -269,7 +269,7 @@ const ProjectWizardStep2 = ({
             value={floors}
             onChange={handleFloorsChange}
             placeholder="2"
-            className="h-12 bg-white border border-[#d8d6df] focus:border-[#533afd] focus:ring-[#533afd]/10 rounded-[4px] transition-all font-light"
+            className="h-12 bg-white border border-[#d8d6df] focus:border-[#FF6600] focus:ring-[#FF6600]/10 rounded-[4px] transition-all font-light"
             min={1}
             max={200}
             inputMode="numeric"
@@ -284,7 +284,7 @@ const ProjectWizardStep2 = ({
           animate={{ opacity: 1, height: "auto" }}
           className="bg-[#e5edf5] border border-[#d8d6df] rounded-[4px] p-3 flex items-center gap-2"
         >
-          <Sparkles className="w-4 h-4 text-[#533afd] shrink-0" />
+          <Sparkles className="w-4 h-4 text-[#FF6600] shrink-0" />
           <p className="text-xs text-[#061b31] font-light">
             {isRTL
               ? `سيتم حساب الأسعار بناءً على أسعار السوق في ${selectedCity?.nameAr || city}`
@@ -298,7 +298,7 @@ const ProjectWizardStep2 = ({
         <Button
           variant="outline"
           onClick={onBack}
-          className="h-12 gap-2 border border-[#d8d6df] hover:border-[#533afd] hover:bg-[#f8fafd] text-[#061b31] font-light rounded-[4px] transition-all"
+          className="h-12 gap-2 border border-[#d8d6df] hover:border-[#FF6600] hover:bg-[#f8fafd] text-[#061b31] font-light rounded-[4px] transition-all"
         >
           {isRTL ? (
             <ArrowRight className="w-4 h-4" />
@@ -310,7 +310,7 @@ const ProjectWizardStep2 = ({
         <Button
           onClick={onNext}
           disabled={!isValid}
-          className="flex-1 h-12 text-base font-light bg-[#533afd] hover:bg-[#422bc7] text-white rounded-[4px] shadow-sm hover:shadow-md transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-1 h-12 text-base font-light bg-[#FF6600] hover:bg-[#E65C00] text-white rounded-[4px] shadow-sm hover:shadow-md transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isRTL ? (
             <>
