@@ -1,14 +1,25 @@
+import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link, useLocation } from "react-router-dom";
+import ComingSoonModal from "@/components/ComingSoonModal";
+import { Camera } from "lucide-react";
 import { Facebook, Twitter, Instagram, Youtube, Linkedin } from "lucide-react";
-import { TextHoverEffect } from "@/components/ui/text-hover-effect";
+// import { TextHoverEffect } from "@/components/ui/text-hover-effect";
 
 const footerLinks = [
   {
-    title: { en: "Get to Know Us", ar: "تعرف علينا" },
+    title: { en: "About Benna.com.sa", ar: "عن بنّة السعودية" },
     links: [
       { name: { en: "About Benna", ar: "عن بنّة" }, href: "/about" },
-      { name: { en: "Why Benna", ar: "لماذا بنّة" }, href: "/why-benna" },
+      {
+        name: { en: "Why choose Benna", ar: "لماذا بنّة" },
+        href: "/why-benna",
+      },
+      { name: { en: "Blog", ar: "المدونة" }, href: "/blog" },
+      {
+        name: { en: "Benna Certificates", ar: "شهادات بنّة" },
+        href: "/certificates",
+      },
       {
         name: { en: "Privacy Policy", ar: "سياسة الخصوصية" },
         href: "/privacy-policy",
@@ -17,18 +28,47 @@ const footerLinks = [
         name: { en: "Terms of Use", ar: "شروط الاستخدام" },
         href: "/terms-of-use",
       },
+    ],
+  },
+  {
+    title: { en: "Order protection", ar: "حماية الطلب" },
+    links: [
       {
-        name: { en: "Benna Certificates", ar: "شهادات بنّة" },
-        href: "/certificates",
+        name: { en: "Secure payments", ar: "مدفوعات آمنة" },
+        href: "/payment-methods",
+      },
+      {
+        name: { en: "Money-back guarantee", ar: "ضمان استرداد الأموال" },
+        href: "/warranty-policy",
+      },
+      {
+        name: { en: "Guaranteed delivery", ar: "توصيل مضمون" },
+        href: "/fulfillment",
+      },
+      {
+        name: { en: "After-sales protections", ar: "حماية ما بعد البيع" },
+        href: "/account/returns",
+      },
+      {
+        name: { en: "Policies and rules", ar: "السياسات والقواعد" },
+        href: "/terms-of-sale",
       },
     ],
   },
   {
-    title: { en: "Shop With Us", ar: "تسوق معنا" },
+    title: { en: "Source on Benna", ar: "التوريد على بنّة" },
     links: [
       {
-        name: { en: "Terms of Sale", ar: "شروط البيع" },
-        href: "/terms-of-sale",
+        name: { en: "Verified vendors", ar: "موردون موثقون" },
+        href: "/top-vendors",
+      },
+      {
+        name: { en: "Request for Quotation", ar: "طلب عرض سعر" },
+        href: "/rfq",
+      },
+      {
+        name: { en: "RFQ Marketplace", ar: "سوق طلبات العروض" },
+        href: "/rfqs",
       },
       { name: { en: "Benna Brands", ar: "ماركات بنّة" }, href: "/brands" },
       { name: { en: "Benna Products", ar: "منتجات بنّة" }, href: "/products" },
@@ -39,25 +79,26 @@ const footerLinks = [
     ],
   },
   {
-    title: { en: "Make Money With Us", ar: "اكسب معنا" },
+    title: { en: "Help Center", ar: "مركز المساعدة" },
     links: [
-      { name: { en: "Sell On Benna", ar: "بيع على بنّة" }, href: "/sell" },
-      { name: { en: "Supply To Benna", ar: "التوريد لبنّة" }, href: "/supply" },
       {
-        name: { en: "Fulfillment By Benna", ar: "التنفيذ بواسطة بنّة" },
-        href: "/fulfillment",
+        name: { en: "Buyer Help Center", ar: "مركز مساعدة المشتري" },
+        href: "/faqs",
       },
-      {
-        name: { en: "Advertise Your Products", ar: "إعلان منتجاتك" },
-        href: "/advertise",
-      },
-    ],
-  },
-  {
-    title: { en: "Let Us Help You", ar: "دعنا نساعدك" },
-    links: [
+      { name: { en: "Live chat", ar: "محادثة مباشرة" }, href: "/chat" },
       { name: { en: "Track Order", ar: "تتبع الطلب" }, href: "/track-order" },
-      { name: { en: "FAQs", ar: "الأسئلة الشائعة" }, href: "/faqs" },
+      {
+        name: { en: "Refunds & returns", ar: "الاسترداد والإرجاع" },
+        href: "/account/returns",
+      },
+      {
+        name: { en: "Warranty claims", ar: "مطالبات الضمان" },
+        href: "/account/warranty",
+      },
+      {
+        name: { en: "Support tickets", ar: "تذاكر الدعم" },
+        href: "/account/support-tickets",
+      },
       {
         name: { en: "Materials Answers", ar: "أسئلة وأجوبة المواد" },
         href: "/answers",
@@ -71,10 +112,58 @@ const footerLinks = [
         href: "/knowledge",
       },
       { name: { en: "Contact Us", ar: "اتصل بنا" }, href: "/contact" },
-      { name: { en: "Connect AI Assistant", ar: "ربط مساعد الذكاء الاصطناعي" }, href: "/connect" },
       {
-        name: { en: "Warranty Policy", ar: "سياسة الضمان" },
-        href: "/warranty-policy",
+        name: { en: "Connect AI Assistant", ar: "ربط مساعد الذكاء الاصطناعي" },
+        href: "/connect",
+      },
+    ],
+  },
+  {
+    title: { en: "Sell on Benna", ar: "البيع على بنّة" },
+    links: [
+      { name: { en: "Sell on Benna", ar: "بيع على بنّة" }, href: "/sell" },
+      {
+        name: { en: "Become a Verified Vendor", ar: "كن مورداً موثقاً" },
+        href: "https://vendor.benna.com.sa/en/signup",
+      },
+      {
+        name: { en: "Supply To Benna", ar: "التوريد لبنّة" },
+        href: "/supply",
+      },
+      {
+        name: { en: "Fulfillment By Benna", ar: "التنفيذ بواسطة بنّة" },
+        href: "/fulfillment",
+      },
+      {
+        name: { en: "Advertise Your Products", ar: "إعلان منتجاتك" },
+        href: "/advertise",
+      },
+      {
+        name: { en: "Check order status", ar: "حالة الطلب" },
+        href: "/track-order",
+      },
+    ],
+  },
+  {
+    title: { en: "Benna Platform", ar: "منصة بنّة" },
+    links: [
+      { name: { en: "Benna AI", ar: "بناء الذكي" }, href: "/assistant" },
+      {
+        name: { en: "AI BOQ", ar: "كمية الأعمال الذكية" },
+        href: "/build-project",
+      },
+      {
+        name: { en: "Compare Products", ar: "قارن المنتجات" },
+        href: "/compare",
+      },
+      {
+        name: { en: "Wishlist", ar: "قائمة الأمنيات" },
+        href: "/account/wishlist",
+      },
+      { name: { en: "Deals", ar: "العروض" }, href: "/deals" },
+      {
+        name: { en: "Cost Calculators", ar: "حاسبات التكلفة" },
+        href: "/calculators/all",
       },
     ],
   },
@@ -83,7 +172,7 @@ const footerLinks = [
     links: [
       {
         name: { en: "Ready Mix Calculator", ar: "حاسبة الخرسانة الجاهزة" },
-        href: "/calculators",
+        href: "/calculators/ready-mix",
       },
       {
         name: { en: "Construction Cost Calculator", ar: "حاسبة تكلفة البناء" },
@@ -104,18 +193,6 @@ const footerLinks = [
         name: { en: "Explore All Calculators", ar: "استكشف جميع الحاسبات" },
         href: "/calculators/all",
       },
-    ],
-  },
-  {
-    title: { en: "Benna Platform", ar: "منصة بنّة" },
-    links: [
-      { name: { en: "Benna AI", ar: "بناء الذكي" }, href: "/assistant" },
-      { name: { en: "AI BOQ", ar: "كمية الأعمال الذكية" }, href: "/build-project" },
-      { name: { en: "RFQ Marketplace", ar: "سوق طلبات العروض" }, href: "/rfqs" },
-      { name: { en: "Vendor Marketplace", ar: "سوق الموردين" }, href: "/sell" },
-      { name: { en: "Compare Products", ar: "قارن المنتجات" }, href: "/compare" },
-      { name: { en: "Wishlist", ar: "قائمة الأمنيات" }, href: "/account/wishlist" },
-      { name: { en: "Deals", ar: "العروض" }, href: "/deals" },
     ],
   },
 ];
@@ -139,6 +216,7 @@ const paymentMethods = [
 const Footer = () => {
   const { language, isRTL } = useLanguage();
   const location = useLocation();
+  const [lensOpen, setLensOpen] = useState(false);
 
   const handleLogoClick = (e: React.MouseEvent) => {
     if (location.pathname === "/") {
@@ -147,29 +225,30 @@ const Footer = () => {
     }
   };
 
-  const getText = (textObj: any) => {
-    return textObj && typeof textObj === "object"
-      ? textObj[language] || textObj.en
-      : textObj;
+  const getText = (textObj: unknown): string => {
+    if (textObj && typeof textObj === "object") {
+      const obj = textObj as Record<string, string>;
+      return obj[language] || obj.en || "";
+    }
+    return String(textObj ?? "");
   };
 
   return (
     <footer className="footer-section" dir={isRTL ? "rtl" : "ltr"}>
-      <div className="bg-[#f8fafd] border-b border-[#d8d6df]/30 py-3 lg:py-4">
-        <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
+      <div className="bg-white border-b border-[#DDDDDD]/30 py-3 lg:py-4">
+        <div className="mx-auto w-full max-w-[1400px] px-4 lg:px-6 xl:px-8">
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="text-xs sm:text-sm text-center text-[#50617a] w-full cursor-pointer hover:text-[#533afd] transition-colors w-full"
+            className="text-xs sm:text-sm text-center text-[#666666] w-full cursor-pointer hover:text-[#FF6600] transition-colors w-full"
           >
             {language === "en" ? "Back to top" : "العودة للأعلى"}
           </button>
         </div>
       </div>
       {/* Main Footer */}
-      <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-8 lg:py-12">
-        {/* Top Row: Logo + App Badges */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 lg:mb-10 w-full">
-          {/* Logo */}
+      <div className="mx-auto w-full max-w-[1400px] px-4 lg:px-6 xl:px-8 py-8 lg:py-12">
+        {/* Logo */}
+        <div className="flex items-center justify-center sm:justify-start mb-8 lg:mb-10 w-full">
           <a
             href="/"
             onClick={handleLogoClick}
@@ -185,38 +264,10 @@ const Footer = () => {
               className="h-10 sm:h-12 lg:h-14 xl:h-16 w-auto"
             />
           </a>
-
-          {/* App Download Badges */}
-          <div className="flex items-center gap-3 sm:gap-4">
-            <a
-              href="https://play.google.com/store/apps/details?id=benna.ksa.com.app"
-              className="inline-block hover:opacity-80 transition-opacity"
-              aria-label="Download on Google Play"
-            >
-              <img
-                src="https://static.wixstatic.com/media/a3b8d7_cf19eb43e85f493aa7dd2060e7bed1aa~mv2.png"
-                alt="Get it on Google Play"
-                className="h-11 sm:h-12 lg:h-14 w-auto"
-              />
-            </a>
-            <a
-              href="https://apps.apple.com/sa/app/benna-%D8%A8%D9%86%D8%A7%D8%A1/id6763252606"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block hover:opacity-80 transition-opacity"
-              aria-label="Download on App Store"
-            >
-              <img
-                src="https://static.wixstatic.com/shapes/a3b8d7_8ed3aae73ef9433598da0de7e90391d9.svg"
-                alt="Download on the App Store"
-                className="h-11 sm:h-12 lg:h-14 w-auto"
-              />
-            </a>
-          </div>
         </div>
 
         {/* Links Row */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6 lg:gap-6 xl:gap-8 w-full">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4 sm:gap-6 lg:gap-6 xl:gap-8 w-full">
           {footerLinks.map((section, index) => (
             <div key={index} className="min-w-0">
               <h3 className="font-semibold text-gray-900 text-sm sm:text-base mb-3 lg:mb-4">
@@ -234,7 +285,11 @@ const Footer = () => {
                       </Link>
                     ) : (
                       <a
-                        href={link.href}
+                        href={
+                          link.href.startsWith("https://vendor.benna.com.sa/en/")
+                            ? link.href.replace("/en/", `/${language}/`)
+                            : link.href
+                        }
                         className="text-xs sm:text-sm text-gray-600 hover:text-gray-900 transition-colors truncate block"
                       >
                         {getText(link.name)}
@@ -248,7 +303,7 @@ const Footer = () => {
         </div>
 
         {/* Payment Methods & Social */}
-        <div className="border-t border-gray-200 mt-6 lg:mt-8 pt-6 lg:pt-8 w-full">
+        <div className="mt-6 lg:mt-8 pt-6 lg:pt-8 w-full">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6">
             {/* Payment Methods */}
             <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 flex-wrap justify-center">
@@ -405,16 +460,144 @@ const Footer = () => {
             </div>
           </div>
         </div>
+        {/* Connect strip — Alibaba-style */}
+        <div className="mt-6 lg:mt-8 pt-6 w-full">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-5">
+            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
+              {/* Benna Lens */}
+              <div className="flex items-center gap-2.5">
+                <span className="text-xs sm:text-sm text-gray-600">
+                  {language === "en"
+                    ? "Snap a photo, find the product"
+                    : "صوّر المنتج واعثر عليه"}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setLensOpen(true)}
+                  className="inline-flex items-center rounded-md bg-ali-orange-500 px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-ali-orange-600"
+                >
+                  {language === "en" ? "Use Benna Lens" : "استخدم عدسة بنّة"}
+                </button>
+              </div>
+
+              {/* WhatsApp */}
+              <a
+                href={`https://wa.me/966565669693?text=${encodeURIComponent(
+                  language === "en"
+                    ? "Hi, I'd like to inquire about building materials"
+                    : "مرحباً، أريد الاستفسار عن مواد البناء",
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2.5 text-xs sm:text-sm text-gray-600 transition-colors"
+              >
+                {language === "en" ? "Connect on" : "تواصل عبر"}
+                <span className="inline-flex items-center gap-1.5 rounded-md bg-[#25D366] px-3 py-1.5 font-semibold text-white transition-colors hover:bg-[#1EBE5B]">
+                  <svg
+                    className="h-4 w-4 text-white"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                  </svg>
+                  WhatsApp
+                </span>
+              </a>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
+              {/* Supplier platform */}
+              <a
+                href={`https://vendor.benna.com.sa/${language}/`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs sm:text-sm text-gray-600 hover:text-gray-900 transition-colors"
+              >
+                {language === "en" ? (
+                  <>
+                    Connect{" "}
+                    <span className="font-semibold text-gray-900">
+                      Supplier Platform
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    تواصل{" "}
+                    <span className="font-semibold text-gray-900">
+                      منصة الموردين
+                    </span>
+                  </>
+                )}
+              </a>
+
+              {/* App badges */}
+              <div className="flex items-center gap-3">
+                <span className="text-xs sm:text-sm text-gray-600">
+                  {language === "en" ? (
+                    <>
+                      Trade on the go with the{" "}
+                      <span className="font-semibold text-gray-900">
+                        Benna.com.sa app
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      تسوق أثناء التنقل مع{" "}
+                      <span className="font-semibold text-gray-900">
+                        تطبيق بنّة
+                      </span>
+                    </>
+                  )}
+                </span>
+                <a
+                  href="https://apps.apple.com/sa/app/benna-%D8%A8%D9%86%D8%A7%D8%A1/id6763252606"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block hover:opacity-80 transition-opacity"
+                  aria-label="Download on the App Store"
+                >
+                  <img
+                    src="https://static.wixstatic.com/shapes/a3b8d7_8ed3aae73ef9433598da0de7e90391d9.svg"
+                    alt="Download on the App Store"
+                    className="h-9 w-auto"
+                  />
+                </a>
+                <a
+                  href="https://play.google.com/store/apps/details?id=benna.ksa.com.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block hover:opacity-80 transition-opacity"
+                  aria-label="Get it on Google Play"
+                >
+                  <img
+                    src="https://static.wixstatic.com/media/a3b8d7_cf19eb43e85f493aa7dd2060e7bed1aa~mv2.png"
+                    alt="Get it on Google Play"
+                    className="h-9 w-auto"
+                  />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* BENNA hover text */}
+      {/* BENNA hover text — hidden
       <div className="hidden lg:flex h-[18rem] w-full items-end justify-center overflow-hidden -mb-10 -mt-6">
         <TextHoverEffect text="BENNA KSA" duration={0.2} className="w-full h-full" />
       </div>
+      */}
+
+      <ComingSoonModal
+        open={lensOpen}
+        onOpenChange={setLensOpen}
+        featureIcon={Camera}
+        featureName={{ en: "Benna Lens", ar: "عدسة بنّة" }}
+      />
 
       {/* Copyright */}
       <div className="bg-gray-900 text-white py-3 lg:py-4">
-        <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
+        <div className="mx-auto w-full max-w-[1400px] px-4 lg:px-6 xl:px-8">
           <p className="text-xs sm:text-sm text-center text-gray-500 w-full">
             {language === "en"
               ? "Benna KSA | Building Platform - CR No. 7029882987 - VAT No. 310336295200003"

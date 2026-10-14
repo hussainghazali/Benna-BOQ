@@ -2,7 +2,7 @@
 // single row, centered container — logo left; Deliver-to / Language /
 // cart / messages / orders / Log in on the right.
 import { Link, useNavigate } from "react-router-dom";
-import { MapPin, Globe, ShoppingCart, MessageCircle, Package, User } from "lucide-react";
+import { MapPin, Globe, ShoppingCart, MessageCircle, Package, User, Menu } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useCart } from "@/contexts/CartContext";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -84,6 +84,38 @@ const Header = () => {
               {t("Log in", "تسجيل الدخول")}
             </Link>
           )}
+        </div>
+      </div>
+
+      {/* Second nav row — marketplace links */}
+      <div className="border-t border-ali-line-200">
+        <div className="mx-auto flex h-10 w-full max-w-[1400px] items-center justify-between px-4 text-[13px]">
+          <nav className="flex items-center gap-5 text-ali-ink-900" aria-label="Marketplace">
+            <Link to="/categories" className="flex items-center gap-1.5 font-semibold hover:text-ali-orange-500">
+              <Menu className="h-4 w-4" />
+              {t("All Categories", "كل الفئات")}
+            </Link>
+            <Link to="/vendors" className="hover:text-ali-orange-500">
+              {t("Verified Vendors", "موردون معتمدون")}
+            </Link>
+            <Link to="/rfq" className="hover:text-ali-orange-500">
+              {t("RFQ Marketplace", "سوق الطلبات")}
+            </Link>
+          </nav>
+          <nav className="flex items-center gap-5 text-ali-ink-700" aria-label="Company">
+            <Link to="/about" className="hover:text-ali-orange-500">
+              {t("About Benna.com.sa", "عن بنّة")}
+            </Link>
+            <Link to="/help" className="hover:text-ali-orange-500">
+              {t("Help Center", "مركز المساعدة")}
+            </Link>
+            <Link to="/track-order" className="hover:text-ali-orange-500">
+              {t("Track Order", "تتبع الطلب")}
+            </Link>
+            <Link to="/sell" className="hover:text-ali-orange-500">
+              {t("Sell on Benna", "بِع على بنّة")}
+            </Link>
+          </nav>
         </div>
       </div>
     </header>

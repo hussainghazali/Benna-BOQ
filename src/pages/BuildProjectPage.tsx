@@ -1,6 +1,6 @@
 // src/pages/BuildProjectPage.tsx
 import { useState, useEffect, useCallback, lazy, Suspense } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useSeo, getBOQServiceSchema, getSpeakableSchema } from "@/lib/seo";
 import { useAuth } from "@/contexts/AuthContext";
@@ -38,6 +38,7 @@ import {
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
 import BennaLoader from "@/components/BennaLoader";
+import SideActionRail from "@/components/sections/SideActionRail";
 
 const STEP_META = [
   { labelEn: "Project", labelAr: "المشروع", icon: Building2 },
@@ -321,85 +322,85 @@ const BuildProjectPage = () => {
 
   return shellWrapper(
     <main className="w-full">
-      {/* ── Hero Band ── */}
-      <div className="relative overflow-hidden bg-white">
-        {/* Subtle Benna brand wash */}
-        <div
-          className="absolute inset-0 opacity-[0.10] z-0 pointer-events-none"
-          style={{
-            background: "radial-gradient(circle, #7f7dfc, #f44bcc 33%, #e5edf5 66%)",
-          }}
-        />
-        <div className="relative z-10 px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
+      {/* ── Hero Band — Alibaba-style, left-aligned, centered container ── */}
+      <div className="relative overflow-hidden bg-ali-orange-100/60">
+        <div className="mx-auto w-full max-w-[1400px] px-4 lg:px-6 xl:px-8 py-12 sm:py-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="max-w-3xl mx-auto text-center"
           >
-            <div className="inline-flex items-center gap-2 mb-6">
-              <span
-                className="border border-[#ff6118] px-3 py-1.5 rounded-[4px] text-[11px] uppercase tracking-widest flex items-center gap-2"
-                style={{ color: "#ff6118", backgroundColor: "rgba(255,97,24,0.05)" }}
-              >
-                <FileText className="h-2.5 w-2.5" />
-                {isRTL ? "قائمة كميات مجانية قابلة للشراء" : "Free shoppable BOQ builder"}
-              </span>
-            </div>
-            <h1
-              className="mb-6"
-              style={{
-                fontSize: "clamp(40px, 6vw, 56px)",
-                fontWeight: 300,
-                lineHeight: 1.07,
-                letterSpacing: "-0.03em",
-              }}
-            >
-              <span className="text-[#061b31]">
-                {isRTL ? "قائمة كميات مشروعك،" : "Your project BOQ,"}
-              </span>
-              <br />
-              <span
-                style={{
-                  background: "linear-gradient(90deg, #7232f1 3.13%, #fb76fa 50%, #ffcf5e)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                {isRTL ? "من منتجات بنّة." : "matched to Benna products."}
-              </span>
+            <h1 className="text-[32px] sm:text-[42px] font-bold leading-tight tracking-tight text-ali-ink-900">
+              {isRTL ? (
+                <>بنّة رقم <span className="text-ali-orange-500">١ لبناء قوائم الكميات</span></>
+              ) : (
+                <>KSA's <span className="text-ali-orange-500">#1 BOQ builder</span></>
+              )}
             </h1>
-            <p
-              className="text-[#50617a] max-w-lg mx-auto"
-              style={{ fontSize: "18px", fontWeight: 300, lineHeight: 1.4 }}
-            >
+            <p className="mt-2 text-[15px] sm:text-base text-ali-ink-500">
               {isRTL
-                ? "املأ ٣ خطوات بسيطة واحصل على جدول مواد كامل مع أزرار إضافة للسلة. أول ٥٠ قائمة مجانية."
-                : "Fill a simple 3-step form and get a full material table with add-to-cart actions. Your first 50 BOQs are free."}
+                ? "صِف مشروعك · احصل على قائمة كميات قابلة للشراء · أضف كل شيء للسلة"
+                : "Describe your project · Get a shoppable BOQ · Add everything to cart"}
             </p>
-            {/* Stat pills */}
-            <div className="flex items-center justify-center gap-3 mt-8 flex-wrap">
-              {[
-                { v: "50", l: isRTL ? "مجانية" : "Free BOQs" },
-                { v: "182k+", l: isRTL ? "منتج" : "Products" },
-                { v: "1085", l: isRTL ? "فئة" : "Categories" },
-                { v: "1-click", l: isRTL ? "سلة" : "Cart" },
-              ].map((s) => (
-                <div key={s.v} className="flex items-center gap-1.5 bg-white border border-[#d8d6df] rounded-[4px] px-3 py-1.5 shadow-sm">
-                  <span className="text-[#FA6400] font-light text-sm">{s.v}</span>
-                  <span className="text-[#50617a] text-xs font-light">{s.l}</span>
-                </div>
-              ))}
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              <button
+                type="button"
+                onClick={() =>
+                  document
+                    .getElementById("boq-wizard")
+                    ?.scrollIntoView({ behavior: "smooth", block: "start" })
+                }
+                className="inline-flex h-11 items-center gap-2 rounded-full bg-ali-orange-500 px-7 text-[15px] font-semibold text-white transition-colors hover:bg-ali-orange-600"
+              >
+                <FileText className="h-4 w-4" />
+                {isRTL ? "أنشئ قائمتي" : "Generate my BOQ"}
+              </button>
+              <button
+                type="button"
+                onClick={() =>
+                  document
+                    .getElementById("how-it-works")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+                className="inline-flex h-11 items-center rounded-full border border-ali-ink-900 bg-white px-7 text-[15px] font-semibold text-ali-ink-900 transition-colors hover:bg-ali-bg-100"
+              >
+                {isRTL ? "كيف يعمل" : "How it works"}
+              </button>
+              <Link
+                to="/boq-projects"
+                className="text-[15px] font-medium text-ali-ink-900 hover:text-ali-orange-500"
+              >
+                {isRTL ? "مشاريعي" : "View my projects"}
+              </Link>
             </div>
           </motion.div>
+        </div>
+
+        {/* Stats row */}
+        <div className="border-t border-ali-ink-900/10 bg-white/40">
+          <div className="mx-auto flex w-full max-w-[1400px] flex-wrap items-center justify-center sm:justify-between gap-x-8 gap-y-2 px-4 lg:px-6 xl:px-8 py-4">
+            {[
+              { v: "50", l: isRTL ? "قائمة مجانية" : "FREE BOQS" },
+              { v: "184K+", l: isRTL ? "منتج في الكتالوج" : "PRODUCTS IN CATALOG" },
+              { v: "1,085+", l: isRTL ? "فئة مغطاة" : "CATEGORIES COVERED" },
+              { v: "+165", l: isRTL ? "مدينة سعودية" : "SAUDI CITIES PRICED" },
+              { v: "1-click", l: isRTL ? "أضف الكل للسلة" : "ADD ALL TO CART" },
+            ].map((s) => (
+              <div key={s.l} className="flex items-baseline gap-2">
+                <span className="text-[20px] font-bold text-ali-ink-900">{s.v}</span>
+                <span className="text-[11px] font-medium uppercase tracking-wide text-ali-ink-500">
+                  {s.l}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
       {/* ── Wizard / Result Area ── */}
-      <div className="bg-white">
-        <div className="px-3 sm:px-4 lg:px-6 xl:px-8 py-10">
-          <div className={cn(result ? "w-full max-w-none" : "max-w-3xl xl:max-w-5xl 2xl:max-w-6xl mx-auto") }>
+      <div className="bg-white" id="boq-wizard">
+        <div className="mx-auto w-full max-w-[1400px] px-4 lg:px-6 xl:px-8 py-10">
+          <div className={cn(result ? "w-full" : "max-w-3xl xl:max-w-5xl 2xl:max-w-6xl mx-auto") }>
             {showPaywall ? (
               <CreditPaywall
                 onPurchaseComplete={() => {
@@ -577,8 +578,8 @@ const BuildProjectPage = () => {
 
       {/* ── Social proof / How-it-works strip ── */}
       {!result && !showPaywall && !isGenerating && (
-        <div className="bg-[#f8fafd] border-t border-[#d8d6df]">
-          <div className="px-4 sm:px-6 lg:px-8 py-12">
+        <div className="bg-[#f8fafd] border-t border-[#d8d6df]" id="how-it-works">
+          <div className="mx-auto w-full max-w-[1400px] px-4 lg:px-6 xl:px-8 py-12">
             <div className="max-w-3xl mx-auto">
               <div className="text-center mb-8">
                 <div className="flex items-center justify-center gap-2 mb-2">
@@ -707,6 +708,9 @@ const BuildProjectPage = () => {
           </div>
         </div>
       )}
+
+      {/* Alibaba-style left-edge quick actions rail */}
+      <SideActionRail />
     </main>,
   );
 };
