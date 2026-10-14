@@ -23,7 +23,7 @@ const Header = () => {
     <header className="sticky top-0 z-40 border-b border-ali-line-200 bg-white">
       <div className="mx-auto flex h-14 w-full max-w-[1400px] items-center justify-between gap-4 px-4">
         {/* Logo */}
-        <Link to="/assistant" className="flex shrink-0 items-center" aria-label="Benna - Home">
+        <Link to="/build-project" className="flex shrink-0 items-center" aria-label="Benna - Home">
           <img
             src="https://static.wixstatic.com/media/b99a57_66162956ac1345b7b402744d22076d87~mv2.png/v1/fit/w_320,h_128,q_80,enc_avif/image.avif"
             alt="Benna"
@@ -68,7 +68,7 @@ const Header = () => {
               type="button"
               onClick={() => {
                 logout();
-                navigate("/assistant");
+                navigate("/build-project");
               }}
               className="flex items-center gap-1 font-semibold text-ali-ink-900 hover:text-ali-orange-500"
               title={t("Log out", "تسجيل الخروج")}
@@ -78,7 +78,7 @@ const Header = () => {
             </button>
           ) : (
             <Link
-              to="/login?redirect=/assistant"
+              to="/welcome?redirect=/build-project"
               className="font-semibold text-ali-ink-900 hover:text-ali-orange-500"
             >
               {t("Log in", "تسجيل الدخول")}
