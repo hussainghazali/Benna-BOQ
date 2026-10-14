@@ -6,6 +6,7 @@ import { CartProvider } from "@/contexts/CartContext";
 import { WishlistProvider } from "@/contexts/WishlistContext";
 import AuthPage from "@/pages/AuthPage";
 import WelcomePage from "@/pages/WelcomePage";
+import CartDrawer from "@/components/CartDrawer";
 import BuildProjectPage from "@/pages/BuildProjectPage";
 import BOQProjectsPage from "@/pages/BOQProjectsPage";
 import BOQProjectDetailPage from "@/pages/BOQProjectDetailPage";
@@ -29,6 +30,7 @@ function App() {
                 <Route path="/register" element={<AuthPage mode="register" />} />
                 <Route path="*" element={<Navigate to="/build-project" replace />} />
               </Routes>
+              <CartDrawer />
               <Toaster richColors position="top-center" />
             </BrowserRouter>
           </WishlistProvider>
