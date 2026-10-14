@@ -247,48 +247,6 @@ const BuildProjectPage = () => {
     setShowPaywall(false);
   }, [reset]);
 
-  const WHAT_WE_BUILT = [
-    {
-      icon: Calculator,
-      titleEn: "Simple Material Calculator",
-      titleAr: "محرك مواد مبسط",
-      descEn: "A clean rule-based BOQ calculator turns project area, floors, and specs into a practical materials list",
-      descAr: "حاسبة كميات واضحة تحول المساحة والأدوار والمواصفات إلى قائمة مواد عملية",
-      stat: "50",
-      statLabelEn: "free BOQs",
-      statLabelAr: "قائمة مجانية",
-    },
-    {
-      icon: BarChart3,
-      titleEn: "Live Saudi Market Pricing",
-      titleAr: "أسعار السوق السعودي الحية",
-      descEn: "Unit prices indexed to 165+ Saudi cities using live contractor & supplier benchmarks updated monthly",
-      descAr: "أسعار الوحدة مؤشرة لأكثر من ١٦٥ مدينة سعودية باستخدام معايير حية للمقاولين والموردين",
-      stat: "182k+",
-      statLabelEn: "products",
-      statLabelAr: "منتج",
-    },
-    {
-      icon: ShoppingCart,
-      titleEn: "One-Click Shoppable BOQ",
-      titleAr: "قائمة كميات قابلة للشراء",
-      descEn: "Every BOQ line item is matched to real Benna catalog products — add all materials to cart in one click",
-      descAr: "كل بند في القائمة مطابق لمنتجات كتالوج Benna الفعلي — أضف كل المواد للسلة بنقرة واحدة",
-      stat: "1-click",
-      statLabelEn: "order everything",
-      statLabelAr: "طلب كل شيء",
-    },
-    {
-      icon: FileText,
-      titleEn: "Instant Export",
-      titleAr: "تصدير CSV فوري",
-      descEn: "Export a full structured BOQ spreadsheet ready for contractors, consultants, or bank submissions",
-      descAr: "تصدير جدول بيانات BOQ منظم جاهز للمقاولين أو الاستشاريين أو تقديم البنك",
-      stat: "CSV",
-      statLabelEn: "ready",
-      statLabelAr: "جاهز",
-    },
-  ];
 
   const shellWrapper = (content: React.ReactNode) => (
     <div className="min-h-screen bg-white">
@@ -322,9 +280,10 @@ const BuildProjectPage = () => {
 
   return shellWrapper(
     <main className="w-full">
-      {/* ── Hero Band — Alibaba-style, left-aligned, centered container ── */}
-      <div className="relative overflow-hidden bg-ali-orange-100/60">
-        <div className="mx-auto w-full max-w-[1400px] px-4 lg:px-6 xl:px-8 py-12 sm:py-16">
+      {/* ── Hero Card — Alibaba-style: rounded peach container, centered ── */}
+      <div className="mx-auto w-full max-w-[1400px] px-4 lg:px-6 xl:px-8 pt-6">
+        <div className="relative overflow-hidden rounded-xl bg-ali-orange-100/60">
+          <div className="px-6 sm:px-10 py-10 sm:py-14">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -374,11 +333,11 @@ const BuildProjectPage = () => {
               </Link>
             </div>
           </motion.div>
-        </div>
+          </div>
 
-        {/* Stats row */}
-        <div className="border-t border-ali-ink-900/10 bg-white/40">
-          <div className="mx-auto flex w-full max-w-[1400px] flex-wrap items-center justify-center sm:justify-between gap-x-8 gap-y-2 px-4 lg:px-6 xl:px-8 py-4">
+          {/* Stats row — inside the same container */}
+          <div className="border-t border-ali-ink-900/10 px-6 sm:px-10 py-4">
+            <div className="flex flex-wrap items-center justify-center sm:justify-between gap-x-8 gap-y-2">
             {[
               { v: "50", l: isRTL ? "قائمة مجانية" : "FREE BOQS" },
               { v: "184K+", l: isRTL ? "منتج في الكتالوج" : "PRODUCTS IN CATALOG" },
@@ -394,6 +353,7 @@ const BuildProjectPage = () => {
               </div>
             ))}
           </div>
+        </div>
         </div>
       </div>
 
@@ -646,64 +606,6 @@ const BuildProjectPage = () => {
                   );
                 })}
               </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* ── "What Benna Built" Feature Showcase ── */}
-      {!result && !showPaywall && !isGenerating && (
-        <div className="bg-[#f8fafd] border-t border-[#d8d6df]">
-          <div className="px-4 sm:px-6 lg:px-8 py-12">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-center mb-8"
-            >
-              <div className="flex items-center justify-center gap-2 mb-3">
-                <div className="w-6 h-0.5 bg-[#FA6400] rounded-full" />
-                <span className="text-xs font-light text-[#FA6400] uppercase tracking-widest">
-                  {isRTL ? "ما بنيناه لك" : "What we built for you"}
-                </span>
-                <div className="w-6 h-0.5 bg-[#FA6400] rounded-full" />
-              </div>
-              <h2
-                className="text-[#061b31]"
-                style={{ fontSize: "22px", fontWeight: 300, lineHeight: 1.2, letterSpacing: "-0.01px" }}
-              >
-                {isRTL ? "منظومة كميات بسيطة وقابلة للشراء" : "A simple shoppable BOQ system"}
-              </h2>
-            </motion.div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {WHAT_WE_BUILT.map((item, i) => {
-                const Icon = item.icon;
-                return (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.25 + i * 0.08 }}
-                    className="bg-white rounded-[6px] border border-[#d8d6df] p-5 hover:shadow-[rgba(23,23,23,0.08)_0px_15px_35px_0px] hover:border-[#FA6400] transition-all duration-300 group"
-                  >
-                    <div className="w-10 h-10 rounded-[4px] bg-[#e5edf5] flex items-center justify-center mb-4 group-hover:bg-[#FA6400] transition-colors duration-300">
-                      <Icon className="w-5 h-5 text-[#FA6400] group-hover:text-white transition-colors duration-300" />
-                    </div>
-                    <h3 className="text-[#061b31] mb-1" style={{ fontSize: "14px", fontWeight: 400, lineHeight: 1.4 }}>
-                      {isRTL ? item.titleAr : item.titleEn}
-                    </h3>
-                    <p className="text-[#50617a] mb-4" style={{ fontSize: "12px", fontWeight: 300, lineHeight: 1.5 }}>
-                      {isRTL ? item.descAr : item.descEn}
-                    </p>
-                    <div className="flex items-baseline gap-1.5 pt-3 border-t border-[#e5edf5]">
-                      <span className="text-[#FA6400]" style={{ fontSize: "18px", fontWeight: 300 }}>{item.stat}</span>
-                      <span className="text-[#64748d]" style={{ fontSize: "11px", fontWeight: 300 }}>
-                        {isRTL ? item.statLabelAr : item.statLabelEn}
-                      </span>
-                    </div>
-                  </motion.div>
-                );
-              })}
             </div>
           </div>
         </div>
