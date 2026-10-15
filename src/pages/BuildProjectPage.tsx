@@ -467,11 +467,8 @@ const BuildProjectPage = () => {
                   className="relative bg-white rounded-[6px] border border-[#d8d6df] overflow-hidden"
                   style={{ boxShadow: "rgba(23,23,23,0.08) 0px 15px 35px 0px" }}
                 >
-                  {/* Violet top accent bar */}
-                  <div
-                    className="h-1 w-full"
-                    style={{ background: "linear-gradient(90deg, rgb(114,50,241) 3.13%, rgb(251,118,250) 50%, rgb(255,207,94))" }}
-                  />
+                  {/* Orange top accent bar — matches storefront card */}
+                  <div className="h-1.5 w-full bg-ali-orange-500" />
                   <div className="p-6 sm:p-8">
                     <AnimatePresence mode="wait">
                       {step === 1 && (
@@ -535,81 +532,6 @@ const BuildProjectPage = () => {
           </div>
         </div>
       </div>
-
-      {/* ── Social proof / How-it-works strip ── */}
-      {!result && !showPaywall && !isGenerating && (
-        <div className="bg-[#f8fafd] border-t border-[#d8d6df]" id="how-it-works">
-          <div className="mx-auto w-full max-w-[1400px] px-4 lg:px-6 xl:px-8 py-12">
-            <div className="max-w-3xl mx-auto">
-              <div className="text-center mb-8">
-                <div className="flex items-center justify-center gap-2 mb-2">
-                  <div className="w-5 h-0.5 bg-[#FA6400] rounded-full" />
-                  <span className="text-xs font-light text-[#FA6400] uppercase tracking-widest">
-                    {isRTL ? "كيف يعمل" : "How it works"}
-                  </span>
-                  <div className="w-5 h-0.5 bg-[#FA6400] rounded-full" />
-                </div>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                {[
-                  {
-                    num: "01",
-                    titleEn: "Describe your project",
-                    titleAr: "صِف مشروعك",
-                    descEn: "Name it, pick the type, city, area, floors, and any special specs",
-                    descAr: "سمّه، اختر النوع والمدينة والمساحة والأدوار وأي مواصفات خاصة",
-                    icon: Building2,
-                  },
-                  {
-                    num: "02",
-                    titleEn: "Benna builds your BOQ",
-                    titleAr: "بنّة تبني قائمتك",
-                    descEn: "The engine calculates materials, quantities, and matches real catalog products",
-                    descAr: "المحرك يحسب المواد والكميات ويربطها بمنتجات حقيقية من الكتالوج",
-                    icon: Calculator,
-                  },
-                  {
-                    num: "03",
-                    titleEn: "Shop & export",
-                    titleAr: "تسوّق وصدّر",
-                    descEn: "Add matched Benna catalog products to cart instantly or export a contractor-ready CSV",
-                    descAr: "أضف منتجات كتالوج Benna المطابقة للسلة فوراً أو صدّر ملف CSV جاهزاً للمقاول",
-                    icon: ShoppingCart,
-                  },
-                ].map((item, i) => {
-                  const Icon = item.icon;
-                  return (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, y: 15 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: i * 0.1 }}
-                      className="flex gap-4"
-                    >
-                      <div className="shrink-0">
-                        <div className="w-10 h-10 rounded-[4px] bg-[#e5edf5] flex items-center justify-center">
-                          <Icon className="w-5 h-5 text-[#FA6400]" />
-                        </div>
-                      </div>
-                      <div>
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className="text-[10px] font-light text-[#FA6400] tracking-widest">{item.num}</span>
-                          <h3 className="text-[14px] font-light text-[#061b31]">
-                            {isRTL ? item.titleAr : item.titleEn}
-                          </h3>
-                        </div>
-                        <p className="text-[12px] font-light text-[#50617a] leading-relaxed">
-                          {isRTL ? item.descAr : item.descEn}
-                        </p>
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Alibaba-style left-edge quick actions rail */}
       <SideActionRail />
