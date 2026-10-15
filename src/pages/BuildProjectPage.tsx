@@ -280,16 +280,16 @@ const BuildProjectPage = () => {
 
   return shellWrapper(
     <main className="w-full">
-      {/* ── Hero Card — Alibaba-style: rounded peach container, centered ── */}
-      <div className="mx-auto w-full max-w-[1400px] px-4 lg:px-6 xl:px-8 pt-6">
-        <div className="relative overflow-hidden rounded-xl bg-ali-orange-100/60">
-          <div className="px-6 sm:px-10 py-10 sm:py-14">
+      {/* ── Hero Band — full-bleed peach bg, content centered ── */}
+      <div className="bg-ali-orange-100/60">
+        <div className="mx-auto w-full max-w-[1400px] px-4 lg:px-6 xl:px-8">
+          <div className="py-10 sm:py-14">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-[32px] sm:text-[42px] font-bold leading-tight tracking-tight text-ali-ink-900">
+            <h1 className="text-[34px] sm:text-[40px] font-bold leading-tight tracking-tight text-ali-ink-900">
               {isRTL ? (
                 <>بنّة رقم <span className="text-ali-orange-500">١ لبناء قوائم الكميات</span></>
               ) : (
@@ -335,8 +335,8 @@ const BuildProjectPage = () => {
           </motion.div>
           </div>
 
-          {/* Stats row — inside the same container */}
-          <div className="border-t border-ali-ink-900/10 px-6 sm:px-10 py-4">
+          {/* Stats row — inside the same band */}
+          <div className="border-t border-ali-ink-900/10 py-4">
             <div className="flex flex-wrap items-center justify-center sm:justify-between gap-x-8 gap-y-2">
             {[
               { v: "50", l: isRTL ? "قائمة مجانية" : "FREE BOQS" },
@@ -346,7 +346,7 @@ const BuildProjectPage = () => {
               { v: "1-click", l: isRTL ? "أضف الكل للسلة" : "ADD ALL TO CART" },
             ].map((s) => (
               <div key={s.l} className="flex items-baseline gap-2">
-                <span className="text-[20px] font-bold text-ali-ink-900">{s.v}</span>
+                <span className="text-[26px] font-bold text-ali-ink-900">{s.v}</span>
                 <span className="text-[11px] font-medium uppercase tracking-wide text-ali-ink-500">
                   {s.l}
                 </span>
