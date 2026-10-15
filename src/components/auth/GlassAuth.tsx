@@ -411,11 +411,13 @@ useEffect(() => {
                 <AnimatePresence mode="wait">
                     {authStep === "welcome" && <motion.div key="welcome-content" initial={{ opacity: 1 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0 }} className="w-full flex flex-col items-center gap-4">
                         <BlurFade delay={0.25 * 1} className="w-full"><div className="text-center"><p className="font-sans font-semibold text-4xl sm:text-5xl md:text-6xl tracking-tight text-foreground whitespace-nowrap">{language === 'ar' ? 'ابدأ معنا' : 'Get started with Us'}</p></div></BlurFade>
+                        {googleSignInButton && (<>
                         <BlurFade delay={0.25 * 2}><p className="text-sm font-medium text-ali-ink-500">{language === 'ar' ? 'تابع باستخدام' : 'Continue with'}</p></BlurFade>
                         <BlurFade delay={0.25 * 3}><div className="flex items-center justify-center w-full">
                             <div className="w-full overflow-hidden rounded-full border border-ali-line-300 bg-white shadow-sm">{googleSignInButton}</div>
                         </div></BlurFade>
                         <BlurFade delay={0.25 * 4} className="w-[300px]"><div className="flex items-center w-full gap-2 py-2"><hr className="w-full border-ali-line-200"/><span className="text-xs font-semibold text-ali-ink-500">{language === 'ar' ? 'أو' : 'OR'}</span><hr className="w-full border-ali-line-200"/></div></BlurFade>
+                        </>)}
                         <BlurFade delay={0.25 * 5} className="w-full flex flex-col gap-3">
                             <button type="button" onClick={() => { if (onModeSwitch) onModeSwitch('signup'); }} className="liquid-button w-full py-3 px-4 text-white font-semibold">{language === 'ar' ? 'التسجيل بالبريد الإلكتروني' : 'Register with email'}</button>
                             <button type="button" onClick={() => { if (onModeSwitch) onModeSwitch('login'); }} className="w-full rounded-full border border-ali-line-300 bg-white py-3 px-4 font-semibold text-ali-ink-900 transition-colors hover:border-ali-orange-500 hover:text-ali-orange-500">{language === 'ar' ? 'تسجيل الدخول بالبريد الإلكتروني' : 'Login with email'}</button>
