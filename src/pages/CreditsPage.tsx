@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import BennaLoader from "@/components/BennaLoader";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/contexts/AuthContext";
@@ -309,7 +310,7 @@ const CreditsPage = () => {
               <div className="divide-y">
                 {txLoading ? (
                   <div className="p-8 text-center">
-                    <Loader2 className="w-6 h-6 animate-spin mx-auto text-muted-foreground" />
+                    <BennaLoader size="sm" className="mx-auto" />
                   </div>
                 ) : txError ? (
                   <div className="p-8 text-center text-red-500">
