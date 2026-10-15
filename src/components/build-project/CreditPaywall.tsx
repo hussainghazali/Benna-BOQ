@@ -35,8 +35,8 @@ const CREDIT_PACKS = [
     icon: Sparkles,
     popular: false,
     free: true,
-    features: ["50 free BOQ generations", "Shoppable BOQ table", "Add products to cart"],
-    featuresAr: ["٥٠ قائمة كميات مجانية", "جدول قابل للشراء", "إضافة المنتجات للسلة"],
+    features: ["50 free BOQ generations", "Shoppable BOQ table", "CSV export"],
+    featuresAr: ["٥٠ قائمة كميات مجانية", "جدول قابل للشراء", "تصدير CSV"],
   },
   {
     id: "boq_100",
@@ -61,13 +61,13 @@ const CREDIT_PACKS = [
       "250 BOQ generations",
       "Best for active projects",
       "CSV export",
-      "Cart-ready product matches",
+      "Matched Benna products",
     ],
     featuresAr: [
       "٢٥٠ قائمة كميات",
       "الأفضل للمشاريع النشطة",
       "تصدير CSV",
-      "منتجات جاهزة للسلة",
+      "منتجات بنّة مطابقة",
     ],
   },
   {

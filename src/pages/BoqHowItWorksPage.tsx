@@ -45,8 +45,8 @@ const BoqHowItWorksPage = () => {
     {
       title: t("Shop & export", "تسوّق وصدّر"),
       description: t(
-        "Add all materials to cart in one click, or export a structured CSV ready for contractors and consultants.",
-        "أضف كل المواد إلى السلة بنقرة واحدة، أو صدّر ملف CSV منظمًا جاهزًا للمقاولين والاستشاريين.",
+        "Export a structured CSV in one click, ready for contractors, consultants and suppliers.",
+        "صدّر ملف CSV منظمًا بنقرة واحدة، جاهزًا للمقاولين والاستشاريين والموردين.",
       ),
       colorTheme: "blue",
     },

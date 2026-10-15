@@ -54,9 +54,9 @@ const BuildProjectPage = () => {
     title: "Build My Project - Free BOQ Builder for Construction",
     titleAr: "ابنِ مشروعك - حاسبة كميات البناء المجانية",
     description:
-      "Get a free, shoppable Bill of Quantities (BOQ) for your construction project in Saudi Arabia. Match materials to Benna products and add them to cart.",
+      "Get a free, shoppable Bill of Quantities (BOQ) for your construction project in Saudi Arabia. Match materials to Benna products and export it as CSV.",
     descriptionAr:
-      "احصل على قائمة كميات مجانية قابلة للشراء لمشروعك في السعودية. فلل، شقق، مباني تجارية، مستودعات، وتجديدات.",
+      "احصل على قائمة كميات مجانية قابلة للشراء لمشروعك في السعودية، وطابق المواد مع منتجات بنّة وصدّرها بصيغة CSV. فلل، شقق، مباني تجارية، مستودعات، وتجديدات.",
     keywords:
       "BOQ generator, bill of quantities, construction calculator, building materials estimate, حاسبة كميات, تقدير مواد بناء, Saudi Arabia",
     schemas: [getBOQServiceSchema(), getSpeakableSchema("/build-project")],
@@ -280,8 +280,8 @@ const BuildProjectPage = () => {
           </h1>
           <p className="mt-2 text-sm text-ali-ink-500">
             {isRTL
-              ? "صِف مشروعك · احصل على قائمة كميات قابلة للشراء · أضف كل شيء للسلة"
-              : "Describe your project · Get a shoppable BOQ · Add everything to cart"}
+              ? "صِف مشروعك · احصل على قائمة كميات قابلة للشراء · صدّرها بنقرة واحدة"
+              : "Describe your project · Get a shoppable BOQ · Export it in one click"}
           </p>
 
           {/* CTAs, then stats row */}
@@ -324,8 +324,8 @@ const BuildProjectPage = () => {
                   label: isRTL ? "مدينة سعودية بالأسعار" : "Saudi cities priced",
                 },
                 {
-                  big: isRTL ? "نقرة واحدة" : "1-click",
-                  label: isRTL ? "إضافة الكل للسلة" : "Add all to cart",
+                  big: "CSV",
+                  label: isRTL ? "تصدير جاهز للمقاولين" : "Export ready",
                 },
               ].map(({ big, label }) => (
                 <div key={label} className="flex items-baseline gap-2">

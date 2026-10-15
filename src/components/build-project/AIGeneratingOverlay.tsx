@@ -16,7 +16,7 @@ const STEPS_EN = [
   { icon: Calculator, text: "Calculating material quantities..." },
   { icon: Package, text: "Matching Benna products..." },
   { icon: Database, text: "Preparing your BOQ table..." },
-  { icon: CheckCircle2, text: "Finalizing cart-ready results..." },
+  { icon: CheckCircle2, text: "Finalizing your results..." },
 ];
 
 const STEPS_AR = [
@@ -24,7 +24,7 @@ const STEPS_AR = [
   { icon: Calculator, text: "حساب كميات المواد..." },
   { icon: Package, text: "مطابقة منتجات بنّة..." },
   { icon: Database, text: "تجهيز جدول قائمة الكميات..." },
-  { icon: CheckCircle2, text: "إنهاء النتائج الجاهزة للسلة..." },
+  { icon: CheckCircle2, text: "إنهاء النتائج..." },
 ];
 
 const AIGeneratingOverlay = () => {
