@@ -6,7 +6,7 @@ export type FinishingTier = "economy" | "standard" | "premium" | "luxury";
 
 export interface BOQInput {
   projectName: string;
-  projectType: string; // villa|apartment|commercial|warehouse|renovation|landscape|other
+  projectType: string; // villa|apartment|commercial|warehouse|renovation|landscape|tower|other
   city: string;
   areaSqm: number;
   floors: number;
@@ -52,6 +52,7 @@ const TYPE_MULT: Record<string, number> = {
   warehouse: 0.6,
   renovation: 0.55,
   landscape: 0.3,
+  tower: 1.2,
   other: 1,
 };
 

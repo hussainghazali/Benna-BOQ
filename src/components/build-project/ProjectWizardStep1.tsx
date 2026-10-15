@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
+  Building,
   Building2,
   Home,
   Warehouse,
@@ -50,6 +51,12 @@ const PROJECT_TYPES = [
     labelAr: "تنسيق حدائق",
     icon: Trees,
   },
+  {
+    value: "tower",
+    labelEn: "Tower / High-rise",
+    labelAr: "برج",
+    icon: Building,
+  },
   { value: "other", labelEn: "Other", labelAr: "أخرى", icon: HelpCircle },
 ];
 
@@ -82,11 +89,11 @@ const ProjectWizardStep1 = ({
     >
       {/* Conversational header */}
       <div className="flex items-start gap-3">
-        <div className="w-10 h-10 rounded-[4px] bg-[#e5edf5] flex items-center justify-center shrink-0">
-          <Sparkles className="w-5 h-5 text-[#FA6400]" />
+        <div className="w-10 h-10 rounded-lg bg-[#f0f0f0] flex items-center justify-center shrink-0">
+          <Sparkles className="w-5 h-5 text-[#FF6600]" />
         </div>
-        <div className="bg-[#f8fafd] rounded-[4px] rounded-tl-sm px-4 py-3 border border-[#d8d6df]">
-          <p className="text-sm text-[#061b31] font-light">
+        <div className="bg-[#f7f7f7] rounded-lg rounded-tl-sm px-4 py-3 border border-[#e5e5e5]">
+          <p className="text-sm text-[#222222] font-normal">
             {isRTL
               ? "مرحبًا! 👋 أخبرني عن مشروعك — اسمه ونوعه، وسأجهز لك قائمة كميات كاملة."
               : "Hey there! 👋 Tell me about your project — its name and type, and I'll prepare a complete BOQ for you."}
@@ -96,7 +103,7 @@ const ProjectWizardStep1 = ({
 
       {/* Project Name Input */}
       <div>
-        <Label className="text-sm font-light mb-2 block text-[#061b31]">
+        <Label className="text-sm font-normal mb-2 block text-[#222222]">
           {isRTL ? "اسم المشروع" : "Project Name"}
         </Label>
         <Input
@@ -108,16 +115,16 @@ const ProjectWizardStep1 = ({
               : "e.g., Residential Villa in Jeddah"
           }
           maxLength={200}
-          className="h-12 bg-white border border-[#d8d6df] focus:border-[#FA6400] focus:ring-[#FA6400]/10 transition-all rounded-[4px] font-light"
+          className="h-12 bg-white border border-[#e5e5e5] focus:border-[#FF6600] focus:ring-[#FF6600]/10 transition-all rounded-lg font-normal"
         />
-        <p className="text-xs text-[#64748d] mt-1 text-right font-light">
+        <p className="text-xs text-[#888888] mt-1 text-right font-normal">
           {projectName.length}/200
         </p>
       </div>
 
       {/* Project Type Grid */}
       <div>
-        <Label className="text-sm font-light mb-3 block text-[#061b31]">
+        <Label className="text-sm font-normal mb-3 block text-[#222222]">
           {isRTL ? "نوع المشروع" : "Project Type"}
         </Label>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
@@ -134,31 +141,31 @@ const ProjectWizardStep1 = ({
                 whileTap={{ scale: 0.97 }}
                 onClick={() => setProjectType(type.value)}
                 className={cn(
-                  "relative flex flex-col items-center gap-2 p-4 rounded-[4px] border transition-all duration-300 overflow-hidden group",
+                  "relative flex flex-col items-center gap-2 p-4 rounded-lg border transition-all duration-300 overflow-hidden group",
                   isSelected
-                    ? "border-[#FA6400] bg-[#e5edf5] shadow-sm"
-                    : "border-[#d8d6df] hover:border-[#FA6400] bg-white",
+                    ? "border-[#FF6600] bg-[#f0f0f0] shadow-sm"
+                    : "border-[#e5e5e5] hover:border-[#FF6600] bg-white",
                 )}
                 type="button"
                 aria-pressed={isSelected}
               >
                 {isSelected && (
-                  <div className="absolute inset-0 bg-[#FA6400]/5" />
+                  <div className="absolute inset-0 bg-[#FF6600]/5" />
                 )}
                 <div
                   className={cn(
-                    "w-10 h-10 rounded-[4px] flex items-center justify-center transition-all",
+                    "w-10 h-10 rounded-lg flex items-center justify-center transition-all",
                     isSelected
-                      ? "bg-[#FA6400] text-white"
-                      : "bg-[#f8fafd] group-hover:bg-[#e5edf5] text-[#64748d] group-hover:text-[#FA6400]",
+                      ? "bg-[#FF6600] text-white"
+                      : "bg-[#f7f7f7] group-hover:bg-[#f0f0f0] text-[#888888] group-hover:text-[#FF6600]",
                   )}
                 >
                   <Icon className="w-5 h-5" />
                 </div>
                 <span
                   className={cn(
-                    "text-sm font-light relative z-10",
-                    isSelected ? "text-[#061b31]" : "text-[#50617a]",
+                    "text-sm font-normal relative z-10",
+                    isSelected ? "text-[#222222]" : "text-[#666666]",
                   )}
                 >
                   {isRTL ? type.labelAr : type.labelEn}
@@ -178,7 +185,7 @@ const ProjectWizardStep1 = ({
         <Button
           onClick={onNext}
           disabled={!isValid}
-          className="w-full h-12 text-base font-light gap-2 bg-[#FA6400] hover:bg-[#E85A00] text-white rounded-[4px] shadow-sm hover:shadow-md transition-all duration-300"
+          className="w-full h-12 text-base font-normal gap-2 bg-[#FF6600] hover:bg-[#FF6600] text-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
         >
           {isRTL ? (
             <>

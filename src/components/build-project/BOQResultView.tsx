@@ -218,9 +218,9 @@ const BOQResultView = ({
         initial={{ opacity: 0, scale: 0.97 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.1 }}
-        className="relative overflow-hidden rounded-[6px]"
+        className="relative overflow-hidden rounded-xl"
         style={{
-          background: "linear-gradient(90deg, rgb(114,50,241) 3.13%, rgb(251,118,250) 50%, rgb(255,207,94))",
+          background: "linear-gradient(90deg, rgb(255,115,0) 3.13%, rgb(255,102,0) 50%, rgb(255,61,0))",
         }}
       >
         <div
@@ -233,20 +233,20 @@ const BOQResultView = ({
         />
         <div className="relative z-10 p-6 sm:p-8">
           <div className="flex items-center gap-2 mb-4">
-            <div className="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-sm border border-white/30 rounded-[4px] px-3 py-1">
+            <div className="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg px-3 py-1">
               <Sparkles className="w-3.5 h-3.5 text-white" />
-              <span className="text-xs font-light text-white">
+              <span className="text-xs font-normal text-white">
                 {isRTL ? "تم التوليد بنجاح" : "Generated successfully"}
               </span>
             </div>
           </div>
           <h2
             className="text-white mb-1"
-            style={{ fontSize: "clamp(22px, 4vw, 32px)", fontWeight: 300, lineHeight: 1.15, letterSpacing: "-0.02em" }}
+            style={{ fontSize: "clamp(22px, 4vw, 32px)", fontWeight: 500, lineHeight: 1.15, letterSpacing: "-0.02em" }}
           >
             {projectName}
           </h2>
-          <p className="text-white/75 mb-5" style={{ fontSize: "14px", fontWeight: 300 }}>
+          <p className="text-white/75 mb-5" style={{ fontSize: "14px", fontWeight: 500 }}>
             {isRTL ? "قائمة الكميات المقدرة" : "Estimated Bill of Quantities"}
           </p>
           {/* Meta pills */}
@@ -257,9 +257,9 @@ const BOQResultView = ({
               { label: isRTL ? "المساحة" : "Area", val: `${areaSqm} m²` },
               { label: isRTL ? "الأدوار" : "Floors", val: String(floors) },
             ].filter(p => p.val).map((p) => (
-              <div key={p.label} className="flex items-center gap-1 bg-white/15 backdrop-blur-sm border border-white/25 rounded-[4px] px-2.5 py-1">
-                <span className="text-white/60 text-[11px] font-light">{p.label}:</span>
-                <span className="text-white text-[11px] font-light capitalize">{p.val}</span>
+              <div key={p.label} className="flex items-center gap-1 bg-white/15 backdrop-blur-sm border border-white/25 rounded-lg px-2.5 py-1">
+                <span className="text-white/60 text-[11px] font-normal">{p.label}:</span>
+                <span className="text-white text-[11px] font-normal capitalize">{p.val}</span>
               </div>
             ))}
           </div>
@@ -295,18 +295,18 @@ const BOQResultView = ({
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 + i * 0.1 }}
-              className="bg-white rounded-[6px] p-5 text-center border border-[#d8d6df]"
+              className="bg-white rounded-xl p-5 text-center border border-[#e5e5e5]"
               style={{ boxShadow: "rgba(23,23,23,0.06) 0px 3px 6px 0px" }}
             >
-              <div className="w-9 h-9 rounded-[4px] bg-[#e5edf5] flex items-center justify-center mx-auto mb-3">
-                <Icon className="w-4.5 h-4.5 text-[#FA6400]" />
+              <div className="w-9 h-9 rounded-lg bg-[#f0f0f0] flex items-center justify-center mx-auto mb-3">
+                <Icon className="w-4.5 h-4.5 text-[#FF6600]" />
               </div>
-              <p className="text-[11px] font-light text-[#64748d] mb-1 uppercase tracking-wider">
+              <p className="text-[11px] font-normal text-[#888888] mb-1 uppercase tracking-wider">
                 {card.label}
               </p>
               <p
-                className={card.accent ? "text-[#FA6400]" : "text-[#061b31]"}
-                style={{ fontSize: "20px", fontWeight: 300 }}
+                className={card.accent ? "text-[#FF6600]" : "text-[#222222]"}
+                style={{ fontSize: "20px", fontWeight: 500 }}
               >
                 {card.value}
               </p>
@@ -320,42 +320,42 @@ const BOQResultView = ({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5 }}
-        className="bg-white rounded-[6px] border border-[#d8d6df] overflow-hidden"
+        className="bg-white rounded-xl border border-[#e5e5e5] overflow-hidden"
         style={{ boxShadow: "rgba(23,23,23,0.06) 0px 3px 6px 0px" }}
       >
         {/* Table header strip */}
-        <div className="bg-[#f8fafd] border-b border-[#d8d6df] px-5 py-3 flex items-center gap-2">
-          <div className="w-1 h-4 bg-[#FA6400] rounded-full" />
-          <span className="text-[13px] font-light text-[#061b31]">
+        <div className="bg-[#f7f7f7] border-b border-[#e5e5e5] px-5 py-3 flex items-center gap-2">
+          <div className="w-1 h-4 bg-[#FF6600] rounded-full" />
+          <span className="text-[13px] font-normal text-[#222222]">
             {isRTL ? "قائمة الكميات التفصيلية" : "Detailed Bill of Quantities"}
           </span>
-          <span className="ml-auto text-[11px] font-light text-[#64748d]">
+          <span className="ml-auto text-[11px] font-normal text-[#888888]">
             {result.items.length} {isRTL ? "بند" : "items"}
           </span>
         </div>
         <div className="overflow-x-auto">
           <Table>
             <TableHeader>
-              <TableRow style={{ background: "linear-gradient(90deg, #FA6400, #E85A00)" }}>
-                <TableHead className="font-light text-white text-[12px]">
+              <TableRow style={{ background: "linear-gradient(90deg, #FF6600, #FF6600)" }}>
+                <TableHead className="font-normal text-white text-[12px]">
                   {isRTL ? "المادة" : "Item"}
                 </TableHead>
-                <TableHead className="font-light text-white text-[12px]">
+                <TableHead className="font-normal text-white text-[12px]">
                   {isRTL ? "الوحدة" : "Unit"}
                 </TableHead>
-                <TableHead className="font-light text-white text-center text-[12px]">
+                <TableHead className="font-normal text-white text-center text-[12px]">
                   {isRTL ? "الكمية" : "Qty"}
                 </TableHead>
-                <TableHead className="font-light text-white text-right text-[12px]">
+                <TableHead className="font-normal text-white text-right text-[12px]">
                   {isRTL ? "سعر الوحدة" : "Unit Price"}
                 </TableHead>
-                <TableHead className="font-light text-white text-right text-[12px]">
+                <TableHead className="font-normal text-white text-right text-[12px]">
                   {isRTL ? "الإجمالي" : "Total"}
                 </TableHead>
-                <TableHead className="font-light text-white text-[12px]">
+                <TableHead className="font-normal text-white text-[12px]">
                   {isRTL ? "العلامة" : "Brand"}
                 </TableHead>
-                <TableHead className="font-light text-white text-center text-[12px]">
+                <TableHead className="font-normal text-white text-center text-[12px]">
                   {isRTL ? "ملاحظات" : "Feedback"}
                 </TableHead>
               </TableRow>
@@ -363,45 +363,45 @@ const BOQResultView = ({
             <TableBody>
               {Object.entries(grouped).map(([category, items]) => (
                 <>
-                  <TableRow key={`cat-${category}`} className="bg-[#f8fafd]">
+                  <TableRow key={`cat-${category}`} className="bg-[#f7f7f7]">
                     <TableCell
                       colSpan={7}
-                      className="py-2.5 border-b border-[#d8d6df]"
+                      className="py-2.5 border-b border-[#e5e5e5]"
                     >
                       <div className="flex items-center gap-2">
-                        <div className="w-0.5 h-4 bg-[#FA6400] rounded-full shrink-0" />
-                        <span className="text-[13px] font-light text-[#061b31]">{category}</span>
+                        <div className="w-0.5 h-4 bg-[#FF6600] rounded-full shrink-0" />
+                        <span className="text-[13px] font-normal text-[#222222]">{category}</span>
                       </div>
                     </TableCell>
                   </TableRow>
                   {items.map((item, idx) => (
                     <TableRow
                       key={`${category}-${idx}`}
-                      className="hover:bg-[#f8fafd] transition-colors"
+                      className="hover:bg-[#f7f7f7] transition-colors"
                     >
-                      <TableCell className="text-sm text-[#061b31] border-b border-[#d8d6df] font-light">
+                      <TableCell className="text-sm text-[#222222] border-b border-[#e5e5e5] font-normal">
                         {item.item}
                       </TableCell>
-                      <TableCell className="text-sm text-[#50617a] border-b border-[#d8d6df] font-light">
+                      <TableCell className="text-sm text-[#666666] border-b border-[#e5e5e5] font-normal">
                         {item.unit}
                       </TableCell>
-                      <TableCell className="text-sm text-[#061b31] text-center border-b border-[#d8d6df] font-light">
+                      <TableCell className="text-sm text-[#222222] text-center border-b border-[#e5e5e5] font-normal">
                         {item.quantity}
                       </TableCell>
-                      <TableCell className="text-sm text-[#061b31] text-right border-b border-[#d8d6df] font-light">
+                      <TableCell className="text-sm text-[#222222] text-right border-b border-[#e5e5e5] font-normal">
                         ﷼ {locNum(item.unitPrice)}
                       </TableCell>
-                      <TableCell className="text-sm text-[#061b31] text-right font-light border-b border-[#d8d6df]">
+                      <TableCell className="text-sm text-[#222222] text-right font-normal border-b border-[#e5e5e5]">
                         ﷼ {locNum(item.totalPrice)}
                       </TableCell>
-                      <TableCell className="border-b border-[#d8d6df]">
+                      <TableCell className="border-b border-[#e5e5e5]">
                         {item.brand && (
-                          <Badge className="bg-[#FA6400] text-white hover:bg-[#FA6400] font-light">
+                          <Badge className="bg-[#FF6600] text-white hover:bg-[#FF6600] font-normal">
                             {item.brand}
                           </Badge>
                         )}
                       </TableCell>
-                      <TableCell className="border-b border-[#d8d6df] text-center">
+                      <TableCell className="border-b border-[#e5e5e5] text-center">
                         <BOQFeedbackPanel
                           boqItemId={`${category}-${idx}`}
                           category={category}
@@ -420,14 +420,14 @@ const BOQResultView = ({
                   ))}
                 </>
               ))}
-              <TableRow style={{ background: "linear-gradient(90deg, #FA6400, #E85A00)" }}>
+              <TableRow style={{ background: "linear-gradient(90deg, #FF6600, #FF6600)" }}>
                 <TableCell
                   colSpan={5}
-                  className="text-right text-[13px] font-light text-white"
+                  className="text-right text-[13px] font-normal text-white"
                 >
                   {isRTL ? "الإجمالي الكلي" : "Grand Total"}
                 </TableCell>
-                <TableCell className="text-[16px] font-light text-white text-right">
+                <TableCell className="text-[16px] font-normal text-white text-right">
                   ﷼ {locNum(result.totalEstimatedCost)}
                 </TableCell>
                 <TableCell colSpan={1} />
@@ -443,11 +443,11 @@ const BOQResultView = ({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
-          className="bg-[#e5edf5] border border-[#d8d6df] rounded-[4px] p-4"
+          className="bg-[#f0f0f0] border border-[#e5e5e5] rounded-lg p-4"
         >
           <div className="flex items-center gap-2 mb-2">
-            <AlertTriangle className="w-4 h-4 text-[#FA6400]" />
-            <h3 className="font-light text-[#061b31]">
+            <AlertTriangle className="w-4 h-4 text-[#FF6600]" />
+            <h3 className="font-normal text-[#222222]">
               {isRTL ? "ملاحظات مهمة" : "Important Notes"}
             </h3>
           </div>
@@ -455,7 +455,7 @@ const BOQResultView = ({
             {result.notes.map((note, i) => (
               <li
                 key={i}
-                className="text-sm text-[#50617a] flex gap-2 font-light"
+                className="text-sm text-[#666666] flex gap-2 font-normal"
               >
                 <span>•</span>
                 <span>{note}</span>
@@ -486,22 +486,32 @@ const BOQResultView = ({
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.7 }}
-        className="bg-[#f8fafd] rounded-[6px] border border-[#d8d6df] p-4"
+        className="bg-[#f7f7f7] rounded-xl border border-[#e5e5e5] p-4"
         style={{ boxShadow: "rgba(50,50,93,0.12) 0px 16px 32px 0px" }}
       >
         <div className="flex flex-col sm:flex-row gap-3">
           <Button
             onClick={handleExportCSV}
             variant="outline"
-            className="gap-2 h-11 rounded-[4px] border border-[#d8d6df] hover:border-[#FA6400] hover:bg-white text-[#061b31] font-light text-[14px]"
+            className="gap-2 h-11 rounded-lg border border-[#e5e5e5] hover:border-[#FF6600] hover:bg-white text-[#222222] font-normal text-[14px]"
           >
             <Download className="w-4 h-4" />
             {isRTL ? "تصدير CSV" : "Export CSV"}
           </Button>
           <Button
+            className="gap-2 h-11 flex-1 rounded-lg text-white font-normal text-[14px] transition-all duration-200 group"
+            style={{ background: "linear-gradient(90deg, rgb(255,115,0), rgb(83,58,253))" }}
+            onClick={() => void handleAddAllMaterials()}
+            disabled={isLoading || recommendations.featuredProducts.length === 0}
+          >
+            <ShoppingCart className="w-4 h-4" />
+            {isRTL ? "طلب جميع المواد" : "Order All Materials"}
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </Button>
+          <Button
             variant="ghost"
             onClick={onReset}
-            className="gap-2 h-11 flex-1 rounded-[4px] border border-[#d8d6df] hover:border-[#FA6400] hover:bg-white text-[#061b31] font-light text-[14px]"
+            className="gap-2 h-11 rounded-lg border border-[#e5e5e5] hover:border-[#FF6600] hover:bg-white text-[#222222] font-normal text-[14px]"
           >
             <RotateCcw className="w-4 h-4" />
             {isRTL ? "مشروع جديد" : "New Project"}

@@ -133,7 +133,7 @@ const CreditsPage = () => {
     <div className="min-h-screen bg-muted/30" dir={isRTL ? "rtl" : "ltr"}>
       <Header />
 
-      <main className="w-full px-3 sm:px-4 lg:px-6 xl:px-8 py-4 sm:py-6">
+      <main className="mx-auto w-full max-w-[1400px] px-4 lg:px-6 xl:px-8 py-4 sm:py-6">
         <div className="flex flex-col lg:flex-row gap-4 lg:gap-6">
           {/* Sidebar - Hidden on mobile */}
           <AccountSidebar />
@@ -180,7 +180,7 @@ const CreditsPage = () => {
                 <span className="text-xl text-muted-foreground">.00</span>
               </div>
               {hasSubscription && (
-                <div className="mt-2 inline-flex items-center gap-1.5 px-3 py-1 bg-ali-orange-100 text-ali-ink-900 rounded-full text-xs font-bold">
+                <div className="mt-2 inline-flex items-center gap-1.5 px-3 py-1 bg-violet-100 text-violet-900 rounded-full text-xs font-bold">
                   <Star className="w-3 h-3" />
                   {isAr
                     ? `${credits?.subscriptionPlan} نشط`
@@ -205,7 +205,7 @@ const CreditsPage = () => {
                     : "Add Credits or Redeem Giftcards"}
                 </span>
                 <div className="flex items-center gap-1">
-                  <div className="w-8 h-5 bg-gradient-to-r from-blue-500 to-ali-orange-500 rounded flex items-center justify-center">
+                  <div className="w-8 h-5 bg-gradient-to-r from-blue-500 to-purple-500 rounded flex items-center justify-center">
                     <CreditCard className="w-3 h-3 text-white" />
                   </div>
                   <div className="w-8 h-5 bg-gradient-to-r from-green-400 to-emerald-500 rounded flex items-center justify-center">

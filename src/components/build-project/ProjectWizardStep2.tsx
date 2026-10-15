@@ -122,9 +122,9 @@ const ProjectWizardStep2 = ({
       variant="outline"
       role="combobox"
       aria-expanded={open}
-      className="w-full h-12 justify-between bg-white border border-[#d8d6df] hover:border-[#FA6400] font-light text-left rounded-[4px] transition-all"
+      className="w-full h-12 justify-between bg-white border border-[#e5e5e5] hover:border-[#FF6600] font-normal text-left rounded-lg transition-all"
     >
-      <span className="truncate text-[#061b31]">
+      <span className="truncate text-[#222222]">
         {selectedCity
           ? isRTL
             ? selectedCity.nameAr
@@ -133,7 +133,7 @@ const ProjectWizardStep2 = ({
             ? "ابحث واختر المدينة..."
             : "Search and select city..."}
       </span>
-      <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 text-[#64748d]" />
+      <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 text-[#888888]" />
     </Button>
   );
 
@@ -143,10 +143,10 @@ const ProjectWizardStep2 = ({
         placeholder={isRTL ? "ابحث عن مدينة..." : "Search city..."}
         value={search}
         onValueChange={setSearch}
-        className="border-b border-[#d8d6df]"
+        className="border-b border-[#e5e5e5]"
       />
       <CommandList className={cn("max-h-60", isMobile && "max-h-[50vh]")}>
-        <CommandEmpty className="text-[#64748d] py-6 text-center">
+        <CommandEmpty className="text-[#888888] py-6 text-center">
           {isRTL ? "لا توجد نتائج" : "No city found."}
         </CommandEmpty>
         <CommandGroup>
@@ -155,24 +155,24 @@ const ProjectWizardStep2 = ({
               key={c.slug}
               value={c.slug}
               onSelect={() => handleSelect(c.name)}
-              className="flex items-center gap-2 cursor-pointer hover:bg-[#e5edf5] data-[selected=true]:bg-[#e5edf5]"
+              className="flex items-center gap-2 cursor-pointer hover:bg-[#f0f0f0] data-[selected=true]:bg-[#f0f0f0]"
             >
               <Check
                 className={cn(
                   "h-4 w-4 shrink-0",
-                  city === c.name ? "opacity-100 text-[#FA6400]" : "opacity-0",
+                  city === c.name ? "opacity-100 text-[#FF6600]" : "opacity-0",
                 )}
               />
-              <span className="truncate text-[#061b31]">
+              <span className="truncate text-[#222222]">
                 {isRTL ? c.nameAr : c.name}
               </span>
               {c.province && (
-                <span className="text-xs text-[#64748d] shrink-0">
+                <span className="text-xs text-[#888888] shrink-0">
                   ({c.province})
                 </span>
               )}
               {c.isMetro && (
-                <span className="text-[10px] bg-[#e5edf5] text-[#FA6400] px-1.5 py-0.5 rounded-[4px] font-light shrink-0">
+                <span className="text-[10px] bg-[#f0f0f0] text-[#FF6600] px-1.5 py-0.5 rounded-lg font-normal shrink-0">
                   {isRTL ? "رئيسية" : "Metro"}
                 </span>
               )}
@@ -193,11 +193,11 @@ const ProjectWizardStep2 = ({
     >
       {/* Conversational header */}
       <div className="flex items-start gap-3">
-        <div className="w-10 h-10 rounded-[4px] bg-[#e5edf5] flex items-center justify-center shrink-0">
-          <MapPin className="w-5 h-5 text-[#FA6400]" />
+        <div className="w-10 h-10 rounded-lg bg-[#f0f0f0] flex items-center justify-center shrink-0">
+          <MapPin className="w-5 h-5 text-[#FF6600]" />
         </div>
-        <div className="bg-[#f8fafd] rounded-[4px] rounded-tl-sm px-4 py-3 border border-[#d8d6df]">
-          <p className="text-sm text-[#061b31] font-light">
+        <div className="bg-[#f7f7f7] rounded-lg rounded-tl-sm px-4 py-3 border border-[#e5e5e5]">
+          <p className="text-sm text-[#222222] font-normal">
             {isRTL
               ? "ممتاز! 📍 الآن أحتاج بعض التفاصيل — أين سيكون المشروع وما حجمه؟"
               : "Great choice! 📍 Now I need some details — where's the project located and how big is it?"}
@@ -211,7 +211,7 @@ const ProjectWizardStep2 = ({
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
       >
-        <Label className="text-sm font-light mb-2 block text-[#061b31]">
+        <Label className="text-sm font-normal mb-2 block text-[#222222]">
           {isRTL ? "المدينة" : "City"}
         </Label>
 
@@ -226,7 +226,7 @@ const ProjectWizardStep2 = ({
           <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>{triggerButton}</PopoverTrigger>
             <PopoverContent
-              className="w-[var(--radix-popover-trigger-width)] p-0 border-[#d8d6df] shadow-sm"
+              className="w-[var(--radix-popover-trigger-width)] p-0 border-[#e5e5e5] shadow-sm"
               align="start"
             >
               {cityList}
@@ -242,7 +242,7 @@ const ProjectWizardStep2 = ({
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
         >
-          <Label className="text-sm font-light mb-2 block text-[#061b31]">
+          <Label className="text-sm font-normal mb-2 block text-[#222222]">
             {isRTL ? "المساحة (م²)" : "Area (sqm)"}
           </Label>
           <Input
@@ -250,7 +250,7 @@ const ProjectWizardStep2 = ({
             value={areaSqm}
             onChange={handleAreaChange}
             placeholder="300"
-            className="h-12 bg-white border border-[#d8d6df] focus:border-[#FA6400] focus:ring-[#FA6400]/10 rounded-[4px] transition-all font-light"
+            className="h-12 bg-white border border-[#e5e5e5] focus:border-[#FF6600] focus:ring-[#FF6600]/10 rounded-lg transition-all font-normal"
             min={1}
             max={1000000}
             inputMode="numeric"
@@ -261,7 +261,7 @@ const ProjectWizardStep2 = ({
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
         >
-          <Label className="text-sm font-light mb-2 block text-[#061b31]">
+          <Label className="text-sm font-normal mb-2 block text-[#222222]">
             {isRTL ? "عدد الأدوار" : "Number of Floors"}
           </Label>
           <Input
@@ -269,7 +269,7 @@ const ProjectWizardStep2 = ({
             value={floors}
             onChange={handleFloorsChange}
             placeholder="2"
-            className="h-12 bg-white border border-[#d8d6df] focus:border-[#FA6400] focus:ring-[#FA6400]/10 rounded-[4px] transition-all font-light"
+            className="h-12 bg-white border border-[#e5e5e5] focus:border-[#FF6600] focus:ring-[#FF6600]/10 rounded-lg transition-all font-normal"
             min={1}
             max={200}
             inputMode="numeric"
@@ -282,10 +282,10 @@ const ProjectWizardStep2 = ({
         <motion.div
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
-          className="bg-[#e5edf5] border border-[#d8d6df] rounded-[4px] p-3 flex items-center gap-2"
+          className="bg-[#f0f0f0] border border-[#e5e5e5] rounded-lg p-3 flex items-center gap-2"
         >
-          <Sparkles className="w-4 h-4 text-[#FA6400] shrink-0" />
-          <p className="text-xs text-[#061b31] font-light">
+          <Sparkles className="w-4 h-4 text-[#FF6600] shrink-0" />
+          <p className="text-xs text-[#222222] font-normal">
             {isRTL
               ? `سيتم حساب الأسعار بناءً على أسعار السوق في ${selectedCity?.nameAr || city}`
               : `Prices will be estimated based on ${city} market rates`}
@@ -298,7 +298,7 @@ const ProjectWizardStep2 = ({
         <Button
           variant="outline"
           onClick={onBack}
-          className="h-12 gap-2 border border-[#d8d6df] hover:border-[#FA6400] hover:bg-[#f8fafd] text-[#061b31] font-light rounded-[4px] transition-all"
+          className="h-12 gap-2 border border-[#e5e5e5] hover:border-[#FF6600] hover:bg-[#f7f7f7] text-[#222222] font-normal rounded-lg transition-all"
         >
           {isRTL ? (
             <ArrowRight className="w-4 h-4" />
@@ -310,7 +310,7 @@ const ProjectWizardStep2 = ({
         <Button
           onClick={onNext}
           disabled={!isValid}
-          className="flex-1 h-12 text-base font-light bg-[#FA6400] hover:bg-[#E85A00] text-white rounded-[4px] shadow-sm hover:shadow-md transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-1 h-12 text-base font-normal bg-[#FF6600] hover:bg-[#FF6600] text-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isRTL ? (
             <>

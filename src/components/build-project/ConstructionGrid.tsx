@@ -11,10 +11,10 @@ const ConstructionGrid = () => (
 
     {/* Top-left violet wash */}
     <motion.div
-      className="absolute -top-[20%] -left-[15%] w-[60%] h-[60%] rounded-[4px] blur-[120px]"
+      className="absolute -top-[20%] -left-[15%] w-[60%] h-[60%] rounded-lg blur-[120px]"
       style={{
         background:
-          "radial-gradient(circle, rgba(83,58,253,0.15), rgba(83,58,253,0.08), transparent 70%)",
+          "radial-gradient(circle, rgba(255,102,0,0.15), rgba(255,102,0,0.08), transparent 70%)",
       }}
       animate={{ x: [0, 30, 0], y: [0, 20, 0], scale: [1, 1.05, 1] }}
       transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
@@ -22,10 +22,10 @@ const ConstructionGrid = () => (
 
     {/* Top-right violet wash */}
     <motion.div
-      className="absolute -top-[10%] -right-[10%] w-[50%] h-[55%] rounded-[4px] blur-[110px]"
+      className="absolute -top-[10%] -right-[10%] w-[50%] h-[55%] rounded-lg blur-[110px]"
       style={{
         background:
-          "radial-gradient(circle, rgba(83,58,253,0.12), rgba(66,43,199,0.08), transparent 70%)",
+          "radial-gradient(circle, rgba(255,102,0,0.12), rgba(255,140,60,0.08), transparent 70%)",
       }}
       animate={{ x: [0, -20, 0], y: [0, 15, 0], scale: [1, 1.08, 1] }}
       transition={{
@@ -38,10 +38,10 @@ const ConstructionGrid = () => (
 
     {/* Center subtle violet glow */}
     <motion.div
-      className="absolute top-[40%] left-[30%] w-[40%] h-[40%] rounded-[4px] blur-[140px]"
+      className="absolute top-[40%] left-[30%] w-[40%] h-[40%] rounded-lg blur-[140px]"
       style={{
         background:
-          "radial-gradient(circle, rgba(83,58,253,0.1), transparent 70%)",
+          "radial-gradient(circle, rgba(255,102,0,0.1), transparent 70%)",
       }}
       animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
       transition={{ duration: 15, repeat: Infinity }}
@@ -52,7 +52,7 @@ const ConstructionGrid = () => (
       className="absolute bottom-0 left-0 right-0 h-[40%]"
       style={{
         background:
-          "linear-gradient(to top, rgba(83,58,253,0.08), rgba(83,58,253,0.04) 50%, transparent)",
+          "linear-gradient(to top, rgba(255,102,0,0.08), rgba(255,102,0,0.04) 50%, transparent)",
       }}
     />
 
@@ -61,8 +61,8 @@ const ConstructionGrid = () => (
       className="absolute inset-0 opacity-30"
       style={{
         backgroundImage: `
-          linear-gradient(to right, #d8d6df 1px, transparent 1px),
-          linear-gradient(to bottom, #d8d6df 1px, transparent 1px)
+          linear-gradient(to right, #e5e5e5 1px, transparent 1px),
+          linear-gradient(to bottom, #e5e5e5 1px, transparent 1px)
         `,
         backgroundSize: "40px 40px",
       }}

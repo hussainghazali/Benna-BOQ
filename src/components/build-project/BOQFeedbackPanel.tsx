@@ -167,7 +167,7 @@ const BOQFeedbackPanel = ({
       labelAr: "مفيد",
       icon: ThumbsUp,
       color:
-        "bg-[#e5edf5] text-[#FA6400] hover:bg-[#d8d6df] border border-[#d8d6df]",
+        "bg-[#f0f0f0] text-[#FF6600] hover:bg-[#e5e5e5] border border-[#e5e5e5]",
     },
     {
       type: "inaccurate" as const,
@@ -175,7 +175,7 @@ const BOQFeedbackPanel = ({
       labelAr: "غير دقيق",
       icon: ThumbsDown,
       color:
-        "bg-[#f8fafd] text-[#50617a] hover:bg-[#e5edf5] border border-[#d8d6df]",
+        "bg-[#f7f7f7] text-[#666666] hover:bg-[#f0f0f0] border border-[#e5e5e5]",
     },
     {
       type: "missing" as const,
@@ -183,7 +183,7 @@ const BOQFeedbackPanel = ({
       labelAr: "منتج مفقود",
       icon: AlertTriangle,
       color:
-        "bg-[#f8fafd] text-[#50617a] hover:bg-[#e5edf5] border border-[#d8d6df]",
+        "bg-[#f7f7f7] text-[#666666] hover:bg-[#f0f0f0] border border-[#e5e5e5]",
     },
     {
       type: "replaced" as const,
@@ -191,7 +191,7 @@ const BOQFeedbackPanel = ({
       labelAr: "تم الاستبدال",
       icon: RefreshCw,
       color:
-        "bg-[#f8fafd] text-[#50617a] hover:bg-[#e5edf5] border border-[#d8d6df]",
+        "bg-[#f7f7f7] text-[#666666] hover:bg-[#f0f0f0] border border-[#e5e5e5]",
     },
     {
       type: "removed" as const,
@@ -199,7 +199,7 @@ const BOQFeedbackPanel = ({
       labelAr: "غير مطلوب",
       icon: PackageX,
       color:
-        "bg-[#f8fafd] text-[#50617a] hover:bg-[#e5edf5] border border-[#d8d6df]",
+        "bg-[#f7f7f7] text-[#666666] hover:bg-[#f0f0f0] border border-[#e5e5e5]",
     },
   ];
 
@@ -210,12 +210,12 @@ const BOQFeedbackPanel = ({
           {isRTL ? "ملاحظات" : "Feedback"}
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-md border border-[#d8d6df] rounded-[4px]">
+      <DialogContent className="max-w-md border border-[#e5e5e5] rounded-lg">
         <DialogHeader>
-          <DialogTitle className="font-light text-[#061b31]">
+          <DialogTitle className="font-normal text-[#222222]">
             {isRTL ? "ملاحظات على العنصر" : "Item Feedback"}
           </DialogTitle>
-          <DialogDescription className="text-[#50617a] font-light">
+          <DialogDescription className="text-[#666666] font-normal">
             {isRTL
               ? "ساعدنا في تحسين دقة التوصيات"
               : "Help us improve our recommendations"}
@@ -224,14 +224,14 @@ const BOQFeedbackPanel = ({
 
         <div className="space-y-4 py-4">
           {/* Item info */}
-          <div className="p-3 bg-[#f8fafd] rounded-[4px] border border-[#d8d6df]">
-            <p className="font-light text-sm text-[#061b31]">{item}</p>
-            <p className="text-xs text-[#64748d] font-light">{category}</p>
+          <div className="p-3 bg-[#f7f7f7] rounded-lg border border-[#e5e5e5]">
+            <p className="font-normal text-sm text-[#222222]">{item}</p>
+            <p className="text-xs text-[#888888] font-normal">{category}</p>
           </div>
 
           {/* Feedback type selection */}
           <div className="space-y-2">
-            <Label className="font-light text-[#061b31]">
+            <Label className="font-normal text-[#222222]">
               {isRTL ? "نوع الملاحظة" : "Feedback Type"}
             </Label>
             <div className="grid grid-cols-2 gap-2">
@@ -245,7 +245,7 @@ const BOQFeedbackPanel = ({
                   className={
                     feedbackType !== option.type
                       ? option.color
-                      : "bg-[#FA6400] hover:bg-[#E85A00] text-white rounded-[4px] font-light"
+                      : "bg-[#FF6600] hover:bg-[#FF6600] text-white rounded-lg font-normal"
                   }
                 >
                   <option.icon className="w-4 h-4 mr-2" />
@@ -257,7 +257,7 @@ const BOQFeedbackPanel = ({
 
           {/* Accuracy score */}
           <div className="space-y-2">
-            <Label className="font-light text-[#061b31]">
+            <Label className="font-normal text-[#222222]">
               {isRTL ? "الدقة" : "Accuracy"}: {accuracyScore}/5
             </Label>
             <div className="flex items-center gap-2">
@@ -275,8 +275,8 @@ const BOQFeedbackPanel = ({
                     key={star}
                     className={`w-4 h-4 ${
                       star <= accuracyScore
-                        ? "fill-[#FA6400] text-[#FA6400]"
-                        : "text-[#64748d]"
+                        ? "fill-[#FF6600] text-[#FF6600]"
+                        : "text-[#888888]"
                     }`}
                   />
                 ))}
@@ -286,7 +286,7 @@ const BOQFeedbackPanel = ({
 
           {/* Relevance score */}
           <div className="space-y-2">
-            <Label className="font-light text-[#061b31]">
+            <Label className="font-normal text-[#222222]">
               {isRTL ? "الصلة" : "Relevance"}: {relevanceScore}/5
             </Label>
             <div className="flex items-center gap-2">
@@ -304,8 +304,8 @@ const BOQFeedbackPanel = ({
                     key={star}
                     className={`w-4 h-4 ${
                       star <= relevanceScore
-                        ? "fill-[#FA6400] text-[#FA6400]"
-                        : "text-[#64748d]"
+                        ? "fill-[#FF6600] text-[#FF6600]"
+                        : "text-[#888888]"
                     }`}
                   />
                 ))}
@@ -315,7 +315,7 @@ const BOQFeedbackPanel = ({
 
           {/* Suggested improvement */}
           <div className="space-y-2">
-            <Label className="font-light text-[#061b31]">
+            <Label className="font-normal text-[#222222]">
               {isRTL ? "اقتراح للتحسين" : "Suggested Improvement"}
             </Label>
             <Textarea
@@ -326,7 +326,7 @@ const BOQFeedbackPanel = ({
               onChange={(e) => setSuggestedImprovement(e.target.value)}
               rows={2}
               maxLength={5000}
-              className="border border-[#d8d6df] focus:border-[#FA6400] focus:ring-[#FA6400]/10 rounded-[4px] font-light resize-none"
+              className="border border-[#e5e5e5] focus:border-[#FF6600] focus:ring-[#FF6600]/10 rounded-lg font-normal resize-none"
             />
           </div>
 
@@ -334,7 +334,7 @@ const BOQFeedbackPanel = ({
           {feedbackType === "replaced" && (
             <>
               <div className="space-y-2">
-                <Label className="font-light text-[#061b31]">
+                <Label className="font-normal text-[#222222]">
                   {isRTL ? "المنتج البديل" : "Replacement Product"}
                 </Label>
                 <Textarea
@@ -345,11 +345,11 @@ const BOQFeedbackPanel = ({
                   onChange={(e) => setReplacementItem(e.target.value)}
                   rows={1}
                   maxLength={500}
-                  className="border border-[#d8d6df] focus:border-[#FA6400] focus:ring-[#FA6400]/10 rounded-[4px] font-light resize-none"
+                  className="border border-[#e5e5e5] focus:border-[#FF6600] focus:ring-[#FF6600]/10 rounded-lg font-normal resize-none"
                 />
               </div>
               <div className="space-y-2">
-                <Label className="font-light text-[#061b31]">
+                <Label className="font-normal text-[#222222]">
                   {isRTL ? "سبب الاستبدال" : "Reason for Replacement"}
                 </Label>
                 <Textarea
@@ -362,7 +362,7 @@ const BOQFeedbackPanel = ({
                   onChange={(e) => setReplacementReason(e.target.value)}
                   rows={2}
                   maxLength={2000}
-                  className="border border-[#d8d6df] focus:border-[#FA6400] focus:ring-[#FA6400]/10 rounded-[4px] font-light resize-none"
+                  className="border border-[#e5e5e5] focus:border-[#FF6600] focus:ring-[#FF6600]/10 rounded-lg font-normal resize-none"
                 />
               </div>
             </>
@@ -376,14 +376,14 @@ const BOQFeedbackPanel = ({
               setOpen(false);
               resetForm();
             }}
-            className="border border-[#d8d6df] hover:border-[#FA6400] hover:bg-[#f8fafd] text-[#061b31] font-light rounded-[4px]"
+            className="border border-[#e5e5e5] hover:border-[#FF6600] hover:bg-[#f7f7f7] text-[#222222] font-normal rounded-lg"
           >
             {isRTL ? "إلغاء" : "Cancel"}
           </Button>
           <Button
             onClick={handleSubmit}
             disabled={isSubmitting}
-            className="bg-[#FA6400] hover:bg-[#E85A00] text-white rounded-[4px] font-light"
+            className="bg-[#FF6600] hover:bg-[#FF6600] text-white rounded-lg font-normal"
           >
             {isSubmitting ? (
               <>

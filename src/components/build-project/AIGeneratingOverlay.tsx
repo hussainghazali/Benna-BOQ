@@ -43,7 +43,7 @@ const AIGeneratingOverlay = () => {
     <motion.div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      className="relative rounded-[6px] border border-[#d8d6df] bg-white overflow-hidden"
+      className="relative rounded-xl border border-[#e5e5e5] bg-white overflow-hidden"
       style={{ boxShadow: "rgba(23,23,23,0.08) 0px 15px 35px 0px" }}
       role="status"
       aria-live="polite"
@@ -52,18 +52,18 @@ const AIGeneratingOverlay = () => {
       {/* Sunburst gradient top strip */}
       <div
         className="h-1 w-full"
-        style={{ background: "linear-gradient(90deg, rgb(114,50,241) 3.13%, rgb(251,118,250) 50%, rgb(255,207,94))" }}
+        style={{ background: "linear-gradient(90deg, rgb(255,115,0) 3.13%, rgb(255,102,0) 50%, rgb(255,61,0))" }}
       />
 
       <div className="p-8 flex flex-col items-center gap-6">
         {/* Circular SVG spinner */}
         <div className="relative w-20 h-20">
           <svg className="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 80 80">
-            <circle cx="40" cy="40" r="34" fill="none" stroke="#e5edf5" strokeWidth="6" />
+            <circle cx="40" cy="40" r="34" fill="none" stroke="#f0f0f0" strokeWidth="6" />
             <motion.circle
               cx="40" cy="40" r="34"
               fill="none"
-              stroke="#FA6400"
+              stroke="#FF6600"
               strokeWidth="6"
               strokeLinecap="round"
               strokeDasharray="213"
@@ -72,17 +72,17 @@ const AIGeneratingOverlay = () => {
             />
           </svg>
           <div className="absolute inset-0 flex items-center justify-center">
-            <Zap className="w-7 h-7 text-[#FA6400] animate-pulse" />
+            <Zap className="w-7 h-7 text-[#FF6600] animate-pulse" />
           </div>
         </div>
 
         <div className="text-center space-y-1.5">
-          <h3 style={{ fontSize: "22px", fontWeight: 300, lineHeight: 1.2, letterSpacing: "-0.01px" }} className="text-[#061b31]">
+          <h3 style={{ fontSize: "22px", fontWeight: 500, lineHeight: 1.2, letterSpacing: "-0.01px" }} className="text-[#222222]">
             {isRTL
               ? "بنّة تجهز قائمة كميات مشروعك"
               : "Benna is preparing your BOQ"}
           </h3>
-          <p className="text-[14px] text-[#50617a] font-light">
+          <p className="text-[14px] text-[#666666] font-normal">
             {isRTL
               ? "نطابق المواد مع كتالوج بنّة المباشر"
               : "Matching your materials with the live Benna catalog"}
@@ -101,25 +101,25 @@ const AIGeneratingOverlay = () => {
                 initial={{ opacity: 0, x: isRTL ? 20 : -20 }}
                 animate={{ opacity: i <= currentStep ? 1 : 0.35, x: 0 }}
                 transition={{ delay: i * 0.12, duration: 0.35 }}
-                className={`flex items-center gap-3 px-4 py-2.5 rounded-[4px] border transition-all duration-500 ${
+                className={`flex items-center gap-3 px-4 py-2.5 rounded-lg border transition-all duration-500 ${
                   isActive
-                    ? "bg-[#f8fafd] border-[#FA6400]"
+                    ? "bg-[#f7f7f7] border-[#FF6600]"
                     : isDone
-                      ? "bg-white border-[#d8d6df]"
-                      : "bg-white border-[#e5edf5]"
+                      ? "bg-white border-[#e5e5e5]"
+                      : "bg-white border-[#f0f0f0]"
                 }`}
               >
                 {/* Left violet accent */}
                 {isActive && (
-                  <div className="absolute left-0 w-0.5 h-full bg-[#FA6400] rounded-r-full" />
+                  <div className="absolute left-0 w-0.5 h-full bg-[#FF6600] rounded-r-full" />
                 )}
                 <div
-                  className={`w-7 h-7 rounded-[4px] flex items-center justify-center shrink-0 transition-all ${
+                  className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-all ${
                     isDone
-                      ? "bg-[#FA6400] text-white"
+                      ? "bg-[#FF6600] text-white"
                       : isActive
-                        ? "bg-[#e5edf5] text-[#FA6400]"
-                        : "bg-[#f8fafd] text-[#64748d]"
+                        ? "bg-[#f0f0f0] text-[#FF6600]"
+                        : "bg-[#f7f7f7] text-[#888888]"
                   }`}
                 >
                   {isDone ? (
@@ -129,15 +129,15 @@ const AIGeneratingOverlay = () => {
                   )}
                 </div>
                 <span
-                  className={`text-[13px] font-light transition-colors flex-1 ${
-                    isActive ? "text-[#061b31]" : isDone ? "text-[#50617a]" : "text-[#64748d]"
+                  className={`text-[13px] font-normal transition-colors flex-1 ${
+                    isActive ? "text-[#222222]" : isDone ? "text-[#666666]" : "text-[#888888]"
                   }`}
                 >
                   {step.text}
                 </span>
                 {isActive && (
                   <motion.div
-                    className="w-1.5 h-1.5 rounded-full bg-[#FA6400] shrink-0"
+                    className="w-1.5 h-1.5 rounded-full bg-[#FF6600] shrink-0"
                     animate={{ scale: [1, 1.6, 1], opacity: [1, 0.4, 1] }}
                     transition={{ repeat: Infinity, duration: 1.4 }}
                   />
@@ -148,12 +148,12 @@ const AIGeneratingOverlay = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#e5edf5] border border-[#d8d6df] rounded-[4px] text-[11px] font-light text-[#FA6400]">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#f0f0f0] border border-[#e5e5e5] rounded-lg text-[11px] font-normal text-[#FF6600]">
             <Zap className="w-3 h-3" />
             {isRTL ? "مطابقة كتالوج" : "Catalog matched"}
           </span>
-          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#f8fafd] border border-[#d8d6df] rounded-[4px] text-[11px] font-light text-[#50617a]">
-            <Calculator className="w-3 h-3 text-[#FA6400]" />
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#f7f7f7] border border-[#e5e5e5] rounded-lg text-[11px] font-normal text-[#666666]">
+            <Calculator className="w-3 h-3 text-[#FF6600]" />
             {isRTL ? "حاسبة مجانية" : "Free calculator"}
           </span>
         </div>

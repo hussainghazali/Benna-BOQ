@@ -40,6 +40,8 @@ const SPEC_OPTIONS = [
   { id: "backup_generator", labelEn: "Backup Generator", labelAr: "مولد احتياطي", emoji: "⚡" },
   { id: "fire_safety", labelEn: "Fire Safety System", labelAr: "أنظمة إطفاء الحريق", emoji: "🧯" },
   { id: "garage", labelEn: "Enclosed Garage", labelAr: "كراج مغلق", emoji: "🚗" },
+  { id: "majlis", labelEn: "Majlis / Diwaniya", labelAr: "مجلس / ديوانية", emoji: "🛋️" },
+  { id: "maid_room", labelEn: "Maid's Room", labelAr: "غرفة خادمة", emoji: "🛏️" },
 ];
 
 interface Props {
@@ -98,11 +100,11 @@ const ProjectWizardStep3 = ({
     >
       {/* Conversational header */}
       <div className="flex items-start gap-3">
-        <div className="w-10 h-10 rounded-[4px] bg-[#e5edf5] flex items-center justify-center shrink-0">
-          <Wand2 className="w-5 h-5 text-[#FA6400]" />
+        <div className="w-10 h-10 rounded-lg bg-[#f0f0f0] flex items-center justify-center shrink-0">
+          <Wand2 className="w-5 h-5 text-[#FF6600]" />
         </div>
-        <div className="bg-[#f8fafd] rounded-[4px] rounded-tl-sm px-4 py-3 border border-[#d8d6df]">
-          <p className="text-sm text-[#061b31] font-light">
+        <div className="bg-[#f7f7f7] rounded-lg rounded-tl-sm px-4 py-3 border border-[#e5e5e5]">
+          <p className="text-sm text-[#222222] font-normal">
             {isRTL
               ? "أخيرًا! 🎯 اختر مستوى التشطيب والمواصفات الإضافية — سأحسب كل شيء بدقة."
               : "Almost there! 🎯 Pick a finishing tier and any extra specs — I'll calculate everything precisely."}
@@ -112,7 +114,7 @@ const ProjectWizardStep3 = ({
 
       {/* Finishing Tier */}
       <div>
-        <Label className="text-sm font-light mb-3 block text-[#061b31]">
+        <Label className="text-sm font-normal mb-3 block text-[#222222]">
           {isRTL ? "مستوى التشطيب" : "Finishing Tier"}
         </Label>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -124,10 +126,10 @@ const ProjectWizardStep3 = ({
                 type="button"
                 onClick={() => setTier(t.id)}
                 className={cn(
-                  "flex items-center justify-center gap-2 px-3 py-2.5 rounded-[4px] border text-sm font-light transition-all",
+                  "flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg border text-sm font-normal transition-all",
                   active
-                    ? "border-[#FA6400] bg-[#e5edf5] text-[#061b31] shadow-sm"
-                    : "border-[#d8d6df] bg-white text-[#50617a] hover:border-[#FA6400]",
+                    ? "border-[#FF6600] bg-[#f0f0f0] text-[#222222] shadow-sm"
+                    : "border-[#e5e5e5] bg-white text-[#666666] hover:border-[#FF6600]",
                 )}
               >
                 <span>{t.emoji}</span>
@@ -140,10 +142,10 @@ const ProjectWizardStep3 = ({
 
       {/* Specifications Grid */}
       <div>
-        <Label className="text-sm font-light mb-3 block text-[#061b31]">
+        <Label className="text-sm font-normal mb-3 block text-[#222222]">
           {isRTL ? "المواصفات الإضافية" : "Additional Specifications"}
           {selectedCount > 0 && (
-            <span className="ml-2 text-xs font-light bg-[#FA6400] text-white px-2 py-0.5 rounded-[4px]">
+            <span className="ml-2 text-xs font-normal bg-[#FF6600] text-white px-2 py-0.5 rounded-lg">
               {selectedCount} {isRTL ? "محدد" : "selected"}
             </span>
           )}
@@ -158,22 +160,22 @@ const ProjectWizardStep3 = ({
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               className={cn(
-                "flex items-center gap-3 p-3 rounded-[4px] border cursor-pointer transition-all duration-300",
+                "flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all duration-300",
                 specifications[spec.id]
-                  ? "border-[#FA6400] bg-[#e5edf5] shadow-sm"
-                  : "border-[#d8d6df] hover:border-[#FA6400] bg-white",
+                  ? "border-[#FF6600] bg-[#f0f0f0] shadow-sm"
+                  : "border-[#e5e5e5] hover:border-[#FF6600] bg-white",
               )}
             >
               <Checkbox
                 checked={specifications[spec.id] || false}
                 onCheckedChange={() => toggleSpec(spec.id)}
-                className="border-[#d8d6df] data-[state=checked]:bg-[#FA6400] data-[state=checked]:border-[#FA6400] data-[state=checked]:text-white"
+                className="border-[#e5e5e5] data-[state=checked]:bg-[#FF6600] data-[state=checked]:border-[#FF6600] data-[state=checked]:text-white"
               />
               <span className="text-base">{spec.emoji}</span>
               <span
                 className={cn(
-                  "text-sm font-light",
-                  specifications[spec.id] ? "text-[#061b31]" : "text-[#50617a]",
+                  "text-sm font-normal",
+                  specifications[spec.id] ? "text-[#222222]" : "text-[#666666]",
                 )}
               >
                 {isRTL ? spec.labelAr : spec.labelEn}
@@ -189,7 +191,7 @@ const ProjectWizardStep3 = ({
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
       >
-        <Label className="text-sm font-light mb-2 block text-[#061b31]">
+        <Label className="text-sm font-normal mb-2 block text-[#222222]">
           {isRTL ? "ملاحظات إضافية" : "Additional Notes"}
         </Label>
         <Textarea
@@ -198,39 +200,12 @@ const ProjectWizardStep3 = ({
           placeholder={
             isRTL ? "أي متطلبات خاصة..." : "Any special requirements..."
           }
-          className="min-h-[80px] bg-white border border-[#d8d6df] focus:border-[#FA6400] focus:ring-[#FA6400]/10 rounded-[4px] transition-all resize-none font-light"
+          className="min-h-[80px] bg-white border border-[#e5e5e5] focus:border-[#FF6600] focus:ring-[#FF6600]/10 rounded-lg transition-all resize-none font-normal"
           maxLength={2000}
         />
-        <p className="text-xs text-[#64748d] mt-1 text-right font-light">
+        <p className="text-xs text-[#888888] mt-1 text-right font-normal">
           {additionalNotes.length}/2000
         </p>
-      </motion.div>
-
-      {/* What you'll get card */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.4 }}
-        className="bg-[#f8fafd] rounded-[4px] p-4 border border-[#d8d6df]"
-      >
-        <div className="flex items-center justify-between mb-3">
-          <p className="text-xs font-light text-[#64748d] uppercase tracking-wider">
-            {isRTL ? "ستحصل على" : "You'll get"}
-          </p>
-        </div>
-        <div className="grid grid-cols-2 gap-2 text-xs text-[#50617a]">
-          {[
-            isRTL ? "📋 قائمة كميات مفصلة" : "📋 Detailed material list",
-            isRTL ? "💰 تقديرات أسعار دقيقة" : "💰 Accurate price estimates",
-            isRTL ? "🏷️ علامات تجارية موصى بها" : "🏷️ Recommended brands",
-            isRTL ? "📊 تصدير CSV" : "📊 CSV export ready",
-          ].map((item, i) => (
-            <div key={i} className="flex items-center gap-1.5 py-1">
-              <span className="text-[#FA6400]">✓</span>
-              <span>{item}</span>
-            </div>
-          ))}
-        </div>
       </motion.div>
 
       {/* Navigation Buttons */}
@@ -238,7 +213,7 @@ const ProjectWizardStep3 = ({
         <Button
           variant="outline"
           onClick={onBack}
-          className="h-12 gap-2 border border-[#d8d6df] hover:border-[#FA6400] hover:bg-[#f8fafd] text-[#061b31] font-light rounded-[4px] transition-all"
+          className="h-12 gap-2 border border-[#e5e5e5] hover:border-[#FF6600] hover:bg-[#f7f7f7] text-[#222222] font-normal rounded-lg transition-all"
           disabled={isProcessing}
         >
           {isRTL ? (
@@ -251,7 +226,7 @@ const ProjectWizardStep3 = ({
         <Button
           onClick={handleGenerate}
           disabled={isProcessing}
-          className="flex-1 h-14 text-base font-light gap-2 bg-[#FA6400] hover:bg-[#E85A00] text-white rounded-[4px] shadow-sm hover:shadow-md transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-1 h-14 text-base font-normal gap-2 bg-[#FF6600] hover:bg-[#FF6600] text-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isProcessing ? (
             <>
