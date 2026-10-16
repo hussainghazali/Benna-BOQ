@@ -36,13 +36,13 @@ const BOQCartConflictDialog = ({
 
   return (
     <AlertDialog open={open} onOpenChange={(o) => !o && onCancel()}>
-      <AlertDialogContent className="rounded-[6px] border-[#e5edf5]">
+      <AlertDialogContent className="rounded-xl border-[#F4F4F4]">
         <AlertDialogHeader>
-          <AlertDialogTitle className="flex items-center gap-2 font-light text-[#061b31]">
-            <AlertTriangle className="h-5 w-5 text-[#FA6400]" />
+          <AlertDialogTitle className="flex items-center gap-2 font-normal text-[#222222]">
+            <AlertTriangle className="h-5 w-5 text-[#FF6600]" />
             {isRTL ? "سلتك تحتوي على بنود BOQ" : "Your cart holds BOQ items"}
           </AlertDialogTitle>
-          <AlertDialogDescription className="font-light text-[#50617a]">
+          <AlertDialogDescription className="font-normal text-[#666666]">
             {isRTL
               ? `تحتوي سلتك حالياً على ${boqCount} بند من جدول الكميات (BOQ). بإضافة ${productName ? `"${productName}"` : "هذا المنتج"} سيتم إفراغ السلة بالكامل من بنود BOQ ثم إضافة المنتج الجديد. هل تريد المتابعة؟`
               : `Your cart currently has ${boqCount} BOQ line item${boqCount !== 1 ? "s" : ""}. Adding ${productName ? `"${productName}"` : "this product"} will clear your entire BOQ cart first, then add the new item. Continue?`}
@@ -51,13 +51,13 @@ const BOQCartConflictDialog = ({
         <AlertDialogFooter>
           <AlertDialogCancel
             onClick={onCancel}
-            className="rounded-[4px] font-light"
+            className="rounded-lg font-normal"
           >
             {isRTL ? "الاحتفاظ ببنود BOQ" : "Keep BOQ items"}
           </AlertDialogCancel>
           <AlertDialogAction
             onClick={onConfirm}
-            className="rounded-[4px] bg-[#FA6400] font-light hover:bg-[#E85A00]"
+            className="rounded-lg bg-[#FF6600] font-semibold hover:bg-[#E65C00]"
           >
             {isRTL ? "إفراغ السلة والإضافة" : "Clear cart & add item"}
           </AlertDialogAction>

@@ -1,18 +1,16 @@
 // src/pages/BuildProjectPage.tsx
-import { useState, useEffect, useCallback, lazy, Suspense } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useSeo, getBOQServiceSchema, getSpeakableSchema } from "@/lib/seo";
 import { useAuth } from "@/contexts/AuthContext";
 import { useCredits } from "@/hooks/useCredits";
 import { useBOQGeneration } from "@/hooks/useBOQGeneration";
-import { useVendorChat } from "@/hooks/useVendorChat";
 import { MAX_AREA_SQM, MAX_FLOORS } from "@/lib/boq-engine";
 
 import { trackEvent } from "@/lib/tracking";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-const ChatManager = lazy(() => import("@/components/ChatManager"));
 import ProjectWizardStep1 from "@/components/build-project/ProjectWizardStep1";
 import ProjectWizardStep2 from "@/components/build-project/ProjectWizardStep2";
 import ProjectWizardStep3 from "@/components/build-project/ProjectWizardStep3";
@@ -30,13 +28,10 @@ import {
   Shield,
   TrendingUp,
   FileText,
-  ShoppingCart,
-  BarChart3,
   Building2,
-  Calculator,
 } from "lucide-react";
 import { toast } from "sonner";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import BennaLoader from "@/components/BennaLoader";
 import SideActionRail from "@/components/sections/SideActionRail";
 
@@ -54,23 +49,14 @@ const BuildProjectPage = () => {
   const { credits, refetch: refetchCredits } = useCredits();
   const { generate, isGenerating, result, setResult, reset } =
     useBOQGeneration();
-  const {
-    openChats,
-    setOpenChats,
-    activeChatId,
-    setActiveChatId,
-    showChat,
-    setShowChat,
-    openChat,
-  } = useVendorChat();
 
   useSeo({
     title: "Build My Project - Free BOQ Builder for Construction",
     titleAr: "ابنِ مشروعك - حاسبة كميات البناء المجانية",
     description:
-      "Get a free, shoppable Bill of Quantities (BOQ) for your construction project in Saudi Arabia. Match materials to Benna products and add them to cart.",
+      "Get a free, shoppable Bill of Quantities (BOQ) for your construction project in Saudi Arabia. Match materials to Benna products and export it as CSV.",
     descriptionAr:
-      "احصل على قائمة كميات مجانية قابلة للشراء لمشروعك في السعودية. فلل، شقق، مباني تجارية، مستودعات، وتجديدات.",
+      "احصل على قائمة كميات مجانية قابلة للشراء لمشروعك في السعودية، وطابق المواد مع منتجات بنّة وصدّرها بصيغة CSV. فلل، شقق، مباني تجارية، مستودعات، وتجديدات.",
     keywords:
       "BOQ generator, bill of quantities, construction calculator, building materials estimate, حاسبة كميات, تقدير مواد بناء, Saudi Arabia",
     schemas: [getBOQServiceSchema(), getSpeakableSchema("/build-project")],
@@ -247,23 +233,12 @@ const BuildProjectPage = () => {
     setShowPaywall(false);
   }, [reset]);
 
-
   const shellWrapper = (content: React.ReactNode) => (
     <div className="min-h-screen bg-white">
       <Header />
       {content}
       <Footer />
-      {showChat && openChats.length > 0 && (
-        <Suspense fallback={null}>
-          <ChatManager
-            openChats={openChats}
-            activeChatId={activeChatId}
-            setActiveChatId={setActiveChatId}
-            setOpenChats={setOpenChats}
-            setShowChat={setShowChat}
-          />
-        </Suspense>
-      )}
+      <SideActionRail />
     </div>
   );
 
@@ -280,87 +255,97 @@ const BuildProjectPage = () => {
 
   return shellWrapper(
     <main className="w-full">
-      {/* ── Hero Band — full-bleed peach bg, content centered ── */}
-      <div className="bg-ali-orange-100/60">
-        <div className="mx-auto w-full max-w-[1400px] px-4 lg:px-6 xl:px-8">
-          <div className="py-10 sm:py-14">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h1 className="text-[34px] sm:text-[40px] font-bold leading-tight tracking-tight text-ali-ink-900">
-              {isRTL ? (
-                <>بنّة رقم <span className="text-ali-orange-500">١ لبناء قوائم الكميات</span></>
-              ) : (
-                <>KSA's <span className="text-ali-orange-500">#1 BOQ builder</span></>
-              )}
-            </h1>
-            <p className="mt-2 text-[15px] sm:text-base text-ali-ink-500">
-              {isRTL
-                ? "صِف مشروعك · احصل على قائمة كميات قابلة للشراء · أضف كل شيء للسلة"
-                : "Describe your project · Get a shoppable BOQ · Add everything to cart"}
-            </p>
-            <div className="mt-6 flex flex-wrap items-center gap-3">
-              <button
-                type="button"
-                onClick={() =>
-                  document
-                    .getElementById("boq-wizard")
-                    ?.scrollIntoView({ behavior: "smooth", block: "start" })
-                }
-                className="inline-flex h-11 items-center gap-2 rounded-full bg-ali-orange-500 px-7 text-[15px] font-semibold text-white transition-colors hover:bg-ali-orange-600"
-              >
-                <FileText className="h-4 w-4" />
-                {isRTL ? "أنشئ قائمتي" : "Generate my BOQ"}
-              </button>
-              <button
-                type="button"
-                onClick={() =>
-                  document
-                    .getElementById("how-it-works")
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
-                className="inline-flex h-11 items-center rounded-full border border-ali-ink-900 bg-white px-7 text-[15px] font-semibold text-ali-ink-900 transition-colors hover:bg-ali-bg-100"
-              >
-                {isRTL ? "كيف يعمل" : "How it works"}
-              </button>
-              <Link
-                to="/boq-projects"
-                className="text-[15px] font-medium text-ali-ink-900 hover:text-ali-orange-500"
-              >
-                {isRTL ? "مشاريعي" : "View my projects"}
-              </Link>
-            </div>
-          </motion.div>
-          </div>
+      {/* ── Hero Band ── */}
+      <section
+        className="border-b border-ali-line-200"
+        style={{
+          background:
+            "linear-gradient(90deg, #FFFFFF 0%, #FFF9F4 25%, #FFF0E5 50%, #FFF9F4 75%, #FFFFFF 100%)",
+          backgroundSize: "200% 100%",
+          animation: "gradient-shift 12s ease-in-out infinite",
+        }}
+      >
+        <div className="mx-auto w-full max-w-[1400px] px-4 lg:px-6 xl:px-8 py-6 md:py-8">
+          <h1 className="max-w-2xl text-3xl lg:text-4xl font-semibold tracking-tight text-ali-ink-900">
+            {isRTL ? (
+              <>
+                أداة بناء جداول الكميات{" "}
+                <span className="text-ali-orange-500">الأولى في السعودية</span>
+              </>
+            ) : (
+              <>
+                KSA's <span className="text-ali-orange-500">#1 BOQ builder</span>
+              </>
+            )}
+          </h1>
+          <p className="mt-2 text-sm text-ali-ink-500">
+            {isRTL
+              ? "صِف مشروعك · احصل على قائمة كميات قابلة للشراء · صدّرها بنقرة واحدة"
+              : "Describe your project · Get a shoppable BOQ · Export it in one click"}
+          </p>
 
-          {/* Stats row — inside the same band */}
-          <div className="border-t border-ali-ink-900/10 py-4">
-            <div className="flex flex-wrap items-center justify-center sm:justify-between gap-x-8 gap-y-2">
-            {[
-              { v: "50", l: isRTL ? "قائمة مجانية" : "FREE BOQS" },
-              { v: "184K+", l: isRTL ? "منتج في الكتالوج" : "PRODUCTS IN CATALOG" },
-              { v: "1,085+", l: isRTL ? "فئة مغطاة" : "CATEGORIES COVERED" },
-              { v: "+165", l: isRTL ? "مدينة سعودية" : "SAUDI CITIES PRICED" },
-              { v: "1-click", l: isRTL ? "أضف الكل للسلة" : "ADD ALL TO CART" },
-            ].map((s) => (
-              <div key={s.l} className="flex items-baseline gap-2">
-                <span className="text-[26px] font-bold text-ali-ink-900">{s.v}</span>
-                <span className="text-[11px] font-medium uppercase tracking-wide text-ali-ink-500">
-                  {s.l}
-                </span>
-              </div>
-            ))}
+          {/* CTAs, then stats row */}
+          <div className="mt-6 flex flex-col gap-6">
+            <div className="flex flex-wrap items-center gap-3">
+              <a
+                href="#boq-wizard"
+                className="inline-flex items-center rounded-full bg-ali-orange-500 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-ali-orange-600"
+              >
+                <FileText className="h-4 w-4 me-1.5" aria-hidden="true" />
+                {isRTL ? "أنشئ قائمة الكميات" : "Generate my BOQ"}
+              </a>
+              <Link
+                to="/boq/how-it-works"
+                className="inline-flex items-center rounded-full border border-ali-ink-900 px-5 py-2.5 text-sm font-semibold text-ali-ink-900 transition-colors hover:bg-ali-bg-100"
+              >
+                {isRTL ? "كيف تعمل" : "How it works"}
+              </Link>
+              <a
+                href="https://store.benna.com.sa/account/boq-projects"
+                className="text-sm text-ali-ink-700 underline decoration-ali-line-300 underline-offset-4 transition-colors hover:text-ali-orange-500"
+              >
+                {isRTL ? "عرض مشاريعي" : "View my projects"}
+              </a>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-4 border-t border-ali-line-200 pt-5">
+              {[
+                { big: "50", label: isRTL ? "قائمة مجانية" : "Free BOQs" },
+                {
+                  big: isRTL ? "+184 ألف" : "184K+",
+                  label: isRTL ? "منتج في الكتالوج" : "Products in catalog",
+                },
+                {
+                  big: isRTL ? "+1,085" : "1,085+",
+                  label: isRTL ? "فئة مغطاة" : "Categories covered",
+                },
+                {
+                  big: "+165",
+                  label: isRTL ? "مدينة سعودية بالأسعار" : "Saudi cities priced",
+                },
+                {
+                  big: "CSV",
+                  label: isRTL ? "تصدير جاهز للمقاولين" : "Export ready",
+                },
+              ].map(({ big, label }) => (
+                <div key={label} className="flex items-baseline gap-2">
+                  <p className="text-2xl font-medium tracking-tighter text-ali-ink-900 md:text-3xl">
+                    {big}
+                  </p>
+                  <p className="text-[11px] font-semibold uppercase tracking-widest text-ali-ink-500">
+                    {label}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-        </div>
-      </div>
+      </section>
 
       {/* ── Wizard / Result Area ── */}
-      <div className="bg-white" id="boq-wizard">
-        <div className="mx-auto w-full max-w-[1400px] px-4 lg:px-6 xl:px-8 py-10">
-          <div className={cn(result ? "w-full" : "max-w-3xl xl:max-w-5xl 2xl:max-w-6xl mx-auto") }>
+      <div id="boq-wizard" className="scroll-mt-24 bg-white">
+        <div className="px-3 sm:px-4 lg:px-6 xl:px-8 py-10">
+          <div className={cn(result ? "w-full max-w-[1400px] mx-auto" : "max-w-3xl xl:max-w-5xl 2xl:max-w-6xl mx-auto") }>
             {showPaywall ? (
               <CreditPaywall
                 onPurchaseComplete={() => {
@@ -375,8 +360,6 @@ const BuildProjectPage = () => {
                 <BOQResultTable
                   result={result}
                   onReset={handleReset}
-                  onOpenFeedback={() => setShowFeedback(true)}
-                  onOpenChat={openChat}
                 />
                 <BOQFeedbackModal
                   boqId={result.boqId}
@@ -389,13 +372,13 @@ const BuildProjectPage = () => {
                 {/* Section label */}
                 <div className="text-center mb-8">
                   <div className="flex items-center justify-center gap-2 mb-2">
-                    <div className="w-5 h-0.5 bg-[#FA6400] rounded-full" />
-                    <span className="text-xs font-light text-[#FA6400] uppercase tracking-widest">
+                    <div className="w-5 h-0.5 bg-[#FF6600] rounded-full" />
+                    <span className="text-xs font-normal text-[#FF6600] uppercase tracking-widest">
                       {isRTL ? "ابدأ الآن" : "Get started"}
                     </span>
-                    <div className="w-5 h-0.5 bg-[#FA6400] rounded-full" />
+                    <div className="w-5 h-0.5 bg-[#FF6600] rounded-full" />
                   </div>
-                  <p className="text-[14px] font-light text-[#50617a]">
+                  <p className="text-[14px] font-normal text-[#666666]">
                     {isRTL ? "٣ خطوات فقط للحصول على قائمة كمياتك" : "Just 3 steps to your complete BOQ"}
                   </p>
                 </div>
@@ -412,14 +395,14 @@ const BuildProjectPage = () => {
                         <div className="flex flex-col items-center gap-1.5">
                           <div
                             className={cn(
-                              "w-11 h-11 rounded-[4px] flex items-center justify-center transition-all duration-500 border",
+                              "w-11 h-11 rounded-lg flex items-center justify-center transition-all duration-500 border",
                               isDone
-                                ? "bg-[#FA6400] border-[#FA6400] text-white"
+                                ? "bg-[#FF6600] border-[#FF6600] text-white"
                                 : isActive
-                                  ? "bg-white border-[#FA6400] text-[#061b31]"
-                                  : "bg-[#f8fafd] border-[#d8d6df] text-[#64748d]",
+                                  ? "bg-white border-[#FF6600] text-[#222222]"
+                                  : "bg-[#f7f7f7] border-[#e5e5e5] text-[#888888]",
                             )}
-                            style={isActive ? { boxShadow: "rgba(83,58,253,0.15) 0px 0px 0px 3px" } : {}}
+                            style={isActive ? { boxShadow: "rgba(255,102,0,0.15) 0px 0px 0px 3px" } : {}}
                           >
                             {isDone ? (
                               <CheckCircle2 className="w-5 h-5" />
@@ -429,12 +412,12 @@ const BuildProjectPage = () => {
                           </div>
                           <span
                             className={cn(
-                              "text-[11px] font-light transition-colors",
+                              "text-[11px] font-normal transition-colors",
                               isDone
-                                ? "text-[#FA6400]"
+                                ? "text-[#FF6600]"
                                 : isActive
-                                  ? "text-[#061b31]"
-                                  : "text-[#64748d]",
+                                  ? "text-[#222222]"
+                                  : "text-[#888888]",
                             )}
                           >
                             {isRTL ? s.labelAr : s.labelEn}
@@ -445,10 +428,10 @@ const BuildProjectPage = () => {
                             className={cn(
                               "w-16 sm:w-24 h-[2px] rounded mx-2 mb-5 transition-all duration-500",
                               step > stepNum
-                                ? "bg-[#FA6400]"
+                                ? "bg-[#FF6600]"
                                 : step === stepNum
-                                  ? "bg-[#d8d6df]"
-                                  : "bg-[#e5edf5]",
+                                  ? "bg-[#e5e5e5]"
+                                  : "bg-[#f0f0f0]",
                             )}
                           />
                         )}
@@ -464,11 +447,14 @@ const BuildProjectPage = () => {
 
                 {/* Wizard Card */}
                 <div
-                  className="relative bg-white rounded-[6px] border border-[#d8d6df] overflow-hidden"
+                  className="relative bg-white rounded-xl border border-[#e5e5e5] overflow-hidden"
                   style={{ boxShadow: "rgba(23,23,23,0.08) 0px 15px 35px 0px" }}
                 >
-                  {/* Orange top accent bar — matches storefront card */}
-                  <div className="h-1.5 w-full bg-ali-orange-500" />
+                  {/* Violet top accent bar */}
+                  <div
+                    className="h-1 w-full"
+                    style={{ background: "linear-gradient(90deg, rgb(255,115,0) 3.13%, rgb(255,102,0) 50%, rgb(255,61,0))" }}
+                  />
                   <div className="p-6 sm:p-8">
                     <AnimatePresence mode="wait">
                       {step === 1 && (
@@ -511,19 +497,19 @@ const BuildProjectPage = () => {
                 </div>
 
                 {/* Trust bar */}
-                <div className="flex items-center justify-center gap-6 mt-6 p-4 bg-[#f8fafd] rounded-[4px] border border-[#d8d6df]">
-                  <div className="flex items-center gap-2 text-[11px] font-light text-[#50617a]">
-                    <Shield className="w-3.5 h-3.5 text-[#FA6400]" />
+                <div className="flex items-center justify-center gap-6 mt-6 p-4 bg-[#f7f7f7] rounded-lg border border-[#e5e5e5]">
+                  <div className="flex items-center gap-2 text-[11px] font-normal text-[#666666]">
+                    <Shield className="w-3.5 h-3.5 text-[#FF6600]" />
                     <span>{isRTL ? "بياناتك مشفرة" : "Data encrypted"}</span>
                   </div>
-                  <div className="w-px h-4 bg-[#d8d6df]" />
-                  <div className="flex items-center gap-2 text-[11px] font-light text-[#50617a]">
-                    <Zap className="w-3.5 h-3.5 text-[#FA6400]" />
+                  <div className="w-px h-4 bg-[#e5e5e5]" />
+                  <div className="flex items-center gap-2 text-[11px] font-normal text-[#666666]">
+                    <Zap className="w-3.5 h-3.5 text-[#FF6600]" />
                     <span>{isRTL ? "٥٠ قائمة مجانية" : "50 free BOQs"}</span>
                   </div>
-                  <div className="w-px h-4 bg-[#d8d6df]" />
-                  <div className="flex items-center gap-2 text-[11px] font-light text-[#50617a]">
-                    <TrendingUp className="w-3.5 h-3.5 text-[#FA6400]" />
+                  <div className="w-px h-4 bg-[#e5e5e5]" />
+                  <div className="flex items-center gap-2 text-[11px] font-normal text-[#666666]">
+                    <TrendingUp className="w-3.5 h-3.5 text-[#FF6600]" />
                     <span>{isRTL ? "منتجات من بنّة" : "Benna products"}</span>
                   </div>
                 </div>
@@ -532,9 +518,6 @@ const BuildProjectPage = () => {
           </div>
         </div>
       </div>
-
-      {/* Alibaba-style left-edge quick actions rail */}
-      <SideActionRail />
     </main>,
   );
 };

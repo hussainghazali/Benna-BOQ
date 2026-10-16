@@ -39,29 +39,29 @@ const CreditStatusBar = ({ onBuyCredits }: Props) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
       className={cn(
-        "flex items-center justify-between gap-3 rounded-[4px] px-4 py-2.5 border",
+        "flex items-center justify-between gap-3 rounded-lg px-4 py-2.5 border",
         hasCredits
-          ? "bg-[#e5edf5] border-[#d8d6df]"
-          : "bg-[#f8fafd] border-[#d8d6df]",
+          ? "bg-[#f0f0f0] border-[#e5e5e5]"
+          : "bg-[#f7f7f7] border-[#e5e5e5]",
       )}
     >
       <div className="flex items-center gap-2 min-w-0">
         {isLoading ? (
-          <Loader2 className="w-4 h-4 animate-spin text-[#64748d] shrink-0" />
+          <Loader2 className="w-4 h-4 animate-spin text-[#888888] shrink-0" />
         ) : guestTrialAvailable ? (
-          <Sparkles className="w-4 h-4 text-[#FA6400] shrink-0" />
+          <Sparkles className="w-4 h-4 text-[#FF6600] shrink-0" />
         ) : (
           <Coins
             className={cn(
               "w-4 h-4 shrink-0",
-              hasCredits ? "text-[#FA6400]" : "text-[#64748d]",
+              hasCredits ? "text-[#FF6600]" : "text-[#888888]",
             )}
           />
         )}
         <span
           className={cn(
-            "text-xs font-light truncate",
-            hasCredits ? "text-[#061b31]" : "text-[#50617a]",
+            "text-xs font-normal truncate",
+            hasCredits ? "text-[#222222]" : "text-[#666666]",
           )}
         >
           {isLoading
@@ -94,7 +94,7 @@ const CreditStatusBar = ({ onBuyCredits }: Props) => {
         <Button
           onClick={onBuyCredits}
           size="sm"
-          className="h-7 px-3 text-xs font-light bg-[#FA6400] hover:bg-[#E85A00] text-white rounded-[4px] shrink-0 gap-1"
+          className="h-7 px-3 text-xs font-normal bg-[#FF6600] hover:bg-[#FF6600] text-white rounded-lg shrink-0 gap-1"
         >
           <Zap className="w-3 h-3" />
           {isRTL ? "شراء رصيد" : "Buy Credits"}
@@ -107,7 +107,7 @@ const CreditStatusBar = ({ onBuyCredits }: Props) => {
         !isLoading && (
           <button
             onClick={onBuyCredits}
-            className="text-[10px] font-light text-[#FA6400] hover:text-[#E85A00] underline underline-offset-2 shrink-0 whitespace-nowrap"
+            className="text-[10px] font-normal text-[#FF6600] hover:text-[#FF6600] underline underline-offset-2 shrink-0 whitespace-nowrap"
           >
             {isRTL ? "احصل على المزيد" : "Get more"}
           </button>

@@ -8,8 +8,8 @@ import AuthPage from "@/pages/AuthPage";
 import WelcomePage from "@/pages/WelcomePage";
 import CartDrawer from "@/components/CartDrawer";
 import BuildProjectPage from "@/pages/BuildProjectPage";
-import BOQProjectsPage from "@/pages/BOQProjectsPage";
-import BOQProjectDetailPage from "@/pages/BOQProjectDetailPage";
+import BoqHowItWorksPage from "@/pages/BoqHowItWorksPage";
+import ExternalRedirect from "@/components/ExternalRedirect";
 import CreditsPage from "@/pages/CreditsPage";
 
 function App() {
@@ -22,8 +22,12 @@ function App() {
               <Routes>
                 <Route path="/" element={<Navigate to="/build-project" replace />} />
                 <Route path="/build-project" element={<BuildProjectPage />} />
-                <Route path="/boq-projects" element={<BOQProjectsPage />} />
-                <Route path="/boq-projects/:projectId" element={<BOQProjectDetailPage />} />
+                <Route path="/boq/how-it-works" element={<BoqHowItWorksPage />} />
+                {/* Saved projects live on the store */}
+                <Route
+                  path="/boq-projects/*"
+                  element={<ExternalRedirect to="https://store.benna.com.sa/account/boq-projects" />}
+                />
                 <Route path="/credits" element={<CreditsPage />} />
                 <Route path="/welcome" element={<WelcomePage />} />
                 <Route path="/login" element={<AuthPage mode="login" />} />

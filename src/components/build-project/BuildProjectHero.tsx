@@ -51,7 +51,7 @@ const BuildProjectHero = () => {
       <div
         className="relative overflow-hidden"
         style={{
-          background: "linear-gradient(90deg, rgb(114,50,241) 3.13%, rgb(251,118,250) 50%, rgb(255,207,94))",
+          background: "linear-gradient(90deg, rgb(255,115,0) 3.13%, rgb(255,102,0) 50%, rgb(255,61,0))",
         }}
       >
         <div
@@ -70,9 +70,9 @@ const BuildProjectHero = () => {
             transition={{ duration: 0.6 }}
             className="text-center"
           >
-            <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-1.5 rounded-[4px] border border-white/30 mb-6">
+            <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-1.5 rounded-lg border border-white/30 mb-6">
               <Zap className="w-3.5 h-3.5 text-white" />
-              <span className="text-xs font-light text-white tracking-wide">
+              <span className="text-xs font-normal text-white tracking-wide">
                 {isRTL ? "مدعوم بالذكاء الاصطناعي · Benna Build Engine" : "Powered by AI · Benna Build Engine"}
               </span>
               <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
@@ -82,7 +82,7 @@ const BuildProjectHero = () => {
               className="text-white mb-4"
               style={{
                 fontSize: "clamp(40px, 7vw, 72px)",
-                fontWeight: 300,
+                fontWeight: 500,
                 lineHeight: 1.0,
                 letterSpacing: "-0.03em",
               }}
@@ -95,7 +95,7 @@ const BuildProjectHero = () => {
             </h1>
             <p
               className="text-white/80 max-w-lg mx-auto mb-8"
-              style={{ fontSize: "18px", fontWeight: 300, lineHeight: 1.4 }}
+              style={{ fontSize: "18px", fontWeight: 500, lineHeight: 1.4 }}
             >
               {isRTL
                 ? "أدخل تفاصيل مشروعك واحصل على قائمة كميات كاملة مع تكاليف تقديرية دقيقة في ثوانٍ"
@@ -106,7 +106,7 @@ const BuildProjectHero = () => {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
               <Button
                 onClick={() => navigate("/welcome")}
-                className="h-12 px-8 rounded-[4px] bg-white text-[#FA6400] font-light hover:bg-[#f8fafd] transition-all shadow-sm"
+                className="h-12 px-8 rounded-lg bg-white text-[#FF6600] font-normal hover:bg-[#f7f7f7] transition-all shadow-sm"
                 style={{ fontSize: "15px" }}
               >
                 {isRTL ? "ابدأ مجاناً" : "Start for free"}
@@ -114,7 +114,7 @@ const BuildProjectHero = () => {
               </Button>
               <button
                 onClick={() => navigate("/register")}
-                className="text-sm font-light text-white/80 hover:text-white transition-colors underline underline-offset-4"
+                className="text-sm font-normal text-white/80 hover:text-white transition-colors underline underline-offset-4"
               >
                 {isRTL ? "سجّل حساباً جديداً →" : "Create a free account →"}
               </button>
@@ -128,9 +128,9 @@ const BuildProjectHero = () => {
                 { v: "30s", l: isRTL ? "نتائج" : "Results" },
                 { v: "Free", l: isRTL ? "أول توليد" : "First BOQ" },
               ].map((s) => (
-                <div key={s.v} className="flex items-center gap-1.5 bg-white/15 backdrop-blur-sm border border-white/25 rounded-[4px] px-3 py-1.5">
-                  <span className="text-white font-light text-sm">{s.v}</span>
-                  <span className="text-white/65 text-xs font-light">{s.l}</span>
+                <div key={s.v} className="flex items-center gap-1.5 bg-white/15 backdrop-blur-sm border border-white/25 rounded-lg px-3 py-1.5">
+                  <span className="text-white font-normal text-sm">{s.v}</span>
+                  <span className="text-white/65 text-xs font-normal">{s.l}</span>
                 </div>
               ))}
             </div>
@@ -139,7 +139,7 @@ const BuildProjectHero = () => {
       </div>
 
       {/* ── Feature cards strip ── */}
-      <div className="bg-[#f8fafd] border-b border-[#d8d6df]">
+      <div className="bg-[#f7f7f7] border-b border-[#e5e5e5]">
         <div className="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto py-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -153,16 +153,16 @@ const BuildProjectHero = () => {
                 <motion.div
                   key={i}
                   whileHover={{ y: -3, transition: { duration: 0.2 } }}
-                  className="group bg-white border border-[#d8d6df] rounded-[6px] p-5 hover:border-[#FA6400] transition-all duration-300"
+                  className="group bg-white border border-[#e5e5e5] rounded-xl p-5 hover:border-[#FF6600] transition-all duration-300"
                   style={{ boxShadow: "rgba(23,23,23,0.04) 0px 2px 4px 0px" }}
                 >
-                  <div className="w-10 h-10 rounded-[4px] bg-[#e5edf5] flex items-center justify-center mb-3 group-hover:bg-[#FA6400] transition-colors duration-300">
-                    <Icon className="w-5 h-5 text-[#FA6400] group-hover:text-white transition-colors duration-300" />
+                  <div className="w-10 h-10 rounded-lg bg-[#f0f0f0] flex items-center justify-center mb-3 group-hover:bg-[#FF6600] transition-colors duration-300">
+                    <Icon className="w-5 h-5 text-[#FF6600] group-hover:text-white transition-colors duration-300" />
                   </div>
-                  <p className="text-[14px] font-light text-[#061b31] mb-1">{f.label}</p>
-                  <p className="text-[12px] text-[#50617a] mb-3 leading-relaxed font-light">{f.desc}</p>
-                  <div className="flex items-baseline gap-1.5 pt-3 border-t border-[#e5edf5]">
-                    <span className="text-[#FA6400] text-[15px] font-light">{f.stat}</span>
+                  <p className="text-[14px] font-normal text-[#222222] mb-1">{f.label}</p>
+                  <p className="text-[12px] text-[#666666] mb-3 leading-relaxed font-normal">{f.desc}</p>
+                  <div className="flex items-baseline gap-1.5 pt-3 border-t border-[#f0f0f0]">
+                    <span className="text-[#FF6600] text-[15px] font-normal">{f.stat}</span>
                   </div>
                 </motion.div>
               );
@@ -174,7 +174,7 @@ const BuildProjectHero = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.7 }}
-            className="flex items-center justify-center gap-6 mt-8 text-[11px] text-[#64748d] font-light"
+            className="flex items-center justify-center gap-6 mt-8 text-[11px] text-[#888888] font-normal"
           >
             {[
               { icon: Shield, text: isRTL ? "🔒 آمن ومشفر" : "Secure & Encrypted" },
@@ -182,7 +182,7 @@ const BuildProjectHero = () => {
               { icon: null, text: isRTL ? "📊 تصدير CSV" : "CSV Export" },
             ].map((item, i) => (
               <span key={i} className="flex items-center gap-1">
-                {item.icon && <item.icon className="w-3 h-3 text-[#FA6400]" />}
+                {item.icon && <item.icon className="w-3 h-3 text-[#FF6600]" />}
                 {item.text}
               </span>
             ))}

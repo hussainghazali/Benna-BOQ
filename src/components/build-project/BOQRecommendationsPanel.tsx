@@ -161,32 +161,46 @@ const BOQRecommendationsPanel = ({
   );
 
   return (
-    <Card className="border border-[#d8d6df] shadow-sm rounded-[4px] overflow-hidden">
-      <CardHeader className="pb-4 bg-[#f8fafd] border-b border-[#d8d6df]">
+    <Card className="border border-[#e5e5e5] shadow-sm rounded-lg overflow-hidden">
+      <CardHeader className="pb-4 bg-[#f7f7f7] border-b border-[#e5e5e5]">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 rounded-[4px] bg-[#FA6400] px-3 py-1 text-xs font-light text-white">
+            <div className="inline-flex items-center gap-2 rounded-lg bg-[#FF6600] px-3 py-1 text-xs font-normal text-white">
               <Sparkles className="h-3.5 w-3.5" />
               {isRTL
                 ? "Benna AI ترشيحات قابلة للشراء"
                 : "Benna AI shoppable picks"}
             </div>
-            <CardTitle className="text-lg sm:text-xl font-light text-[#061b31]">
+            <CardTitle className="text-lg sm:text-xl font-normal text-[#222222]">
               {isRTL
                 ? "منتجات حقيقية من Benna مرتبطة بقائمة الكميات"
                 : "Real Benna products mapped to your BOQ"}
             </CardTitle>
-            <p className="text-sm text-[#50617a] font-light">
+            <p className="text-sm text-[#666666] font-normal">
               {isRTL
                 ? "مطابقة مباشرة من كتالوج Benna الفعلي لتسهيل تجهيز المواد وإضافتها للسلة."
                 : "Directly matched from the live Benna catalog so your materials are ready to purchase."}
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
-            <Badge className="gap-1 rounded-[4px] px-3 py-1 bg-[#FA6400] text-white hover:bg-[#FA6400] font-light border-0">
+            <Badge className="gap-1 rounded-lg px-3 py-1 bg-[#FF6600] text-white hover:bg-[#FF6600] font-normal border-0">
               <PackageCheck className="h-3.5 w-3.5" />
               {isRTL ? `تغطية ${coverageLabel}` : `Coverage ${coverageLabel}`}
             </Badge>
+            <Button
+              onClick={addAll}
+              disabled={
+                isLoading || isAddingAll || recommendations.length === 0
+              }
+              className="rounded-lg bg-[#FF6600] hover:bg-[#FF6600] text-white font-normal"
+            >
+              {isAddingAll ? (
+                <Loader2 className="animate-spin h-4 w-4" />
+              ) : (
+                <ShoppingCart className="h-4 w-4" />
+              )}
+              {isRTL ? "إضافة كل الترشيحات" : "Add all recommendations"}
+            </Button>
           </div>
         </div>
       </CardHeader>
@@ -194,13 +208,13 @@ const BOQRecommendationsPanel = ({
         {error ? (
           <Alert
             variant="destructive"
-            className="border-[#d8d6df] bg-[#f8fafd]"
+            className="border-[#e5e5e5] bg-[#f7f7f7]"
           >
-            <AlertCircle className="h-4 w-4 text-[#FA6400]" />
-            <AlertTitle className="text-[#061b31] font-light">
+            <AlertCircle className="h-4 w-4 text-[#FF6600]" />
+            <AlertTitle className="text-[#222222] font-normal">
               {isRTL ? "تعذر تحميل التوصيات" : "Recommendations unavailable"}
             </AlertTitle>
-            <AlertDescription className="text-[#50617a] font-light">
+            <AlertDescription className="text-[#666666] font-normal">
               {isRTL
                 ? "تم توليد BOQ بنجاح لكن تعذر تحميل كتالوج Benna حالياً."
                 : "The BOQ was generated successfully, but the Benna catalog could not be loaded right now."}
@@ -213,12 +227,12 @@ const BOQRecommendationsPanel = ({
             {Array.from({ length: 6 }).map((_, index) => (
               <div
                 key={index}
-                className="rounded-[4px] border border-[#d8d6df] p-4 bg-white"
+                className="rounded-lg border border-[#e5e5e5] p-4 bg-white"
               >
-                <Skeleton className="mb-4 aspect-square w-full rounded-[4px] bg-[#f8fafd]" />
-                <Skeleton className="mb-2 h-4 w-2/3 bg-[#f8fafd]" />
-                <Skeleton className="mb-2 h-4 w-full bg-[#f8fafd]" />
-                <Skeleton className="h-10 w-full rounded-[4px] bg-[#f8fafd]" />
+                <Skeleton className="mb-4 aspect-square w-full rounded-lg bg-[#f7f7f7]" />
+                <Skeleton className="mb-2 h-4 w-2/3 bg-[#f7f7f7]" />
+                <Skeleton className="mb-2 h-4 w-full bg-[#f7f7f7]" />
+                <Skeleton className="h-10 w-full rounded-lg bg-[#f7f7f7]" />
               </div>
             ))}
           </div>
@@ -229,7 +243,7 @@ const BOQRecommendationsPanel = ({
               variant="outline"
               size="icon"
               onClick={() => slideCards("prev")}
-              className="absolute left-2 top-1/2 z-10 hidden -translate-y-1/2 rounded-[4px] bg-white border border-[#d8d6df] shadow-sm hover:border-[#FA6400] hover:bg-[#f8fafd] md:inline-flex"
+              className="absolute left-2 top-1/2 z-10 hidden -translate-y-1/2 rounded-lg bg-white border border-[#e5e5e5] shadow-sm hover:border-[#FF6600] hover:bg-[#f7f7f7] md:inline-flex"
               aria-label={isRTL ? "السابق" : "Previous recommendations"}
             >
               <ChevronLeft className="h-4 w-4" />
@@ -258,21 +272,21 @@ const BOQRecommendationsPanel = ({
                 return (
                   <Card
                     key={product._id}
-                    className="w-[280px] min-w-[280px] snap-start overflow-hidden border border-[#d8d6df] rounded-[4px] hover:border-[#FA6400] hover:shadow-md transition-all duration-200"
+                    className="w-[280px] min-w-[280px] snap-start overflow-hidden border border-[#e5e5e5] rounded-lg hover:border-[#FF6600] hover:shadow-md transition-all duration-200"
                   >
-                    <div className="aspect-square bg-[#f8fafd] p-3 relative">
+                    <div className="aspect-square bg-[#f7f7f7] p-3 relative">
                       <img
                         src={getProductImage(product.productImageUrl)}
                         alt={product.name}
                         loading="lazy"
-                        className="h-full w-full rounded-[4px] object-contain"
+                        className="h-full w-full rounded-lg object-contain"
                         onError={(e) => {
                           (e.target as HTMLImageElement).src =
                             "/placeholder-product.png";
                         }}
                       />
                       {hasDiscount && discountText && (
-                        <div className="absolute top-2 left-2 bg-[#FA6400] text-white text-xs font-light px-2 py-0.5 rounded-[4px]">
+                        <div className="absolute top-2 left-2 bg-[#FF6600] text-white text-xs font-normal px-2 py-0.5 rounded-lg">
                           {discountText}
                         </div>
                       )}
@@ -280,12 +294,12 @@ const BOQRecommendationsPanel = ({
                     <CardContent className="space-y-3 p-4">
                       <div className="flex items-start justify-between gap-2">
                         <div className="min-w-0">
-                          <p className="truncate text-xs font-light text-[#64748d] uppercase tracking-wider">
+                          <p className="truncate text-xs font-normal text-[#888888] uppercase tracking-wider">
                             {product.brand || product.categoryNameEnglish}
                           </p>
                           <Link
                             to={`/product/${product.uniqueProductSlug}`}
-                            className="line-clamp-2 text-sm font-light text-[#061b31] hover:text-[#FA6400] transition-colors"
+                            className="line-clamp-2 text-sm font-normal text-[#222222] hover:text-[#FF6600] transition-colors"
                           >
                             {isRTL && product.nameArabic
                               ? product.nameArabic
@@ -293,38 +307,51 @@ const BOQRecommendationsPanel = ({
                           </Link>
                         </div>
                         {product.inventory === "InStock" ? (
-                          <Badge className="rounded-[4px] bg-[#FA6400] text-white hover:bg-[#FA6400] font-light border-0">
+                          <Badge className="rounded-lg bg-[#FF6600] text-white hover:bg-[#FF6600] font-normal border-0">
                             <CheckCircle2 className="h-3.5 w-3.5" />
                             {isRTL ? "متوفر" : "In stock"}
                           </Badge>
                         ) : null}
                       </div>
 
-                      <div className="space-y-1 rounded-[4px] bg-[#f8fafd] p-3 text-xs border border-[#d8d6df]">
+                      <div className="space-y-1 rounded-lg bg-[#f7f7f7] p-3 text-xs border border-[#e5e5e5]">
                         <p>
-                          <span className="font-light text-[#061b31]">
+                          <span className="font-normal text-[#222222]">
                             {isRTL ? "مطابق لـ:" : "Matched for:"}
                           </span>{" "}
-                          <span className="text-[#50617a]">
+                          <span className="text-[#666666]">
                             {recommendation.matchedItem}
                           </span>
                         </p>
-                        <p className="text-[#64748d] font-light">
+                        <p className="text-[#888888] font-normal">
                           {recommendation.reason}
                         </p>
                       </div>
 
                       <div className="flex items-end justify-between gap-2">
                         <div>
-                          <p className="text-xl font-light text-[#061b31]">
+                          <p className="text-xl font-normal text-[#222222]">
                             ﷼ {locNum(finalPrice)}
                           </p>
                           {hasDiscount ? (
-                            <p className="text-xs text-[#64748d] line-through">
+                            <p className="text-xs text-[#888888] line-through">
                               ﷼ {locNum(product.price)}
                             </p>
                           ) : null}
                         </div>
+                        <Button
+                          size="sm"
+                          onClick={() => void addSingle(recommendation)}
+                          disabled={isAdding || isAddingAll}
+                          className="rounded-lg bg-[#FF6600] hover:bg-[#FF6600] text-white font-normal shadow-sm"
+                        >
+                          {isAdding ? (
+                            <Loader2 className="animate-spin h-4 w-4" />
+                          ) : (
+                            <ShoppingCart className="h-4 w-4" />
+                          )}
+                          {isRTL ? "أضف" : "Add"}
+                        </Button>
                       </div>
                     </CardContent>
                   </Card>
@@ -336,19 +363,19 @@ const BOQRecommendationsPanel = ({
               variant="outline"
               size="icon"
               onClick={() => slideCards("next")}
-              className="absolute right-2 top-1/2 z-10 hidden -translate-y-1/2 rounded-[4px] bg-white border border-[#d8d6df] shadow-sm hover:border-[#FA6400] hover:bg-[#f8fafd] md:inline-flex"
+              className="absolute right-2 top-1/2 z-10 hidden -translate-y-1/2 rounded-lg bg-white border border-[#e5e5e5] shadow-sm hover:border-[#FF6600] hover:bg-[#f7f7f7] md:inline-flex"
               aria-label={isRTL ? "التالي" : "Next recommendations"}
             >
               <ChevronRight className="h-4 w-4" />
             </Button>
           </div>
         ) : (
-          <Alert className="border-[#d8d6df] bg-[#e5edf5]">
-            <AlertCircle className="h-4 w-4 text-[#FA6400]" />
-            <AlertTitle className="text-[#061b31] font-light">
+          <Alert className="border-[#e5e5e5] bg-[#f0f0f0]">
+            <AlertCircle className="h-4 w-4 text-[#FF6600]" />
+            <AlertTitle className="text-[#222222] font-normal">
               {isRTL ? "لا توجد مطابقة مباشرة بعد" : "No direct matches yet"}
             </AlertTitle>
-            <AlertDescription className="text-[#50617a] font-light">
+            <AlertDescription className="text-[#666666] font-normal">
               {isRTL
                 ? "تم إنشاء BOQ لكننا لم نجد منتجات مطابقة بثقة كافية من الكتالوج الحالي."
                 : "The BOQ is ready, but we didn't find confident direct matches from the current catalog."}

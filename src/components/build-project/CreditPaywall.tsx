@@ -35,8 +35,8 @@ const CREDIT_PACKS = [
     icon: Sparkles,
     popular: false,
     free: true,
-    features: ["50 free BOQ generations", "Shoppable BOQ table", "Add products to cart"],
-    featuresAr: ["٥٠ قائمة كميات مجانية", "جدول قابل للشراء", "إضافة المنتجات للسلة"],
+    features: ["50 free BOQ generations", "Shoppable BOQ table", "CSV export"],
+    featuresAr: ["٥٠ قائمة كميات مجانية", "جدول قابل للشراء", "تصدير CSV"],
   },
   {
     id: "boq_100",
@@ -61,13 +61,13 @@ const CREDIT_PACKS = [
       "250 BOQ generations",
       "Best for active projects",
       "CSV export",
-      "Cart-ready product matches",
+      "Matched Benna products",
     ],
     featuresAr: [
       "٢٥٠ قائمة كميات",
       "الأفضل للمشاريع النشطة",
       "تصدير CSV",
-      "منتجات جاهزة للسلة",
+      "منتجات بنّة مطابقة",
     ],
   },
   {
@@ -288,20 +288,20 @@ const CreditPaywall = ({ onPurchaseComplete, embedded = false }: Props) => {
         animate={{ opacity: 1, scale: 1 }}
         className="text-center py-12"
       >
-        <div className="w-16 h-16 bg-[#FA6400] rounded-[4px] flex items-center justify-center mx-auto mb-4">
+        <div className="w-16 h-16 bg-[#FF6600] rounded-lg flex items-center justify-center mx-auto mb-4">
           <Check className="w-8 h-8 text-white" />
         </div>
-        <h2 className="text-2xl font-light text-[#061b31] mb-2">
+        <h2 className="text-2xl font-normal text-[#222222] mb-2">
           {isRTL ? "تمت العملية بنجاح!" : "Payment Successful!"}
         </h2>
-        <p className="text-[#50617a] font-light mb-6">
+        <p className="text-[#666666] font-normal mb-6">
           {isRTL
             ? "تمت إضافة الرصيد إلى حسابك"
             : "Credits have been added to your account"}
         </p>
         <Button
           onClick={() => setPaymentStatus("idle")}
-          className="bg-[#FA6400] hover:bg-[#E85A00] text-white rounded-[4px] font-light"
+          className="bg-[#FF6600] hover:bg-[#FF6600] text-white rounded-lg font-normal"
         >
           {isRTL ? "العودة للباقات" : "Back to Packages"}
         </Button>
@@ -319,8 +319,8 @@ const CreditPaywall = ({ onPurchaseComplete, embedded = false }: Props) => {
       {/* Header */}
       <div className="text-center">
         <div
-          className="w-16 h-16 rounded-[6px] flex items-center justify-center mx-auto mb-4 overflow-hidden relative"
-          style={{ background: "linear-gradient(90deg, rgb(114,50,241) 3.13%, rgb(251,118,250) 50%, rgb(255,207,94))" }}
+          className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4 overflow-hidden relative"
+          style={{ background: "linear-gradient(90deg, rgb(255,115,0) 3.13%, rgb(255,102,0) 50%, rgb(255,61,0))" }}
         >
           <div
             className="pointer-events-none absolute inset-0 opacity-20"
@@ -328,18 +328,18 @@ const CreditPaywall = ({ onPurchaseComplete, embedded = false }: Props) => {
           />
           <Coins className="w-8 h-8 text-white relative z-10" />
         </div>
-        <h2 style={{ fontSize: "22px", fontWeight: 300, lineHeight: 1.2, letterSpacing: "-0.01px" }} className="text-[#061b31] mb-2">
+        <h2 style={{ fontSize: "22px", fontWeight: 500, lineHeight: 1.2, letterSpacing: "-0.01px" }} className="text-[#222222] mb-2">
           {isRTL
             ? "احصل على رصيد لتوليد قوائم الكميات"
             : "Get Credits to Generate BOQs"}
         </h2>
-        <p className="text-[#50617a] font-light">
+        <p className="text-[#666666] font-normal">
           {isRTL
             ? "اختر الباقة المناسبة لاحتياجاتك"
             : "Choose a package that fits your needs"}
         </p>
         {credits && (
-          <p className="text-sm text-[#64748d] mt-2 font-light">
+          <p className="text-sm text-[#888888] mt-2 font-normal">
             {credits.isUnlimited
               ? isRTL
                 ? "غير محدود"
@@ -371,10 +371,10 @@ const CreditPaywall = ({ onPurchaseComplete, embedded = false }: Props) => {
                 transition={{ delay: i * 0.1 }}
                 whileHover={{ y: -4, transition: { duration: 0.2 } }}
                 className={cn(
-                  "relative rounded-[6px] border overflow-hidden transition-all bg-white",
+                  "relative rounded-xl border overflow-hidden transition-all bg-white",
                   pkg.popular
-                    ? "border-[#FA6400] scale-[1.02]"
-                    : "border-[#d8d6df] hover:border-[#FA6400]",
+                    ? "border-[#FF6600] scale-[1.02]"
+                    : "border-[#e5e5e5] hover:border-[#FF6600]",
                 )}
                 style={pkg.popular ? { boxShadow: "rgba(50,50,93,0.12) 0px 16px 32px 0px" } : { boxShadow: "rgba(23,23,23,0.06) 0px 3px 6px 0px" }}
               >
@@ -382,11 +382,11 @@ const CreditPaywall = ({ onPurchaseComplete, embedded = false }: Props) => {
                 {pkg.popular && (
                   <div
                     className="h-1 w-full"
-                    style={{ background: "linear-gradient(90deg, rgb(114,50,241) 3.13%, rgb(251,118,250) 50%, rgb(255,207,94))" }}
+                    style={{ background: "linear-gradient(90deg, rgb(255,115,0) 3.13%, rgb(255,102,0) 50%, rgb(255,61,0))" }}
                   />
                 )}
                 {pkg.popular && (
-                  <Badge className="absolute top-4 left-1/2 -translate-x-1/2 bg-[#FA6400] text-white font-light shadow-sm border-0">
+                  <Badge className="absolute top-4 left-1/2 -translate-x-1/2 bg-[#FF6600] text-white font-normal shadow-sm border-0">
                     <Sparkles className="w-3 h-3 mr-1" />
                     {isRTL ? "الأكثر شيوعاً" : "Most Popular"}
                   </Badge>
@@ -396,26 +396,26 @@ const CreditPaywall = ({ onPurchaseComplete, embedded = false }: Props) => {
                 <div className="text-center mb-4">
                   <div
                     className={cn(
-                      "w-12 h-12 rounded-[4px] mx-auto mb-3 flex items-center justify-center",
-                      pkg.popular ? "bg-[#e5edf5]" : "bg-[#f8fafd]",
+                      "w-12 h-12 rounded-lg mx-auto mb-3 flex items-center justify-center",
+                      pkg.popular ? "bg-[#f0f0f0]" : "bg-[#f7f7f7]",
                     )}
                   >
                     <Icon
                       className={cn(
                         "w-6 h-6",
-                        pkg.popular ? "text-[#FA6400]" : "text-[#64748d]",
+                        pkg.popular ? "text-[#FF6600]" : "text-[#888888]",
                       )}
                     />
                   </div>
-                  <h3 className="font-light text-lg text-[#061b31]">
+                  <h3 className="font-normal text-lg text-[#222222]">
                     {isRTL ? pkg.nameAr : pkg.nameEn}
                   </h3>
                   <div className="mt-2">
-                    <span className="text-3xl font-light text-[#061b31]">
+                    <span className="text-3xl font-normal text-[#222222]">
                       {pkg.price === 0 ? (isRTL ? "مجاني" : "Free") : `﷼${locNum(pkg.price)}`}
                     </span>
                   </div>
-                  <p className="text-sm text-[#50617a] mt-1 font-light">
+                  <p className="text-sm text-[#666666] mt-1 font-normal">
                     {locNum(pkg.credits)} {isRTL ? "قائمة كميات" : "BOQs"}
                     {pkg.price > 0 && (
                       <>
@@ -432,9 +432,9 @@ const CreditPaywall = ({ onPurchaseComplete, embedded = false }: Props) => {
                   {(isRTL ? pkg.featuresAr : pkg.features).map((f, fi) => (
                     <li
                       key={fi}
-                      className="flex items-center gap-2 text-sm text-[#50617a] font-light"
+                      className="flex items-center gap-2 text-sm text-[#666666] font-normal"
                     >
-                      <Check className="w-4 h-4 shrink-0 text-[#FA6400]" />
+                      <Check className="w-4 h-4 shrink-0 text-[#FF6600]" />
                       {f}
                     </li>
                   ))}
@@ -448,12 +448,12 @@ const CreditPaywall = ({ onPurchaseComplete, embedded = false }: Props) => {
                     alreadyClaimedFree
                   }
                   className={cn(
-                    "w-full h-11 rounded-[4px] font-light",
+                    "w-full h-11 rounded-lg font-normal",
                     alreadyClaimedFree
-                      ? "bg-[#f8fafd] text-[#64748d] border border-[#d8d6df] cursor-not-allowed"
+                      ? "bg-[#f7f7f7] text-[#888888] border border-[#e5e5e5] cursor-not-allowed"
                       : pkg.popular
-                        ? "bg-[#FA6400] hover:bg-[#E85A00] text-white"
-                        : "border border-[#d8d6df] hover:border-[#FA6400] text-[#061b31]",
+                        ? "bg-[#FF6600] hover:bg-[#FF6600] text-white"
+                        : "border border-[#e5e5e5] hover:border-[#FF6600] text-[#222222]",
                   )}
                   variant={pkg.popular ? "default" : "outline"}
                 >
@@ -479,21 +479,21 @@ const CreditPaywall = ({ onPurchaseComplete, embedded = false }: Props) => {
         </div>
 
       {/* Payment trust badges */}
-      <div className="flex items-center justify-center gap-4 pt-2 text-[11px] text-[#64748d] font-light">
+      <div className="flex items-center justify-center gap-4 pt-2 text-[11px] text-[#888888] font-normal">
         <span className="flex items-center gap-1">
-          <Shield className="w-3 h-3 text-[#FA6400]" />
+          <Shield className="w-3 h-3 text-[#FF6600]" />
           {isRTL ? "دفع آمن" : "Secure Payment"}
         </span>
         <span className="flex items-center gap-1">
-          <CreditCard className="w-3 h-3 text-[#FA6400]" />
+          <CreditCard className="w-3 h-3 text-[#FF6600]" />
           Visa / Mastercard / Mada
         </span>
         <span className="flex items-center gap-1">🍎 Apple Pay</span>
       </div>
 
       {paymentStatus === "failed" && (
-        <div className="flex items-center gap-2 justify-center text-[#50617a] text-sm font-light">
-          <AlertTriangle className="w-4 h-4 text-[#FA6400]" />
+        <div className="flex items-center gap-2 justify-center text-[#666666] text-sm font-normal">
+          <AlertTriangle className="w-4 h-4 text-[#FF6600]" />
           {isRTL
             ? "فشلت عملية الدفع. يرجى المحاولة مرة أخرى."
             : "Payment failed. Please try again."}

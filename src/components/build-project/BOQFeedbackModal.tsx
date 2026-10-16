@@ -32,20 +32,20 @@ const IMPROVE_OPTIONS = [
 
 const StarRow = ({ value, onChange, label }: { value: number; onChange: (v: number) => void; label: string }) => (
   <div>
-    <div className="text-sm font-light text-[#061b31] mb-2">{label}</div>
+    <div className="text-sm font-normal text-[#222222] mb-2">{label}</div>
     <div className="flex gap-1">
       {[1, 2, 3, 4, 5].map((n) => (
         <button
           key={n}
           type="button"
           onClick={() => onChange(n)}
-          className="p-1 rounded hover:bg-[#f8fafd] transition"
+          className="p-1 rounded hover:bg-[#f7f7f7] transition"
           aria-label={`${n} stars`}
         >
           <Star
             className={cn(
               "w-6 h-6 transition",
-              n <= value ? "fill-[#FA6400] text-[#FA6400]" : "text-[#d8d6df]",
+              n <= value ? "fill-[#FF6600] text-[#FF6600]" : "text-[#e5e5e5]",
             )}
           />
         </button>
@@ -90,10 +90,10 @@ const BOQFeedbackModal = ({ boqId, open, onOpenChange }: Props) => {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-lg" dir={isRTL ? "rtl" : "ltr"}>
         <DialogHeader>
-          <DialogTitle className="font-light text-[#061b31]">
+          <DialogTitle className="font-normal text-[#222222]">
             {isRTL ? "كيف كانت قائمة الكميات؟" : "How was your BOQ?"}
           </DialogTitle>
-          <DialogDescription className="font-light">
+          <DialogDescription className="font-normal">
             {isRTL
               ? "ملاحظاتك تساعدنا على تحسين الدقة."
               : "Your feedback helps us improve accuracy."}
@@ -111,12 +111,12 @@ const BOQFeedbackModal = ({ boqId, open, onOpenChange }: Props) => {
             label={isRTL ? "دقة الأسعار" : "Pricing accuracy"}
           />
           <div>
-            <div className="text-sm font-light text-[#061b31] mb-2">
+            <div className="text-sm font-normal text-[#222222] mb-2">
               {isRTL ? "ما الذي يمكن تحسينه؟" : "What can we improve?"}
             </div>
             <div className="grid grid-cols-2 gap-2">
               {IMPROVE_OPTIONS.map((opt) => (
-                <label key={opt.id} className="flex items-center gap-2 text-sm text-[#50617a] font-light cursor-pointer">
+                <label key={opt.id} className="flex items-center gap-2 text-sm text-[#666666] font-normal cursor-pointer">
                   <Checkbox
                     checked={improvements.includes(opt.id)}
                     onCheckedChange={() => toggle(opt.id)}
@@ -130,17 +130,17 @@ const BOQFeedbackModal = ({ boqId, open, onOpenChange }: Props) => {
             value={comment}
             onChange={(e) => setComment(e.target.value.slice(0, 1000))}
             placeholder={isRTL ? "اكتب ملاحظاتك (اختياري)" : "Additional notes (optional)"}
-            className="rounded-[4px] font-light"
+            className="rounded-lg font-normal"
             rows={3}
           />
           <div className="flex justify-end gap-2 pt-2">
-            <Button variant="outline" onClick={() => onOpenChange(false)} className="rounded-[4px]">
+            <Button variant="outline" onClick={() => onOpenChange(false)} className="rounded-lg">
               {isRTL ? "لاحقًا" : "Later"}
             </Button>
             <Button
               onClick={submit}
               disabled={busy}
-              className="bg-[#FA6400] hover:bg-[#E85A00] text-white rounded-[4px]"
+              className="bg-[#FF6600] hover:bg-[#FF6600] text-white rounded-lg"
             >
               {busy ? "…" : isRTL ? "إرسال" : "Submit"}
             </Button>

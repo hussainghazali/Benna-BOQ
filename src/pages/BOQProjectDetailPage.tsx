@@ -1,5 +1,6 @@
 // src/pages/BOQProjectDetailPage.tsx
 import { useEffect, useState } from "react";
+import BennaLoader from "@/components/BennaLoader";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/contexts/AuthContext";
@@ -18,7 +19,6 @@ import {
   CheckCircle,
   AlertCircle,
   FileText,
-  Loader2,
 } from "lucide-react";
 import RiyalSymbol from "@/components/ui/RiyalSymbol";
 
@@ -149,11 +149,11 @@ const BOQProjectDetailPage = () => {
   if (isLoading) {
     return (
       <Shell>
-        <div className="bg-white rounded-[6px] border border-[#d8d6df] p-12 flex flex-col items-center justify-center gap-3">
-          <Loader2 className="w-8 h-8 animate-spin text-[#FA6400]" />
-          <p className="text-sm text-[#50617a]">
-            {isRTL ? "جارٍ تحميل المشروع…" : "Loading project…"}
-          </p>
+        <div className="bg-white rounded-[6px] border border-[#d8d6df] p-12 flex items-center justify-center">
+          <BennaLoader
+            size="md"
+            label={isRTL ? "جارٍ تحميل المشروع…" : "Loading project…"}
+          />
         </div>
       </Shell>
     );
